@@ -1,27 +1,28 @@
 {
   "files": {
-    "main.css": "/research-portal-frontend/static/css/main.5f3920a9.chunk.css",
-    "main.js": "/research-portal-frontend/static/js/main.2bb47fea.chunk.js",
-    "main.js.map": "/research-portal-frontend/static/js/main.2bb47fea.chunk.js.map",
-    "runtime-main.js": "/research-portal-frontend/static/js/runtime-main.63631e4b.js",
-    "runtime-main.js.map": "/research-portal-frontend/static/js/runtime-main.63631e4b.js.map",
-    "static/css/2.6994593e.chunk.css": "/research-portal-frontend/static/css/2.6994593e.chunk.css",
-    "static/js/2.20a1bb86.chunk.js": "/research-portal-frontend/static/js/2.20a1bb86.chunk.js",
-    "static/js/2.20a1bb86.chunk.js.map": "/research-portal-frontend/static/js/2.20a1bb86.chunk.js.map",
-    "static/js/3.fed7fe18.chunk.js": "/research-portal-frontend/static/js/3.fed7fe18.chunk.js",
-    "static/js/3.fed7fe18.chunk.js.map": "/research-portal-frontend/static/js/3.fed7fe18.chunk.js.map",
+    "main.css": "/research-portal-frontend/static/css/main.1a91cd2e.chunk.css",
+    "main.js": "/research-portal-frontend/static/js/main.b768a9eb.chunk.js",
+    "main.js.map": "/research-portal-frontend/static/js/main.b768a9eb.chunk.js.map",
+    "runtime-main.js": "/research-portal-frontend/static/js/runtime-main.e1f590d1.js",
+    "runtime-main.js.map": "/research-portal-frontend/static/js/runtime-main.e1f590d1.js.map",
+    "static/css/2.f0a56c59.chunk.css": "/research-portal-frontend/static/css/2.f0a56c59.chunk.css",
+    "static/js/2.29ce58c6.chunk.js": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js",
+    "static/js/2.29ce58c6.chunk.js.map": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js.map",
+    "static/js/3.e5964e11.chunk.js": "/research-portal-frontend/static/js/3.e5964e11.chunk.js",
+    "static/js/3.e5964e11.chunk.js.map": "/research-portal-frontend/static/js/3.e5964e11.chunk.js.map",
     "index.html": "/research-portal-frontend/index.html",
-    "static/css/2.6994593e.chunk.css.map": "/research-portal-frontend/static/css/2.6994593e.chunk.css.map",
-    "static/css/main.5f3920a9.chunk.css.map": "/research-portal-frontend/static/css/main.5f3920a9.chunk.css.map",
-    "static/js/2.20a1bb86.chunk.js.LICENSE.txt": "/research-portal-frontend/static/js/2.20a1bb86.chunk.js.LICENSE.txt",
+    "static/css/2.f0a56c59.chunk.css.map": "/research-portal-frontend/static/css/2.f0a56c59.chunk.css.map",
+    "static/css/main.1a91cd2e.chunk.css.map": "/research-portal-frontend/static/css/main.1a91cd2e.chunk.css.map",
+    "static/js/2.29ce58c6.chunk.js.LICENSE.txt": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js.LICENSE.txt",
+    "static/media/icon.ef3b13a0.jpg": "/research-portal-frontend/static/media/icon.ef3b13a0.jpg",
     "static/media/nittLogo.200fc918.png": "/research-portal-frontend/static/media/nittLogo.200fc918.png",
     "static/media/nittLogoWide.54460003.png": "/research-portal-frontend/static/media/nittLogoWide.54460003.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.63631e4b.js",
-    "static/css/2.6994593e.chunk.css",
-    "static/js/2.20a1bb86.chunk.js",
-    "static/css/main.5f3920a9.chunk.css",
-    "static/js/main.2bb47fea.chunk.js"
+    "static/js/runtime-main.e1f590d1.js",
+    "static/css/2.f0a56c59.chunk.css",
+    "static/js/2.29ce58c6.chunk.js",
+    "static/css/main.1a91cd2e.chunk.css",
+    "static/js/main.b768a9eb.chunk.js"
   ]
 }
