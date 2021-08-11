@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/research-portal-frontend/static/css/main.1a91cd2e.chunk.css",
-    "main.js": "/research-portal-frontend/static/js/main.b768a9eb.chunk.js",
-    "main.js.map": "/research-portal-frontend/static/js/main.b768a9eb.chunk.js.map",
+    "main.css": "/research-portal-frontend/static/css/main.0d513707.chunk.css",
+    "main.js": "/research-portal-frontend/static/js/main.32084fb6.chunk.js",
+    "main.js.map": "/research-portal-frontend/static/js/main.32084fb6.chunk.js.map",
     "runtime-main.js": "/research-portal-frontend/static/js/runtime-main.e1f590d1.js",
     "runtime-main.js.map": "/research-portal-frontend/static/js/runtime-main.e1f590d1.js.map",
-    "static/css/2.f0a56c59.chunk.css": "/research-portal-frontend/static/css/2.f0a56c59.chunk.css",
+    "static/css/2.6e0331ef.chunk.css": "/research-portal-frontend/static/css/2.6e0331ef.chunk.css",
     "static/js/2.29ce58c6.chunk.js": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js",
     "static/js/2.29ce58c6.chunk.js.map": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js.map",
     "static/js/3.e5964e11.chunk.js": "/research-portal-frontend/static/js/3.e5964e11.chunk.js",
     "static/js/3.e5964e11.chunk.js.map": "/research-portal-frontend/static/js/3.e5964e11.chunk.js.map",
     "index.html": "/research-portal-frontend/index.html",
-    "static/css/2.f0a56c59.chunk.css.map": "/research-portal-frontend/static/css/2.f0a56c59.chunk.css.map",
-    "static/css/main.1a91cd2e.chunk.css.map": "/research-portal-frontend/static/css/main.1a91cd2e.chunk.css.map",
+    "static/css/2.6e0331ef.chunk.css.map": "/research-portal-frontend/static/css/2.6e0331ef.chunk.css.map",
+    "static/css/main.0d513707.chunk.css.map": "/research-portal-frontend/static/css/main.0d513707.chunk.css.map",
     "static/js/2.29ce58c6.chunk.js.LICENSE.txt": "/research-portal-frontend/static/js/2.29ce58c6.chunk.js.LICENSE.txt",
     "static/media/icon.ef3b13a0.jpg": "/research-portal-frontend/static/media/icon.ef3b13a0.jpg",
     "static/media/nittLogo.200fc918.png": "/research-portal-frontend/static/media/nittLogo.200fc918.png",
@@ -20,9 +20,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.e1f590d1.js",
-    "static/css/2.f0a56c59.chunk.css",
+    "static/css/2.6e0331ef.chunk.css",
     "static/js/2.29ce58c6.chunk.js",
-    "static/css/main.1a91cd2e.chunk.css",
-    "static/js/main.b768a9eb.chunk.js"
+    "static/css/main.0d513707.chunk.css",
+    "static/js/main.32084fb6.chunk.js"
   ]
 }
