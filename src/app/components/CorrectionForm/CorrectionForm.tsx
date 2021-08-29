@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   Label,
   Button,
@@ -80,25 +79,22 @@ const CorrectionForm = () => {
       })
     }
   
-  
-  
   return (
-    (user==="admin"?
     <div className="wrapper h-full">
       <Container padding className="formContainer">
       <div className="header">
       <Text className="text-red-800 text-header">Edit Project</Text></div>
         <div className="fieldInput">
           <Label>Project Name</Label>
-          <TextInput className="inputField" name="projectName" type="text" onClick={handleChange}/>
+          {user==="admin"?<TextInput className="inputField" name="projectName" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="projectName" type="text" onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
           <Label>Heading</Label>
-          <TextInput className="inputField" name="heading" type="text" onClick={handleChange}/>
+          {user==="admin"?<TextInput className="inputField" name="heading" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="heading" type="text" onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
           <Label>Area Of Research</Label>
-          <TextInput className="inputField" name="name" type="text" onClick={handleChange}/>
+          {(user==="admin" || user==="edit")?<TextInput className="inputField" name="name" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="name" type="text" onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
           <Label>Description</Label>
@@ -109,57 +105,7 @@ const CorrectionForm = () => {
           <Button className="bg-red-800 text-white loginBtn float-right" onClick={handleSubmit}>SUBMIT</Button>
         </div>
       </Container>
-    </div>:(user==='edit'?<div className="wrapper h-full">
-      <Container padding className="formContainer">
-      <div className="header">
-      <Text className="text-red-800 text-header">Edit Project</Text></div>
-        <div className="fieldInput">
-          <Label>Project Name</Label>
-          <TextInput className="inputField" name="projectName" type="text" disabled={true} onClick={handleChange}/>
-        </div>
-        <div className="fieldInput">
-          <Label>Google scholars link</Label>
-          <TextInput className="inputField" name="heading" type="text"onClick={handleChange}/>
-        </div>
-        <div className="fieldInput">
-          <Label>Area Of Research</Label>
-          <TextInput className="inputField" name="name" type="text" onClick={handleChange}/>
-        </div>
-        <div className="fieldInput">
-          <Label>Description</Label>
-          <HelpText>Description of the project (max 10,000 words)</HelpText>
-           <textarea className="inputField" style={{borderRadius: '5px'}} onClick={handleChange}></textarea>
-        </div>
-        <div className="items-center loginBtnContainer">
-          <Button className="bg-red-800 text-white loginBtn float-right" onClick={handleSubmit}>SUBMIT</Button>
-        </div>
-      </Container>
-    </div>:<div className="wrapper h-full">
-      <Container padding className="formContainer">
-      <div className="header">
-      <Text className="text-red-800 text-header">Edit Project</Text></div>
-        <div className="fieldInput">
-          <Label>Project Name</Label>
-          <TextInput className="inputField" name="name" type="text" value={currentState.name} disabled={true} onChange={handleChange}/>
-        </div>
-        <div className="fieldInput">
-          <Label>Google scholars link</Label>
-          <TextInput className="inputField" name="paperLink" type="text" value={currentState.paperLink} onChange={handleChange}/>
-        </div>
-        <div className="fieldInput">
-          <Label>Area Of Research</Label>
-          <TextInput className="inputField" name="aor" type="text" value={currentState.aor} onChange={handleChange} />
-        </div>
-        <div className="fieldInput">
-          <Label>Description</Label>
-          <HelpText>Description of the project (max 10,000 words)</HelpText>
-           <textarea name="abstract" className="inputField" style={{borderRadius: '5px'}} disabled={false} value={currentState.abstract} onChange={handleChange}></textarea>
-        </div>
-        <div className="items-center loginBtnContainer">
-          <Button className="bg-red-800 text-white loginBtn float-right" onClick={handleSubmit}>SUBMIT</Button>
-        </div>
-      </Container>
-    </div>))
+    </div>
   );
 };
 
