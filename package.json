@@ -60,6 +60,7 @@
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "gh-pages": "^3.2.3",
+    "hash-router": "^0.4.0",
     "postcss": "^7.0.36",
     "tailwind-react-ui": "^0.8.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"

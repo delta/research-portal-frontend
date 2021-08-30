@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import logoSm from './assets/nittLogo.png';
 import logoLg from './assets/nittLogoWide.png'
 import { Link } from 'react-router-dom';
+import { axiosInstance } from '../../utils/axios';
 
 
 const data = [{
@@ -25,12 +26,6 @@ const data = [{
 ];
 const  NavBar = (props:any) => {
 	const {toggleSideBar,toggleSideBarMobile,hamburger} = props;
-	const[user,setUser]=React.useState(false);
-	useEffect(() => {
-		console.log(localStorage.getItem('email'))
-		if(localStorage.getItem("email")!=null) setUser(true);
-		else setUser(false);
-	}, [user])
 
     return (
 			<nav className="bg-red-800 flex-1" style={{overflow: 'hidden',boxShadow: '0 0px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'}}>
@@ -57,7 +52,7 @@ const  NavBar = (props:any) => {
 							{data.map((val, key)=> {
 								return (<Link to={val.href} key={key} className="text-gray-300 ml-10 px-3 py-1 rounded-md text-md hover:text-white hover:bg-red-900 font-medium">{val.text}</Link>);
 							})}
-							{(!user)?<Link to='/login' className="text-gray-300 ml-10 px-3 py-1 rounded-md text-md hover:text-white hover:bg-red-900 font-medium">Login</Link>:<div><button className="text-gray-300 ml-10 px-3 py-1 rounded-md text-md hover:text-white hover:bg-red-900 font-medium" onClick={()=>{localStorage.clear(); setUser(false)}}>Logout</button></div>}
+							{/* {(!user)?<Link to='/login' className="text-gray-300 ml-10 px-3 py-1 rounded-md text-md hover:text-white hover:bg-red-900 font-medium">Login</Link>:<div><button className="text-gray-300 ml-10 px-3 py-1 rounded-md text-md hover:text-white hover:bg-red-900 font-medium" onClick={logout}>Logout</button></div>} */}
 						</div>
 					</div>
 				</div>

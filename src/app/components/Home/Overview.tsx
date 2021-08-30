@@ -24,17 +24,15 @@ const Overview = () => {
   return (
     <Container className="h-full bg-gray-300 absolute lg:p-9 md:p-6 p-4 flex justify-around items-start flex-col">
       <p className=" xl:text-5xl lg:text-4xl md:text-3xl text-2xl text-gray-800 border-b-2 border-gray-400 pb-3 font-bold">
-        OVERVIEW
+        About NIT Trichy
       </p>
       <p className="xl:text-xl lg:text-lg md:text-sm text-xs text-gray-700">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus diam
-        quam odio donec fringilla sed. Egestas pharetra, egestas consequat sit
-        erat. Condimentum vel vestibulum, facilisi euismod id ornare fermentum
-        ac. Bibendum turpis faucibus faucibus lectus cursus elementum. Suscipit
-        mauris viverra pellentesque nisi, diam rhoncus vitae purus. Sed purus
-        sed lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Senectus diam quam odio donec fringilla sed. Egestas pharetra, egestas
-        consequat sit erat.
+        The institution offers Under Graduate Courses in ten branches and Post
+        Graduate Courses in twenty-one disciplines of Science, Engineering &
+        Technology besides M.S. (by Research) and Ph.D. in all the departments.
+        The faculty is inducted through a process of open advertisement
+        throughout the country. The institute is an example of cultural unity
+        with students drawn from most of the states in the country.
       </p>
     </Container>
   );

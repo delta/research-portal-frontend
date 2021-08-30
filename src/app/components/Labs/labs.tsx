@@ -20,7 +20,7 @@ const Lab = () => {
   let img =
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
   
-  const [labs, setLabs] = useState([{name:"",description:""}]);
+  const [labs, setLabs] = useState([{name:"",description:"",image_url:""}]);
 
   useEffect(() => {
     let url = `/center`;
@@ -37,27 +37,27 @@ const Lab = () => {
     labs.forEach((lab,index)=>{
       htmlArr.push(
         <Col
-            w={{
-              def: "full",
-              sm: "1/1",
-              md: "1/2",
-              lg: "1/3",
-              xl: "1/3",
-            }}
-            h="md:h-full"
-            key={index}
-          >
-            <Card border shadow maxW="sm">
-              <img src={img} alt="Example image" />
-              <CardBody>
-                <Article>
-                  <ContentTitle size={5}>{lab.name}</ContentTitle>
-                  <Text is="p">{lab.description}</Text>
-                </Article>
-              </CardBody>
-            </Card>
-          </Col>
-      )
+          w={{
+            def: "full",
+            sm: "1/1",
+            md: "1/2",
+            lg: "1/3",
+            xl: "1/3",
+          }}
+          h="h-full"
+          key={index}
+        >
+          <Card border shadow maxW="sm" className="overflow-y-scroll m-4" style={{height:"40rem"}}>
+            <img src={`${lab.image_url}`} alt="Example image" />
+            <CardBody>
+              <Article>
+                <ContentTitle size={5}>{lab.name}</ContentTitle>
+                <Text is="p">{lab.description}</Text>
+              </Article>
+            </CardBody>
+          </Card>
+        </Col>
+      );
     });
     return htmlArr;
   };

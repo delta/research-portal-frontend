@@ -23,13 +23,14 @@ transition: transform 1s;
 
 const DepartmentCard = (props:any) => {
   return (
+    <a href={`https://www.nitt.edu/home/academics/departments/${props.data.short_name}/`}>
     <Container
       className="rounded-2xl col-span-1 bg-yellow-200 lg:m-6 m-4 relative"
      >
       <StyledImage
         className="h-full w-full rounded-2xl"
         src={
-          "https://images.unsplash.com/photo-1592030581891-6ebac71d3af2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjB8fHJlc2VhcmNoZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+          `${props.data.image_url}`
         }
         alt="dummy"
       />
@@ -40,6 +41,7 @@ const DepartmentCard = (props:any) => {
         </p>
       </div>
     </Container>
+    </a>
   );
 };
 
@@ -48,7 +50,6 @@ const Departments = () => {
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    console.log("test");
     let url = `/department`;
     axiosInstance
       .get(url)

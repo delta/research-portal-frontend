@@ -1,5 +1,5 @@
 const Footer = () => {
-    return <div className='w-screen bg-gray-800 text-transparent' style={{minHeight:'30vh'}}>
+    return <div className='w-screen bg-gray-800' style={{minHeight:'30vh'}}>
       <div className='m-20 z-10 text-2xl text-center'>
       <p className="text-white">Made with ❤ by Delta Force</p>
       </div>

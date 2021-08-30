@@ -43,7 +43,6 @@ const Signup = () => {
     e.preventDefault();
     let form_data = new FormData();
     if (fileSelected) {
-      console.log(state)
       form_data.append("profile_pic", fileSelected, fileSelected.name);
       form_data.append("name", state.name);
       form_data.append("email", state.email);
