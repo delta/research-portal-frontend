@@ -53,7 +53,7 @@ const ResearchCard = (props: any) => {
         <Link to={`/project/${props.data.id}`}>
           <div className="p-5">
             <div>
-              <img className="mb-6 h-40 w-full" src={img} alt="Project"></img>
+              <img className="mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
             </div>
             <div className="text-center">
               <h3 className="text-lg font-semibold mb-2">{props.data.name}</h3>
@@ -72,7 +72,7 @@ const ResearchCard = (props: any) => {
       <Container>
         <div className="p-5">
           <div>
-            <img className="mb-6 h-40 w-full" src={img} alt="Project"></img>
+            <img className="mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
           </div>
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2">{props.data.name}</h3>

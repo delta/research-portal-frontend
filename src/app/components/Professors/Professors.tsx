@@ -45,7 +45,7 @@ const ProfessorCard = (props: any) => {
       <Container className="rounded-2xl col-span-1 bg-yellow-200 lg:m-6 m-4 relative">
         <StyledImage
           className="w-full rounded-2xl h-44"
-          src={"https://www.nitt.edu/home/administration/chairperson/BB.jpg"}
+          src={props.data.image_url}
           alt="dummy"
         />
         <div className=" absolute bottom-0 h-2/5 w-full bg-gray-400 bg-opacity-50 hover:bg-opacity-80 lg:p-4 md:p-3 p-2">
