@@ -15,6 +15,19 @@ import {
 } from "tailwind-react-ui";
 import { axiosInstance } from "../../utils/axios";
 import "./labs.css";
+import styled from "styled-components";
+
+const Container = styled.div`
+  margin: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 60vw;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+`;
 
 const Lab = () => {
   let img =
@@ -36,16 +49,8 @@ const Lab = () => {
     let htmlArr: JSX.Element[] = [];
     labs.forEach((lab,index)=>{
       htmlArr.push(
-        <Col
-          w={{
-            def: "full",
-            sm: "1/1",
-            md: "1/2",
-            lg: "1/3",
-            xl: "1/3",
-          }}
-          h="h-full"
-          key={index}
+        <div className="flex flex-auto justify-items-center">
+        <Container className="justfify-items-center"
         >
           <Card border shadow maxW="sm" className="overflow-y-scroll m-4" style={{height:"40rem"}}>
             <img src={`${lab.image_url}`} alt="Example image" />
@@ -56,7 +61,8 @@ const Lab = () => {
               </Article>
             </CardBody>
           </Card>
-        </Col>
+        </Container>
+        </div>
       );
     });
     return htmlArr;
