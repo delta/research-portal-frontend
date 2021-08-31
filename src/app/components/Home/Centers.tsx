@@ -26,7 +26,7 @@ const CentersCard = (props:any) => {
     <Container className="bg-red-300 lg:m-6 m-4 rounded-2xl relative">
       <StyledImage
         src={
-          "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+          `${props.data.image_url}`
         }
         alt="dummy"
         className="h-full w-full rounded-2xl"
@@ -57,9 +57,7 @@ const Centers = () => {
   const getCentersCards = ()=>{
     let htmlArr: JSX.Element[] = [];
     centers.forEach((center,index)=>{
-      htmlArr.push(
-        <CentersCard data={center} key={index}/>
-      )
+      htmlArr.push(<CentersCard data={center} key={index}/>)
     });
     return htmlArr;
   }

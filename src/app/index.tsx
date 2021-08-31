@@ -6,8 +6,7 @@ import SideBarMob from "./components/SideBarMob/SideBarMob";
 import { useState } from "react";
 import Home from "./components/Home";
 import styled from "styled-components";
-import Profile from "./components/Profile/Profile";
-import {BrowserRouter as Router,  Switch,  Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Research from "./components/Research/Research";
 import Professor from "./components/Professors/Professors";
 import Login from "./components/Login/Login";
@@ -17,6 +16,9 @@ import MyResearch from "./components/Research/MyResearch";
 import UpdateRoles from "./components/Research/UpdateRoles";
 import Lab from "./components/Labs/labs";
 import CreateProject from "./components/CreateProject/CreateProject";
+import Project from "./components/Project/Project";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -61,59 +63,73 @@ const App = () => {
     return (
       <div className="flex">
         <Router>
-        <div className="flex-1">
+          <div className="flex-1">
             <NavBar
               toggleSideBar={toggleSideBar}
               toggleSideBarMobile={toggleSideBarMobile}
               hamburger={hamburger}
             ></NavBar>
-            <div style={{ height: '88vh' }}>
-              <Container className='h-full overflow-y-scroll' style={{overflow: "scroll"}}>
+            <div style={{ height: "88vh" }}>
+              <Container
+                className="h-full overflow-y-scroll"
+                style={{ overflow: "scroll" }}
+              >
                 {/* Mobile Side Bar */}
                 <div style={{ display: mobState }}>
                   <SideBarMob></SideBarMob>
                 </div>
                 <Switch>
                   <Route exact path="/login">
-                    <Login/>
-                    </Route>
-                    <Route exact path="/signup">
-                    <Signup/>
-                    </Route>
+                    <Login />
+                  </Route>
+                  <Route exact path="/signup">
+                    <Signup />
+                  </Route>
                   <Route exact path="/">
                     <Home />
                   </Route>
-                  <Route exact path="/profile">
-                    <Profile />
+                  <Route exact path="/project/:id">
+                    <Project />
                   </Route>
                   <Route exact path="/professors">
                     <Professor />
                   </Route>
                   <Route exact path="/research">
-                    <Research/>
+                    <Research />
                   </Route>
                   <Route exact path="/edit-project/:id">
-                    <CorrectionForm/>
+                    <CorrectionForm />
                   </Route>
                   <Route exact path="/create-project">
-                    <CreateProject/>
-                    </Route>
+                    <CreateProject />
+                  </Route>
                   <Route exact path="/my-research">
-                    <MyResearch/>
+                    <MyResearch />
                   </Route>
                   <Route exact path="/update-role">
-                    <UpdateRoles/>
+                    <UpdateRoles />
                   </Route>
                   <Route exact path="/labs">
-                    <Lab/>
+                    <Lab />
                   </Route>
                 </Switch>
               </Container>
             </div>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </div>
           <div style={{ display: state }}>
             <SideBar closeSideBar={closeSideBar}></SideBar>
-        </div>
+          </div>
         </Router>
       </div>
     );

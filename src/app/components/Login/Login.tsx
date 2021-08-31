@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
 import {
   Select,
   Field,
@@ -48,8 +49,9 @@ const Login = () => {
         'password':state.password
       }
     }).then((response:any)=>{
+      toast.success('Logged in successfully!');
       localStorage.setItem('email', response.data.data.email);
-      window.location.href='/';
+      history.push('/')
     });
   }
   return <div className="wrapper center h-full">

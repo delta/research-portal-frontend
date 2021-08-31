@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import slide1 from '../../../assets/cover/slide-1.jpg'
+import slide2 from '../../../assets/cover/slide-2.jpg'
+import slide3 from '../../../assets/cover/slide-3.jpg'
+import slide4 from '../../../assets/cover/slide-4.jpg'
+import slide5 from '../../../assets/cover/slide-5.jpg'
 
 const dummyImages = [
-  "https://images.unsplash.com/photo-1562774053-701939374585?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1964&q=80",
-  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-  "https://images.unsplash.com/photo-1613685353742-5f7cad79f22f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80",
-  "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
-  "https://images.unsplash.com/photo-1581087725018-45eb42ace6eb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+  slide1,slide2,slide3,slide4,slide5
 ];
 
 const Landing = () => {

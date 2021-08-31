@@ -46,13 +46,20 @@ const CorrectionForm = () => {
         setCurrentState({...currentState, id: e.target.value});
       }
     }
-    useEffect(() => {
+    function getPrivilege(){
       axiosInstance({
         method:'GET',
-        url: `/project/id`, 
-        params: {
-          projectId: id
-        }
+        url: `/project/privilege/projectId=${id}`, 
+      }).then((response:any)=>{
+        setUser(response.data.data)
+      });
+    }
+    useEffect(() => {
+      getPrivilege();
+      let url = `/project/id?projectId=${id}`;
+      axiosInstance({
+        method:'GET',
+        url: url, 
       }).then((response:any)=>{
         let proj = response.data.data;
         setCurrentState({
@@ -72,7 +79,6 @@ const CorrectionForm = () => {
         data: currentState,
         params: currentState
       }).then((res:any)=>{
-        console.log(res);
         window.location.href = '/research';
       }).catch((err:any)=>{
         console.log(err);
@@ -86,20 +92,20 @@ const CorrectionForm = () => {
       <Text className="text-red-800 text-header">Edit Project</Text></div>
         <div className="fieldInput">
           <Label>Project Name</Label>
-          {user==="admin"?<TextInput className="inputField" name="projectName" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="projectName" type="text" onClick={handleChange} disabled={true}/>}
+          {user==="admin"?<TextInput className="inputField" name="projectName" type="text" value={currentState.name} onClick={handleChange}/>:<TextInput className="inputField" name="projectName" type="text" value={currentState.name} onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
           <Label>Heading</Label>
-          {user==="admin"?<TextInput className="inputField" name="heading" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="heading" type="text" onClick={handleChange} disabled={true}/>}
+          {user==="admin"?<TextInput className="inputField" name="heading" type="text" value={currentState.head} onClick={handleChange}/>:<TextInput className="inputField" name="heading" type="text" value={currentState.head} onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
           <Label>Area Of Research</Label>
-          {(user==="admin" || user==="edit")?<TextInput className="inputField" name="name" type="text" onClick={handleChange}/>:<TextInput className="inputField" name="name" type="text" onClick={handleChange} disabled={true}/>}
+          {(user==="admin" || user==="edit")?<TextInput className="inputField" name="name" value={currentState.aor} type="text" onClick={handleChange}/>:<TextInput className="inputField" name="name" type="text" value={currentState.aor} onClick={handleChange} disabled={true}/>}
         </div>
         <div className="fieldInput">
-          <Label>Description</Label>
-          <HelpText>Description of the project (max 10,000 words)</HelpText>
-           <textarea className="inputField" style={{borderRadius: '5px'}} onClick={handleChange}></textarea>
+          <Label>Abstract</Label>
+          <HelpText>Abstract of the project (max 10,000 words)</HelpText>
+           <textarea className="inputField" style={{borderRadius: '5px'}} value={currentState.abstract} onClick={handleChange}></textarea>
         </div>
         <div className="items-center loginBtnContainer">
           <Button className="bg-red-800 text-white loginBtn float-right" onClick={handleSubmit}>SUBMIT</Button>
