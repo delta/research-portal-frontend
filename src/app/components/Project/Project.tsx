@@ -85,7 +85,13 @@ const Project = () => {
   const [user, setUser] = useState("admin");
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState({
-    head: "",
+    head: {
+      name: "",
+      id: null,
+      email: "",
+      image_url: "",
+      is_staff: ""
+    },
     department: {
       full_name: "",
       id: null,
@@ -95,6 +101,7 @@ const Project = () => {
     id: null,
     abstract: "",
     paper_link: "",
+    members:[{name:'', permission: '', image_url: ''}]
   });
 
   useEffect(() => {
@@ -104,6 +111,7 @@ const Project = () => {
       .then((res: any) => {
         console.log(res)
         setProject(res.data.data);
+        console.log(project);
       })
       .catch((err: Error) => console.log(err));
   }, []);
@@ -190,12 +198,12 @@ const Project = () => {
         <div>
           <img
             className="w-32 max-h-32 mb-4 sm:mb-0"
-            src={sampleImg}
+            src={project.head.image_url}
             alt="Project"
           ></img>
         </div>
         <div className="flex-1 text-center sm:text-left h-auto sm:pl-12">
-          <h3 className="text-lg font-semibold mb-2">{project.head}</h3>
+          <h3 className="text-lg font-semibold mb-2">{project.head.name}</h3>
           <h3 className="text-lg font-semibold mb-2">
             {project.department.full_name}
           </h3>
@@ -218,21 +226,21 @@ const Project = () => {
         )}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:p-3 mt-0 sm:w-9/12">
-        {data.map((val, index) => {
+        {project.members.length!=0 && project.members.map((val, index) => {
           return (
-            <div>
+            <div key={index}>
               <div className="flex flex-col text-lg antialiased items-center sm:mg-2 lg:m-5 font-semibold rounded-lg border shadow-lg sm:p-2 h-80">
                 <div className="p-5">
                   <div className="max-h-40 ">
                     <img
                       className="mb-6 h-40 w-full"
-                      src={sampleImg}
+                      src={val.image_url}
                       alt="Project"
                     ></img>
                   </div>
                   <div className="text-center">
                     <h3 className="text-lg font-semibold mb-2">{val.name}</h3>
-                    <h3 className="text-lg font-semibold mb-2">{val.dept}</h3>
+                    <h3 className="text-lg font-semibold mb-2">{val.permission}</h3>
                   </div>
                 </div>
               </div>

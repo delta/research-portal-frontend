@@ -42,7 +42,7 @@ const CentersCard = (props:any) => {
 
 const Centers = () => {
 
-  const [centers, setcenters] = useState([]);
+  const [centers, setcenters] = useState([{image_url:''}]);
 
   useEffect(() => {
     let url = `/center`;
@@ -57,7 +57,8 @@ const Centers = () => {
   const getCentersCards = ()=>{
     let htmlArr: JSX.Element[] = [];
     centers.forEach((center,index)=>{
-      htmlArr.push(<CentersCard data={center} key={index}/>)
+      if(center.image_url)
+        htmlArr.push(<CentersCard data={center} key={index}/>)
     });
     return htmlArr;
   }
