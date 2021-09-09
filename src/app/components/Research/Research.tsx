@@ -34,6 +34,7 @@ const Research = () => {
       .get(url)
       .then((res: any) => {
         setDepartments(res.data.data);
+        console.log(departments);
       })
       .catch((err: Error) => console.log(err));
     url = `/admin_user/search/?professor=${localStorage.getItem('email')}`
