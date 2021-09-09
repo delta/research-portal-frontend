@@ -11,7 +11,24 @@ import {
   Select,
 } from "tailwind-react-ui";
 import { axiosInstance } from "../../utils/axios";
+import CustomFilter from "./CustomFilter";
+import CustomTagInput from "./CustomTagInput";
 import "./CreateProject.css";
+
+interface DepartmentData {
+  id: number;
+  full_name: string;
+  short_name: number;
+  image_url: string;
+}
+
+interface LabData {
+  id: number;
+  name: string;
+  department: number;
+  image_url: string;
+  description: string;
+}
 
 const CreateProject = () => {
   let state={
@@ -23,13 +40,18 @@ const CreateProject = () => {
     department:''
   }
   const [currentState, setCurrentState] = useState<any>(state)
-  const [options, setOptions] = useState<Array<Object>>();
-  const [departments, setDepartments] = useState([
-    {
-      full_name: "",
-      short_name: "",
-    },
-  ]);
+  const [departments, setDepartments] = useState<Array<DepartmentData>>();
+  
+  const [labs, setLabs] = useState<Array<LabData>>();
+  const [coes, setCoes] = useState([{name:""}]);
+  const [customTags, setCustomTags] = useState<Array<string>>([]);
+
+  const [selectedLabs, setSelectedLabs] = useState([]);
+  const [selectedCoes, setSelectedCoes] = useState([]);
+
+  const [isDepartmentsLoaded, setIsDepartmentsLoaded] = useState(false);
+  const [isLabsLoaded, setIsLabsLoaded] = useState(false);
+  const [isCoesLoaded, setIsCoesLoaded] = useState(false);
 
   const history = useHistory();
 
@@ -61,29 +83,55 @@ const CreateProject = () => {
     }
   }
 
-  async function getDepartments() {
+  const getDepartments = ()=>{
     let url = `/department`;
-    await axiosInstance
+    axiosInstance
       .get(url)
-      .then(async (res: any) => {
+      .then((res: any) => {
         setDepartments(res.data.data);
-        let ob: Array<Object> = [];
-        await departments.forEach((item) => {
-          ob.push({
-            value: item.short_name,
-            label: item.full_name,
-          });
-        });
-        await setOptions(ob);
+        setIsDepartmentsLoaded(true);
       })
       .catch((err: Error) => console.log(err));
   }
+
+  const getLabs = () => {
+    let url = `/center`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        console.log(res.data.data);
+        setLabs(res.data.data);
+        setIsLabsLoaded(true);
+        console.log(labs);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
+  const getCoes = () => {
+    let url = `/coe`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        setCoes(res.data.data);
+        setIsCoesLoaded(true);
+        console.log(coes);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
   useEffect(() => {
     getDepartments();
-  }, [options]);
+    getLabs();
+    getCoes();
+  }, []);
 
   function handleSubmit(e: any) {
     console.log(currentState)
+    // send the below three to the backend
+    console.log(selectedLabs)
+    console.log(selectedCoes)
+    console.log(customTags)
+
     axiosInstance({
       method: "POST",
       url: "/project/create",
@@ -150,10 +198,35 @@ const CreateProject = () => {
           <Select
             className="border-2 border-black focus:shadow focus:border-red-800"
             name="department"
-            options={options}
+            options={departments?.map((item: any, key) => {
+              return {
+                value: item.short_name,
+                label: item.full_name,
+              };
+            })}
             onChange={handleChange}
           />
         </div>
+
+        {
+          isLabsLoaded == true?(
+            <CustomFilter options={labs} 
+              selectedOptions={selectedLabs}
+              name="Select Labs"
+              setSelectedOptions={setSelectedLabs} />
+          ):null
+        }
+        {
+          isCoesLoaded == true?(
+            <CustomFilter options={coes}
+              selectedOptions={selectedCoes}
+              name="Select Ceners of Excellence"
+              setSelectedOptions={setSelectedCoes}/>
+          ):null
+        }
+
+        <CustomTagInput tags={customTags} setTags={setCustomTags}/>
+
         <div className="fieldInput">
           <Label>Paper Link</Label>
           <TextInput

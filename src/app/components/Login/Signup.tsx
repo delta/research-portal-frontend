@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Select,
@@ -26,7 +26,25 @@ const Signup = () => {
     email: "",
     password: "",
     name: "",
+    department: "",
   })
+
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    let url = `/department`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        setDepartments(res.data.data);
+      })
+      .catch((err: Error) => console.log(err));
+  }, []);
+
+  const handleDepartmentChange = (e: any) => {
+    setState({ ...state, department: e.target.value });
+  }
+
   function handleChange(e: any) {
     let val = e.target.name;
     if (val === "webmail") {
@@ -47,6 +65,7 @@ const Signup = () => {
       form_data.append("name", state.name);
       form_data.append("email", state.email);
       form_data.append("password", state.password);
+      form_data.append("department", state.department);
       let url = `/user/register/`;
       axiosInstance
         .post(url, form_data, {
@@ -61,7 +80,7 @@ const Signup = () => {
     }
   }
   return (
-    <div className="wrapper h-full">
+    <div className="wrapper pb-10" style={{ height: "fit-content" }}>
       <Container padding className="signupContainer">
         <div className="header">
           <Text className="text-red-800 text-header">SIGN UP</Text>
@@ -82,6 +101,20 @@ const Signup = () => {
         <Field>
           <Label>Name</Label>
           <TextInput className="inputField" name="name" type="text" onChange={handleChange} />
+        </Field>
+        <Label className="filterLabel">Select your Department</Label>
+        <Field>
+          <Select
+            className="border-2 border-black focus:shadow focus:border-red-800"
+            name="select"
+            onChange={handleDepartmentChange}
+            options={departments.map((item: any, key) => {
+              return {
+                value: item.short_name,
+                label: item.full_name,
+              };
+            })}
+          />
         </Field>
         <Field>
           <Label>Profile Image</Label>
