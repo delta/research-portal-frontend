@@ -30,26 +30,34 @@ interface LabData {
   description: string;
 }
 
+interface AorData {
+  id: number;
+  name: string;
+  description: string;
+}
+
 const CreateProject = () => {
   let state={
     name:'',
     head:'',
     paperLink:'',
-    aor:'',
     abstract:'',
     department:''
   }
   const [currentState, setCurrentState] = useState<any>(state)
   const [departments, setDepartments] = useState<Array<DepartmentData>>();
   
+  const [aors, setAors] = useState<Array<AorData>>();
   const [labs, setLabs] = useState<Array<LabData>>();
   const [coes, setCoes] = useState([{name:""}]);
   const [customTags, setCustomTags] = useState<Array<string>>([]);
 
   const [selectedLabs, setSelectedLabs] = useState([]);
   const [selectedCoes, setSelectedCoes] = useState([]);
+  const [selectedAors, setSelectedAors] = useState([]);
 
   const [isDepartmentsLoaded, setIsDepartmentsLoaded] = useState(false);
+  const [isAorsLoaded, setIsAorsLoaded] = useState(false);
   const [isLabsLoaded, setIsLabsLoaded] = useState(false);
   const [isCoesLoaded, setIsCoesLoaded] = useState(false);
 
@@ -71,9 +79,6 @@ const CreateProject = () => {
     else if(val==='paperLink'){
       setCurrentState({...currentState, paperLink: e.target.value});
       console.log(currentState);
-    }
-    else if(val==='aor'){
-      setCurrentState({...currentState, aor: e.target.value});
     }
     else if(val==='abstract'){
       setCurrentState({...currentState, abstract: e.target.value});
@@ -107,6 +112,19 @@ const CreateProject = () => {
       .catch((err: Error) => console.log(err));
   }
 
+  const getAors = () => {
+    let url = `/aor`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        console.log(res.data.data);
+        setAors(res.data.data);
+        setIsAorsLoaded(true);
+        console.log(aors);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
   const getCoes = () => {
     let url = `/coe`;
     axiosInstance
@@ -123,23 +141,19 @@ const CreateProject = () => {
     getDepartments();
     getLabs();
     getCoes();
+    getAors();
   }, []);
 
   function handleSubmit(e: any) {
-    console.log(currentState)
     // send the below three to the backend
-    console.log(selectedLabs)
-    console.log(selectedCoes)
-    console.log(customTags)
-
     axiosInstance({
       method: "POST",
       url: "/project/create",
-      data: currentState,
+      data: {...currentState, aor: selectedAors, labs: selectedLabs, coes: selectedCoes, tags: customTags},
     })
       .then((res: any) => {
         console.log(res);
-        history.push('/research')
+        // history.push('/research')
       })
       .catch((err: any) => {
         //console.log(err);[]
@@ -170,19 +184,14 @@ const CreateProject = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="fieldInput">
-          <Label>Area Of Research</Label>
-          <Select
-            onChange={handleChange}
-            className="border-2 border-black focus:shadow focus:border-red-800"
-            name="aor"
-            options={[
-              { value: "Machine Learning", label: "Machine Learning" },
-              { value: "Robotics", label: "Robotics" },
-              { value: "Blockchain", label: "Blockchain" },
-            ]}
-          />
-        </div>
+        {
+          isAorsLoaded == true?(
+            <CustomFilter options={aors} 
+              selectedOptions={selectedAors}
+              name="Select Areas of Research"
+              setSelectedOptions={setSelectedAors} />
+          ):null
+        }
         <div className="fieldInput">
           <Label>Abstract</Label>
           <HelpText>Abstract of the project (max 10,000 words)</HelpText>
