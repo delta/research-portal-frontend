@@ -104,17 +104,34 @@ const Project = () => {
     members:[{name:'', permission: '', image_url: ''}]
   });
 
-  useEffect(() => {
+  const [userPrivilege, setUserPrivilege] = useState("view");
+
+  const getProjectDetails = () => {
     let url = `/project/id?projectId=${id}`;
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res)
+        console.log(res.data.data)
         setProject(res.data.data);
-        console.log(project);
       })
       .catch((err: Error) => console.log(err));
-  }, []);
+  };
+
+  const checkCurrentUserPrivilege = () => {
+    let url = `/project/privilege?projectId=${id}`;
+    console.log(id);
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        setUserPrivilege(res.data.data);
+      })
+      .catch((err: Error) => console.log(err));
+  };
+
+  useEffect(() => {
+    getProjectDetails();
+    checkCurrentUserPrivilege();
+}, []);
 
   return (
     <div className="flex flex-col items-center mt-5 mb-10 sm:mb-20 sm:mt-20 p-0 sm:p-2 m-7">
@@ -220,6 +237,16 @@ const Project = () => {
             {/* <Button className="adminButton w-40 bg-red-800 text-white m-2">
               Add Tags
             </Button> */}
+            {
+              userPrivilege === "admin" ? (
+                <Link to={`/edit-project/${id}`}>
+                  <Button
+                    className="editButton w-40 bg-red-800 text-white">
+                    Edit Project
+                  </Button>
+                </Link>):null
+            }
+            
           </div>
         ) : (
           <div></div>

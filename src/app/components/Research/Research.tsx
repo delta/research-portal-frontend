@@ -22,7 +22,6 @@ const Research = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res.data.data);
         setResearches(res.data.data);
       })
       .catch((err: Error) => console.log(err));
@@ -34,7 +33,6 @@ const Research = () => {
       .get(url)
       .then((res: any) => {
         setDepartments(res.data.data);
-        console.log(departments);
       })
       .catch((err: Error) => console.log(err));
     url = `/admin_user/search/?professor=${localStorage.getItem('email')}`
@@ -72,7 +70,6 @@ const Research = () => {
 
   const handleHeadNameChange = (e: any) => {
     setHeadName(e.target.value);
-    handleQuery();
   };
 
   const handleQuery = () => {
@@ -85,14 +82,16 @@ const Research = () => {
       .catch((err: Error) => console.log(err));
   };
 
+  useEffect(() => {
+    handleQuery();
+  }, [searchDept,searchName,headName,aor]);
+
   const handleSearchByProjectName = (e: any) => {
     setSearchName(e.target.value);
-    handleQuery();
   };
 
   const handleSearchByAor = (e: any) => {
     setAor(e.target.value);
-    handleQuery();
   };
 
 

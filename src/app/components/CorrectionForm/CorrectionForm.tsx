@@ -10,6 +10,22 @@ import {
 import { axiosInstance } from "../../utils/axios";
 import './CorrectionForm.css';
 import { useParams } from "react-router";
+import CustomFilter from "../CreateProject/CustomFilter";
+import CustomTagInput from "../CreateProject/CustomTagInput";
+
+interface LabData {
+  id: number;
+  name: string;
+  department: number;
+  image_url: string;
+  description: string;
+}
+
+interface AorData {
+  id: number;
+  name: string;
+  description: string;
+}
 
 const CorrectionForm = () => {
     const {id} = useParams<{id: string}>();
@@ -18,95 +34,195 @@ const CorrectionForm = () => {
       name:'',
       head:'',
       paperLink:'',
-      aor:'',
       abstract:'',
       department:''
     }
     const [currentState, setCurrentState] = useState<any>(state)
+
+    const [aors, setAors] = useState<Array<AorData>>();
+    const [labs, setLabs] = useState<Array<LabData>>();
+    const [coes, setCoes] = useState([{name:""}]);
+    const [customTags, setCustomTags] = useState<Array<string>>([]);
+
+    const [selectedLabs, setSelectedLabs] = useState([]);
+    const [selectedCoes, setSelectedCoes] = useState([]);
+    const [selectedAors, setSelectedAors] = useState([]);
+
+    const [isAorsLoaded, setIsAorsLoaded] = useState(false);
+    const [isLabsLoaded, setIsLabsLoaded] = useState(false);
+    const [isCoesLoaded, setIsCoesLoaded] = useState(false);
+
     function handleChange(e:any) {
-      let val = e.target.name;
-      if(val==='name'){
-        setCurrentState({...currentState, name: e.target.value});
-        console.log(currentState);
-      }
-      else if(val==='head'){
-        state.head=e.target.value;
-      }
-      else if(val==='paperLink'){
-        setCurrentState({...currentState, paperLink: e.target.value});
-        console.log(currentState);
-      }
-      else if(val==='aor'){
-        setCurrentState({...currentState, aor: e.target.value});
-      }
-      else if(val==='abstract'){
-        setCurrentState({...currentState, abstract: e.target.value});
-      }
-      else if(val==='id'){
-        setCurrentState({...currentState, id: e.target.value});
-      }
+      setCurrentState({...currentState,[e.target.name]:e.target.value})
     }
+
     function getPrivilege(){
       axiosInstance({
         method:'GET',
-        url: `/project/privilege/projectId=${id}`, 
+        url: `/project/privilege?projectId=${id}`, 
       }).then((response:any)=>{
         setUser(response.data.data)
       });
     }
-    useEffect(() => {
-      getPrivilege();
+
+    const getProject = () => {
       let url = `/project/id?projectId=${id}`;
       axiosInstance({
         method:'GET',
         url: url, 
       }).then((response:any)=>{
         let proj = response.data.data;
+        setSelectedAors(proj.aor_tags.map((aor:any)=>{
+          return aor.name;
+        }));
+        setSelectedLabs(proj.labs_tags.map((lab:any)=>{
+          return lab.name;
+        }));
+        setSelectedCoes(proj.coe_tags.map((coe:any)=>{
+          return coe.name;
+        }));
+        setCustomTags(proj.tags);
         setCurrentState({
           name: proj.name,
           abstract: proj.abstract,
           paperLink: proj.paper_link,
           aor: proj.aor,
-          projectId: proj.id
+          projectId: proj.id,
+          head: proj.head.email
         });
       });
+    }
+
+    const getLabs = () => {
+      let url = `/center`;
+      axiosInstance
+        .get(url)
+        .then((res: any) => {
+          setLabs(res.data.data);
+          setIsLabsLoaded(true);
+        })
+        .catch((err: Error) => console.log(err));
+    }
+
+    const getAors = () => {
+      let url = `/aor`;
+      axiosInstance
+        .get(url)
+        .then((res: any) => {
+          setAors(res.data.data);
+          setIsAorsLoaded(true);
+        })
+        .catch((err: Error) => console.log(err));
+    }
+
+    const getCoes = () => {
+      let url = `/coe`;
+      axiosInstance
+        .get(url)
+        .then((res: any) => {
+          setCoes(res.data.data);
+          setIsCoesLoaded(true);
+        })
+        .catch((err: Error) => console.log(err));
+    }
+
+    useEffect(() => {
+      getPrivilege();
+      getProject();
+      getLabs();
+      getCoes();
+      getAors();
     }, []);
+
+
     function handleSubmit(e:any){
-      console.log(currentState);
+      let route = "edit";
+      if(user === "write") route = "write";
       axiosInstance({
         method:'POST',
-        url:'/project/edit',
-        data: currentState,
-        params: currentState
+        url:`/project/${route}?projectId=${id}`,
+        data: {...currentState, aor: selectedAors, labs: selectedLabs, coes: selectedCoes, tags: customTags},
+        
       }).then((res:any)=>{
-        window.location.href = '/research';
+        if(res.data.status_code === 200){
+          window.location.href = '/research';
+        }
+        else{
+          console.log(res.data);
+        }
       }).catch((err:any)=>{
         console.log(err);
       })
     }
   
   return (
-    <div className="wrapper h-full">
+    <div className="wrapper p-20" style={{ height: "fit-content" }}>
       <Container padding className="formContainer">
       <div className="header">
       <Text className="text-red-800 text-header">Edit Project</Text></div>
+        
         <div className="fieldInput">
           <Label>Project Name</Label>
-          {user==="admin"?<TextInput className="inputField" name="projectName" type="text" value={currentState.name} onClick={handleChange}/>:<TextInput className="inputField" name="projectName" type="text" value={currentState.name} onClick={handleChange} disabled={true}/>}
+          <TextInput className="inputField" name="name" type="text" value={currentState.name} onChange={handleChange} disabled={user!=="admin"}/>
         </div>
+
         <div className="fieldInput">
-          <Label>Heading</Label>
-          {user==="admin"?<TextInput className="inputField" name="heading" type="text" value={currentState.head} onClick={handleChange}/>:<TextInput className="inputField" name="heading" type="text" value={currentState.head} onClick={handleChange} disabled={true}/>}
+          <Label>Head</Label>
+          <TextInput className="inputField" name="head" type="text" 
+          value={currentState.head} onChange={handleChange} disabled={user!=="admin"}/>
         </div>
-        <div className="fieldInput">
-          <Label>Area Of Research</Label>
-          {(user==="admin" || user==="edit")?<TextInput className="inputField" name="name" value={currentState.aor} type="text" onClick={handleChange}/>:<TextInput className="inputField" name="name" type="text" value={currentState.aor} onClick={handleChange} disabled={true}/>}
-        </div>
+
         <div className="fieldInput">
           <Label>Abstract</Label>
           <HelpText>Abstract of the project (max 10,000 words)</HelpText>
-           <textarea className="inputField" style={{borderRadius: '5px'}} value={currentState.abstract} onClick={handleChange}></textarea>
+           <textarea className="inputField" style={{borderRadius: '5px'}} name="abstract" value={currentState.abstract} onChange={handleChange} disabled={user === "view"}></textarea>
         </div>
+
+        {
+          (isAorsLoaded == true && (user == 'admin' || user == 'edit'))?(
+            <CustomFilter options={aors} 
+              selectedOptions={selectedAors}
+              name="Select Areas of Research"
+              setSelectedOptions={setSelectedAors} />
+          ):null
+        }
+
+        {
+          (isLabsLoaded == true && (user == 'admin' || user == 'edit'))?(
+            <CustomFilter options={labs} 
+              selectedOptions={selectedLabs}
+              name="Select Labs"
+              setSelectedOptions={setSelectedLabs} />
+          ):null
+        }
+
+        {
+          (isCoesLoaded == true && (user == 'admin' || user == 'edit'))?(
+            <CustomFilter options={coes}
+              selectedOptions={selectedCoes}
+              name="Select Ceners of Excellence"
+              setSelectedOptions={setSelectedCoes}/>
+          ):null
+        }
+
+        {
+          (user == 'admin' || user == 'edit')?(
+            <CustomTagInput tags={customTags} setTags={setCustomTags}/>
+          ):null
+        }
+
+        <div className="fieldInput">
+          <Label>Paper Link</Label>
+          <TextInput
+            className="inputField"
+            name="paperLink"
+            type="text"
+            value={currentState.paperLink}
+            onChange={handleChange}
+            disabled={user === "view"}
+          />
+        </div>
+
         <div className="items-center loginBtnContainer">
           <Button className="bg-red-800 text-white loginBtn float-right" onClick={handleSubmit}>SUBMIT</Button>
         </div>
