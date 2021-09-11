@@ -39,7 +39,7 @@ const ResearchCard = (props: any) => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        if (res.data.data == "admin") setUser(true);
+        if (res.data.data == "Admin") setUser(true);
       })
       .catch((err: Error) => console.log(err));
     url = `/admin_user/search/?professor=${localStorage.getItem("email")}`;

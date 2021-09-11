@@ -12,24 +12,12 @@ import './CorrectionForm.css';
 import { useParams } from "react-router";
 import CustomFilter from "../CreateProject/CustomFilter";
 import CustomTagInput from "../CreateProject/CustomTagInput";
+import { AorData, LabData } from "../../interfaces/home";
 
-interface LabData {
-  id: number;
-  name: string;
-  department: number;
-  image_url: string;
-  description: string;
-}
-
-interface AorData {
-  id: number;
-  name: string;
-  description: string;
-}
 
 const CorrectionForm = () => {
     const {id} = useParams<{id: string}>();
-    const [user,setUser] = useState("write")
+    const [user,setUser] = useState("Write")
     let state={
       name:'',
       head:'',
@@ -137,7 +125,7 @@ const CorrectionForm = () => {
 
     function handleSubmit(e:any){
       let route = "edit";
-      if(user === "write") route = "write";
+      if(user === "Write") route = "write";
       axiosInstance({
         method:'POST',
         url:`/project/${route}?projectId=${id}`,
@@ -163,23 +151,17 @@ const CorrectionForm = () => {
         
         <div className="fieldInput">
           <Label>Project Name</Label>
-          <TextInput className="inputField" name="name" type="text" value={currentState.name} onChange={handleChange} disabled={user!=="admin"}/>
+          <TextInput className="inputField" name="name" type="text" value={currentState.name} onChange={handleChange} disabled={user!=="Admin"}/>
         </div>
 
-        <div className="fieldInput">
-          <Label>Head</Label>
-          <TextInput className="inputField" name="head" type="text" 
-          value={currentState.head} onChange={handleChange} disabled={user!=="admin"}/>
-        </div>
-
-        <div className="fieldInput">
+        <div className="fieldInput my-2">
           <Label>Abstract</Label>
           <HelpText>Abstract of the project (max 10,000 words)</HelpText>
-           <textarea className="inputField" style={{borderRadius: '5px'}} name="abstract" value={currentState.abstract} onChange={handleChange} disabled={user === "view"}></textarea>
+           <textarea className="inputField" style={{borderRadius: '5px'}} name="abstract" value={currentState.abstract} onChange={handleChange} disabled={user === "View"}></textarea>
         </div>
 
         {
-          (isAorsLoaded == true && (user == 'admin' || user == 'edit'))?(
+          (isAorsLoaded == true && (user == 'admin' || user == 'Edit'))?(
             <CustomFilter options={aors} 
               selectedOptions={selectedAors}
               name="Select Areas of Research"
@@ -188,7 +170,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (isLabsLoaded == true && (user == 'admin' || user == 'edit'))?(
+          (isLabsLoaded == true && (user == 'admin' || user == 'Edit'))?(
             <CustomFilter options={labs} 
               selectedOptions={selectedLabs}
               name="Select Labs"
@@ -197,7 +179,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (isCoesLoaded == true && (user == 'admin' || user == 'edit'))?(
+          (isCoesLoaded == true && (user == 'admin' || user == 'Edit'))?(
             <CustomFilter options={coes}
               selectedOptions={selectedCoes}
               name="Select Ceners of Excellence"
@@ -206,7 +188,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (user == 'admin' || user == 'edit')?(
+          (user == 'admin' || user == 'Edit')?(
             <CustomTagInput tags={customTags} setTags={setCustomTags}/>
           ):null
         }
@@ -219,7 +201,7 @@ const CorrectionForm = () => {
             type="text"
             value={currentState.paperLink}
             onChange={handleChange}
-            disabled={user === "view"}
+            disabled={user === "View"}
           />
         </div>
 

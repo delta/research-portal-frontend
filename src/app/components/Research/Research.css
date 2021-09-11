@@ -17,6 +17,17 @@ li {
 aside{
   min-width: 350px;
 }
+
+.result-container{
+  width: 75%;
+  margin-left: 25%!important;
+}
+
+.filter-input-container > div{
+  width: 100%!important;
+  max-width: 100%!important;
+}
+
 @media (max-width:600px) {
   .search_container{
     display: block;
@@ -30,5 +41,13 @@ aside{
   }
   .searchInput,.searchHolder{
     width: 100%;
+  }
+}
+
+@media (max-width: 1024px) { 
+  .result-container
+  {
+    width: 100%;
+    margin-left: 0!important;
   }
 }

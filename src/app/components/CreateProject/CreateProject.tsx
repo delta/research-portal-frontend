@@ -14,27 +14,7 @@ import { axiosInstance } from "../../utils/axios";
 import CustomFilter from "./CustomFilter";
 import CustomTagInput from "./CustomTagInput";
 import "./CreateProject.css";
-
-interface DepartmentData {
-  id: number;
-  full_name: string;
-  short_name: number;
-  image_url: string;
-}
-
-interface LabData {
-  id: number;
-  name: string;
-  department: number;
-  image_url: string;
-  description: string;
-}
-
-interface AorData {
-  id: number;
-  name: string;
-  description: string;
-}
+import { AorData, LabData, DepartmentData } from "../../interfaces/home";
 
 const CreateProject = () => {
   let state={

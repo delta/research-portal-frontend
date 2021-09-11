@@ -82,7 +82,7 @@ const Project = () => {
   const handleDefault = () => {
     setIsFlipped(-1);
   };
-  const [user, setUser] = useState("admin");
+  const [user, setUser] = useState("Admin");
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState({
     head: {
@@ -104,7 +104,7 @@ const Project = () => {
     members:[{name:'', permission: '', image_url: ''}]
   });
 
-  const [userPrivilege, setUserPrivilege] = useState("view");
+  const [userPrivilege, setUserPrivilege] = useState("View");
 
   const getProjectDetails = () => {
     let url = `/project/id?projectId=${id}`;
@@ -119,7 +119,6 @@ const Project = () => {
 
   const checkCurrentUserPrivilege = () => {
     let url = `/project/privilege?projectId=${id}`;
-    console.log(id);
     axiosInstance
       .get(url)
       .then((res: any) => {
@@ -228,7 +227,7 @@ const Project = () => {
         </div>
       </div>
       <div className="grid mt-5">
-        {user === "admin" ? (
+        {user === "Admin" ? (
           <div className="mb-0">
             <Button onClick={openModal1} className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
               Add Members
@@ -238,7 +237,7 @@ const Project = () => {
               Add Tags
             </Button> */}
             {
-              userPrivilege === "admin" ? (
+              userPrivilege !== "View" ? (
                 <Link to={`/edit-project/${id}`}>
                   <Button
                     className="editButton w-40 bg-red-800 text-white">

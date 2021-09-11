@@ -79,7 +79,7 @@ const MyResearch = () => {
     };
 
     const handleDefault = () =>{setIsFlipped(-1);};
-    const [user,setUser] = useState("admin");
+    const [user,setUser] = useState("Admin");
 
     return (
         <div className="flex flex-col items-center mt-5 mb-10 sm:mb-20 sm:mt-20 p-0 sm:p-2 m-7">

@@ -28,7 +28,7 @@ import config from '../../../env'
 
 const Login = () => {
   const history = useHistory();
-  let user="admin";
+  let user="Admin";
   let state={
     email:'',
     password:''
