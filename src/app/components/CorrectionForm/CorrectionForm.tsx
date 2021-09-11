@@ -161,7 +161,7 @@ const CorrectionForm = () => {
         </div>
 
         {
-          (isAorsLoaded == true && (user == 'admin' || user == 'Edit'))?(
+          (isAorsLoaded == true && (user == 'Admin' || user == 'Edit'))?(
             <CustomFilter options={aors} 
               selectedOptions={selectedAors}
               name="Select Areas of Research"
@@ -170,7 +170,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (isLabsLoaded == true && (user == 'admin' || user == 'Edit'))?(
+          (isLabsLoaded == true && (user == 'Admin' || user == 'Edit'))?(
             <CustomFilter options={labs} 
               selectedOptions={selectedLabs}
               name="Select Labs"
@@ -179,7 +179,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (isCoesLoaded == true && (user == 'admin' || user == 'Edit'))?(
+          (isCoesLoaded == true && (user == 'Admin' || user == 'Edit'))?(
             <CustomFilter options={coes}
               selectedOptions={selectedCoes}
               name="Select Ceners of Excellence"
@@ -188,7 +188,7 @@ const CorrectionForm = () => {
         }
 
         {
-          (user == 'admin' || user == 'Edit')?(
+          (user == 'Admin' || user == 'Edit')?(
             <CustomTagInput tags={customTags} setTags={setCustomTags}/>
           ):null
         }
