@@ -111,7 +111,6 @@ const Project = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res.data.data)
         setProject(res.data.data);
       })
       .catch((err: Error) => console.log(err));

@@ -150,7 +150,7 @@ const MyResearch = () => {
                 </div>
 			</div>
             <div className="grid mt-5">
-                {(user==='admin'?<div className="mb-0">
+                {(user==='Admin'?<div className="mb-0">
                 <Button onClick={openModal1} className="adminButton w-40 bg-red-800 text-white m-2">Add Members</Button>
                 <Link to="/update-role"><Button className="adminButton w-40 bg-red-800 text-white m-2">Update Roles</Button></Link>
                 <Button onClick={openModal2} className="adminButton w-40 bg-red-800 text-white m-2">Add Tags</Button>
