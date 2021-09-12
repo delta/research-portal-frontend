@@ -31,9 +31,9 @@ const SideBarMob = (props:any) => {
       <div className="w-8/12 bg-red-50 h-screen border-l-2 border-gray-200 right-0 absolute z-10">
         <div className="flex justify-center p-4">
           {user === true ? (
-            <img src={loggedImg}></img>
+            <img src={loggedImg} alt='user'></img>
           ) : (
-            <img src={dummyImg}></img>
+            <img src={dummyImg} alt='user'></img>
           )}
         </div>
         {!user ? (

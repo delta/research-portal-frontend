@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Select,
-  Field,
-  Label,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  Button,
-  Article,
-  ContentTitle,
-  Text,
-  Aside,
+  Row
 } from "tailwind-react-ui";
 import "./Professor.css";
-import img from "./Assets/icon.jpg";
 import { axiosInstance } from "../../utils/axios";
 import styled from "styled-components";
 

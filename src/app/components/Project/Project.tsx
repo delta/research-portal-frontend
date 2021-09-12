@@ -1,64 +1,27 @@
 import React, { useEffect, useState } from "react";
-import ReactCardFlip from "react-card-flip";
 import "./Project.css";
-import sampleImg from "./Assets/icon.jpg";
-import {Select, Label,TextInput,Button} from 'tailwind-react-ui';
+import { Select, Label, TextInput, Button } from "tailwind-react-ui";
 import { useParams } from "react-router";
 import { axiosInstance } from "../../utils/axios";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
-const data = [
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-  {
-    name: "Elliot Anderson",
-    dept: "ICE",
-  },
-];
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
 };
 const Project = () => {
   const [modalIsOpen1, setIsOpen1] = useState(false);
   const [modalIsOpen2, setIsOpen2] = useState(false);
+  const [member, setMember] = useState('');
+  const [role, setRole] = useState('');
 
   const openModal1 = () => {
     setIsOpen1(true);
@@ -90,7 +53,7 @@ const Project = () => {
       id: null,
       email: "",
       image_url: "",
-      is_staff: ""
+      is_staff: "",
     },
     department: {
       full_name: "",
@@ -101,7 +64,7 @@ const Project = () => {
     id: null,
     abstract: "",
     paper_link: "",
-    members:[{name:'', permission: '', image_url: ''}]
+    members: [{ name: "", permission: "", image_url: "" }],
   });
 
   const [userPrivilege, setUserPrivilege] = useState("View");
@@ -131,6 +94,34 @@ const Project = () => {
     checkCurrentUserPrivilege();
 }, []);
 
+  const handleMember=(e:any)=>{
+    setMember(e.target.value);
+    console.log(member)
+  }
+
+  const handleRole=(e:any)=>{
+    console.log(e.target.value)
+    setRole(e.target.value);
+    console.log(role)
+  }
+
+  const addRole=()=>{
+    let url=`/admin_users/add_members/`;
+    axiosInstance({
+      method:'POST',
+      url:url,
+      data:{
+        user_id:member,
+        project_id:id,
+        role:role
+      }
+    }).then((res:any)=>{
+      console.log(res);
+    }).catch((err:Error)=>{
+      console.log(err);
+    })
+  }
+
   return (
     <div className="flex flex-col items-center mt-5 mb-10 sm:mb-20 sm:mt-20 p-0 sm:p-2 m-7">
       <div>
@@ -143,13 +134,14 @@ const Project = () => {
           <form>
             <div className="fieldInput">
               <Label>Registration Number</Label>
-              <TextInput className="inputField" name="heading" type="text" />
+              <input className="inputField" name="heading" type="text" onChange={handleMember} />
             </div>
             <div className="fieldInput">
               <Label>Permission</Label>
               <Select
                 className="inputField"
                 name="selectPrivilege"
+                onChange={handleRole}
                 options={[
                   { value: "Edit", label: "Edit" },
                   { value: "Write", label: "Write" },
@@ -157,20 +149,24 @@ const Project = () => {
                 ]}
               />
             </div>
-            <div className="flex justify-between m-4">
-              <Button
-                onClick={closeModal1}
-                className="adminButton w-40 bg-red-800 text-white"
-              >
-                Close
-              </Button>
-              <Button
-                onClick={closeModal1}
-                className="adminButton w-40 bg-red-800 text-white"
-              >
-                Add Member
-              </Button>
-            </div>
+            {user === "admin" ? (
+              <div className="flex justify-between m-4">
+                <Button
+                  onClick={closeModal1}
+                  className="adminButton w-40 bg-red-800 text-white"
+                >
+                  Close
+                </Button>
+                <Button
+                  onClick={addRole}
+                  className="adminButton w-40 bg-red-800 text-white"
+                >
+                  Add Member
+                </Button>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </form>
         </Modal>
         <Modal
@@ -228,10 +224,17 @@ const Project = () => {
       <div className="grid mt-5">
         {user === "Admin" ? (
           <div className="mb-0">
-            <Button onClick={openModal1} className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
+            <Button
+              onClick={openModal1}
+              className="adminButton md:w-40 w-full bg-red-800 text-white m-2"
+            >
               Add Members
             </Button>
-            <Link to="/update-role"><Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">Update Roles</Button></Link>
+            <Link to="/update-role">
+              <Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
+                Update Roles
+              </Button>
+            </Link>
             {/* <Button className="adminButton w-40 bg-red-800 text-white m-2">
               Add Tags
             </Button> */}
@@ -251,27 +254,30 @@ const Project = () => {
         )}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:p-3 mt-0 sm:w-9/12">
-        {project.members.length!=0 && project.members.map((val, index) => {
-          return (
-            <div key={index}>
-              <div className="flex flex-col text-lg antialiased items-center sm:mg-2 lg:m-5 font-semibold rounded-lg border shadow-lg sm:p-2 h-80">
-                <div className="p-5">
-                  <div className="max-h-40 ">
-                    <img
-                      className="mb-6 h-40 w-full"
-                      src={val.image_url}
-                      alt="Project"
-                    ></img>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold mb-2">{val.name}</h3>
-                    <h3 className="text-lg font-semibold mb-2">{val.permission}</h3>
+        {project.members.length !== 0 &&
+          project.members.map((val, index) => {
+            return (
+              <div key={index}>
+                <div className="flex flex-col text-lg antialiased items-center sm:mg-2 lg:m-5 font-semibold rounded-lg border shadow-lg sm:p-2 h-80">
+                  <div className="p-5">
+                    <div className="max-h-40 ">
+                      <img
+                        className="mb-6 h-40 w-full"
+                        src={val.image_url}
+                        alt="Project"
+                      ></img>
+                    </div>
+                    <div className="text-center">
+                      <h3 className="text-lg font-semibold mb-2">{val.name}</h3>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {val.permission}
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );

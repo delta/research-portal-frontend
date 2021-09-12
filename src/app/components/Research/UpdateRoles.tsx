@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import {Button, Select, Label,TextInput} from 'tailwind-react-ui';
+import {Button, Select, Label} from 'tailwind-react-ui';
 
 const people = [
   {

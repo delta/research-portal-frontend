@@ -15,6 +15,7 @@ import CustomFilter from "./CustomFilter";
 import CustomTagInput from "./CustomTagInput";
 import "./CreateProject.css";
 import { AorData, LabData, DepartmentData } from "../../interfaces/home";
+import { toast } from "react-toastify";
 
 const CreateProject = () => {
   let state={
@@ -48,7 +49,6 @@ const CreateProject = () => {
 
     if(val==='name'){
       setCurrentState({...currentState, name: e.target.value});
-      console.log(currentState);
     }
     else if(val==='head'){
       currentState.head=e.target.value;
@@ -58,7 +58,6 @@ const CreateProject = () => {
     }
     else if(val==='paperLink'){
       setCurrentState({...currentState, paperLink: e.target.value});
-      console.log(currentState);
     }
     else if(val==='abstract'){
       setCurrentState({...currentState, abstract: e.target.value});
@@ -132,6 +131,12 @@ const CreateProject = () => {
       data: {...currentState, aor: selectedAors, labs: selectedLabs, coes: selectedCoes, tags: customTags},
     })
       .then((res: any) => {
+        if (res.data.status_code === 200) {
+          toast.success("Project created successfully!!");
+          history.push("/research");
+        } else {
+          toast.error("Error creating project, please try again!!");
+        }
         console.log(res);
         // history.push('/research')
       })

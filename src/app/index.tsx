@@ -17,8 +17,10 @@ import UpdateRoles from "./components/Research/UpdateRoles";
 import Lab from "./components/Labs/labs";
 import CreateProject from "./components/CreateProject/CreateProject";
 import Project from "./components/Project/Project";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProjectResults from "./components/ProjectResults/ProjectResults";
+import Profile from "./components/Profile/Profile";
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -111,6 +113,12 @@ const App = () => {
                   </Route>
                   <Route exact path="/labs">
                     <Lab />
+                  </Route>
+                  <Route exact path="/results">
+                    <ProjectResults/>
+                  </Route>
+                  <Route exact path="/profile">
+                    <Profile/>
                   </Route>
                 </Switch>
               </Container>

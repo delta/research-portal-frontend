@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
-import {
-  Select,
-  Field,
-  Label,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  Button,
-  Article,
-  ContentTitle,
-  Text,
-  Aside,
-} from "tailwind-react-ui";
 import { axiosInstance } from "../../utils/axios";
 import "./labs.css";
+import { useHistory } from "react-router";
 
 const Lab = () => {
+  const history = useHistory();
+  const handleClick = (name: String) => {
+    let url = `/project/search?department=&projectName=&headName=&aor=&lab=${name}&coe=&tag=`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        console.log(res);
+        history.push("/results", { data: res.data });
+      })
+      .catch((err: Error) => console.log(err));
+  };
   let img =
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
-  
-  const [labs, setLabs] = useState([{name:"",description:"",image_url:""}]);
+
+  const [labs, setLabs] = useState([
+    { name: "", description: "", image_url: "" },
+  ]);
 
   useEffect(() => {
     let url = `/center`;
@@ -32,45 +32,44 @@ const Lab = () => {
       .catch((err: Error) => console.log(err));
   }, []);
 
-  const getLabs = ()=>{
+  const labCards = () => {
     let htmlArr: JSX.Element[] = [];
-    labs.forEach((lab,index)=>{
+    labs.forEach((lab, index) => {
       htmlArr.push(
-        <Col
-          w={{
-            def: "full",
-            sm: "1/1",
-            md: "1/2",
-            lg: "1/3",
-            xl: "1/3",
+        <button
+          onClick={() => {
+            handleClick(lab.name);
           }}
-          h="h-full"
-          key={index}
         >
-          <Card border shadow maxW="sm" className="overflow-y-scroll m-4" style={{height:"40rem"}}>
-            <img src={`${lab.image_url}`} alt="Example image" />
-            <CardBody>
-              <Article>
-                <ContentTitle size={5}>{lab.name}</ContentTitle>
-                <Text is="p">{lab.description}</Text>
-              </Article>
-            </CardBody>
-          </Card>
-        </Col>
+          <div
+            className="m-4 p-4"
+            style={{
+              height: "40rem",
+              boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            }}
+          >
+            <img
+              src={`${lab.image_url}`}
+              alt="Example image"
+              className="h-96"
+            ></img>
+            <div className="flex flex-col text-left">
+              <div className="overflow-y-scroll h-52 p-4 pb-10">
+                <h1 className="text-3xl font-bold mb-4">{lab.name}</h1>
+                <p>{lab.description}</p>
+              </div>
+            </div>
+          </div>
+        </button>
       );
     });
     return htmlArr;
   };
 
   return (
-    <div className="wrapper">
-      <div className="grid justify-items-end m-3"></div>
-      <div className="main-container mb-10">
-        <div className="results container-1 m-3 flex flex-auto justify-center">
-          <Row gutter className="md:h-full">
-            {labs.length?getLabs():null}
-          </Row>
-        </div>
+    <div className="wrapper mt-10 mb-10 p-2">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center justify-items-center gap-4 m-2">
+        {labs.length ? labCards() : null}
       </div>
     </div>
   );

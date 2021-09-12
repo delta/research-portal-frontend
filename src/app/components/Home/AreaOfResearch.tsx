@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { axiosInstance } from "../../utils/axios";
+import { useHistory } from "react-router";
 
 const Container = styled.div`
   min-width: 45vw;
@@ -28,6 +29,18 @@ const StyledImage = styled.img`
 `;
 
 const AreaOfResearchCard = (props:any) => {
+  const history = useHistory();
+
+  const handleClick = (aor: String) => {
+    let url = `/project/search?department=&projectName=&headName=&aor=${aor}&lab=&coe=&tag=`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        console.log(res)
+        history.push("/results", {data:res.data});
+      })
+      .catch((err: Error) => console.log(err));
+  };
   // Temp frontend obj to store urls
   const Urls = [
     "https://i.ibb.co/1MdCGY0/image.png",
@@ -35,6 +48,7 @@ const AreaOfResearchCard = (props:any) => {
     "https://png.pngtree.com/png-vector/20190130/ourlarge/pngtree-2-5d-blockchain-matrix-5dscience-fictionblockchaintechnologyenergy-png-image_656119.jpg"
   ]
   return (
+    
     <Container className="lg:m-6 m-4 grid md:grid-cols-5 grid-cols-1 rounded-lg">
       <StyledImage
         src={
@@ -44,12 +58,15 @@ const AreaOfResearchCard = (props:any) => {
         className="md:col-span-2 col-span-1 h-full w-full rounded-lg"
       />
       <div className="md:col-span-3 col-span-1 flex justify-between items-start flex-col h-full w-full lg:p-8 md:p-6 p-4">
+      <button onClick={()=>{handleClick(props.data.name)}}>
         <p className="xl:text-4xl lg:text-3xl md:text-2xl text-xl mb-3 sm:mb-0 text-red-800 font-bold">
           {props.data.name}
         </p>
+        
         <p className="xl:text-xl lg:text-lg md:text-sm text-xs mb-3 sm:mb-0">
          {props.data.description}
         </p>
+        </button>
         {/* <p className="xl:text-2xl lg:text-lg md:text-sm text-xs mb-3 sm:mb-0 text-red-800 hover:text-red-600">
           Read More -&gt;
         </p> */}

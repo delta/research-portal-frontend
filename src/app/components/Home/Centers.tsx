@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import { axiosInstance } from "../../utils/axios";
+import { useHistory } from "react-router";
 
 const Container = styled.div`
   height: 50vh;
@@ -21,22 +22,35 @@ transition: transform 1s;
 `;
 
 const CentersCard = (props:any) => {
+  const history = useHistory();
+  const handleClick = (name: String) => {
+    let url = `/project/search?department=&projectName=&headName=&aor=&lab=&coe=${name}&tag=`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        console.log(res);
+        history.push("/results", { data: res.data });
+      })
+      .catch((err: Error) => console.log(err));
+  };
 
   return (
-    <Container className="bg-red-300 lg:m-6 m-4 rounded-2xl relative">
-      <StyledImage
-        src={
-          `${props.data.image_url}`
-        }
-        alt="dummy"
-        className="h-full w-full rounded-2xl"
-      />
-      <div className="h-1/4 w-full top-3/4 bg-red-800 bg-opacity-50 hover:bg-opacity-70 absolute flex justify-center items-center">
-        <p className=" lg:text-2xl md:text-xl text-lg text-red-200 font-bold">
-          {props.data.name}
-        </p>
-      </div>
-    </Container>
+    <button onClick={() => {
+            handleClick(props.name);
+          }}>
+      <Container className="bg-red-300 lg:m-6 m-4 rounded-2xl relative">
+        <StyledImage
+          src={`${props.data.image_url}`}
+          alt="dummy"
+          className="h-full w-full rounded-2xl"
+        />
+        <div className="h-1/4 w-full top-3/4 bg-red-800 bg-opacity-50 hover:bg-opacity-70 absolute flex justify-center items-center">
+          <p className=" lg:text-2xl md:text-xl text-lg text-red-200 font-bold">
+            {props.data.name}
+          </p>
+        </div>
+      </Container>
+    </button>
   );
 };
 
@@ -72,7 +86,7 @@ const Centers = () => {
         </p>
       </div>
       <div className="h-full grid lg:grid-cols-3 md:grid-cols-1 justify-items-center lg:p-14 md:p-8 p-6">
-        {centers.length?getCentersCards():null}
+        {centers.length ? getCentersCards() : null}
       </div>
     </div>
   );

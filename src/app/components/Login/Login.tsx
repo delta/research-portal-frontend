@@ -3,28 +3,15 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import {
-  Select,
   Field,
   Label,
-  Row,
-  Col,
-  Card,
-  CardBody,
   Button,
-  Article,
-  ContentTitle,
   Text,
-  Aside,
   Container,
   TextInput,
-  HelpText,
-  Header,
-  NavBrand,
-  Box
 } from "tailwind-react-ui";
 import "./Login.css";
 import { axiosInstance } from "../../utils/axios";
-import config from '../../../env'
 
 const Login = () => {
   const history = useHistory();
@@ -49,9 +36,13 @@ const Login = () => {
         'password':state.password
       }
     }).then((response:any)=>{
-      toast.success('Logged in successfully!');
-      localStorage.setItem('email', response.data.data.email);
-      history.push('/')
+      if (response.data.status_code === 200) {
+        toast.success("Logged in successfully!");
+        localStorage.setItem("email", response.data.data.email);
+        history.push("/");
+      } else {
+        toast.error("Error logging in, please try again!!");
+      }
     });
   }
   return <div className="wrapper center h-full">

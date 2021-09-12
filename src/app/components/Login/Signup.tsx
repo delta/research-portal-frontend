@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  Select,
   Field,
   Label,
-  Row,
-  Col,
-  Card,
-  CardBody,
   Button,
-  Article,
-  ContentTitle,
   Text,
-  Aside,
   Container,
   TextInput,
   HelpText,
+  Select
 } from "tailwind-react-ui";
 import { axiosInstance } from "../../utils/axios";
 import "./Login.css";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+  const history = useHistory();
   const [fileSelected, setFileSelected] = React.useState<File>();
   const [state, setState] = React.useState<any>({
     email: "",
@@ -74,7 +70,12 @@ const Signup = () => {
           },
         })
         .then((res: any) => {
-          console.log(res.data);
+          if (res.data.status_code === 200) {
+            toast.success("Registered successfully!");
+            history.push("/login");
+          } else {
+            toast.error("Error registering the user, please try again!!");
+          }
         })
         .catch((err: Error) => console.log(err));
     }

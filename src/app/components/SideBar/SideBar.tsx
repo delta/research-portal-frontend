@@ -5,24 +5,24 @@ import loggedImg from "./assets/logged.png";
 import { Link } from "react-router-dom";
 import { axiosInstance } from '../../utils/axios';
 
-const data = [{
-    text: 'sample'
-},
-{
-    text: 'info'
-},
-{
-    text: 'displaying'
-},
-{
-    text: 'world'
-}]
+// const data = [{
+//     text: 'sample'
+// },
+// {
+//     text: 'info'
+// },
+// {
+//     text: 'displaying'
+// },
+// {
+//     text: 'world'
+// }]
 const SideBar = (props:any) => {
     const [user, setUser] = useState(false);
     useEffect(() => {
       // console.log(localStorage.getItem("email"));
       if (localStorage.getItem("email")?.length) setUser(true);
-      if(user==true){
+      if(user===true){
 
       }
     }, []);
@@ -51,9 +51,9 @@ const SideBar = (props:any) => {
         <div className="w-64 text-center pt-3">
           <div className="text-center p-4">
             {user === true ? (
-              <img src={loggedImg} className="p-10"></img>
+              <img src={loggedImg} alt='user' className="p-10"></img>
             ) : (
-              <img src={dummyImg} className="p-10"></img>
+              <img src={dummyImg} alt='user' className="p-10"></img>
             )}
           </div>
           {!user ? (

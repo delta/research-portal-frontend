@@ -1,0 +1,34 @@
+.main-container{
+  display: flex;
+}
+
+section {
+  height: 100%;
+}
+li {
+  display: flex;
+  justify-content: center;
+}
+.filterLabel {
+  justify-content: center;
+  padding: 2px;
+  line-height: 1;
+}
+aside{
+  min-width: 350px;
+}
+@media (max-width:600px) {
+  .search_container{
+    display: block;
+  }
+  .adminButton {
+    width: 95%;
+  }
+  .main-container{
+    display: block;
+    text-align: center;
+  }
+  .searchInput,.searchHolder{
+    width: 100%;
+  }
+}
