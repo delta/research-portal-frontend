@@ -306,6 +306,8 @@ export interface ProfileData {
     coes: any[];
     labs: Lab[];
     projects: Project[];
+    filteredProjects : Project[];
+    filteredNon_admin_projects : NonAdminProject[];
     non_admin_projects: NonAdminProject[];
     status_code: number;
 }
