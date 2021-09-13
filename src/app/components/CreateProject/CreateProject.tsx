@@ -91,7 +91,7 @@ const CreateProject = () => {
     })
       .then((res: any) => {
         console.log(res);
-        history.push('/research')
+        // history.push('/research')
       })
       .catch((err: any) => {
         //console.log(err);[]

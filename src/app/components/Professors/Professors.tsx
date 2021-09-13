@@ -19,40 +19,51 @@ import { axiosInstance } from "../../utils/axios";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 15vw;
+  width: 16vw;
+  height: 20vw;
   margin: 1rem;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.17),
-    inset 2px 4px 7px rgba(255, 255, 255, 0.52);
   @media screen and (min-width: 768px) and (max-width: 991px) {
-    width: 40vw;
+    width: 32vw;
+    height: 40vw;
   }
   @media screen and (max-width: 768px) {
-    width: 100vw;
+    width: 48vw;
+    height: 60vw;
   }
 `;
 
 const StyledImage = styled.img`
+  width: 16vw;
+  height: 20vw;
   transition: transform 1s;
   :hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05, 1.05);
+  }
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 32vw;
+    height: 40vw;
+  }
+  @media screen and (max-width: 768px) {
+    width: 48vw;
+    height: 60vw;
   }
 `;
 
 const ProfessorCard = (props: any) => {
   return (
     // <a href={`https://www.nitt.edu/home/academics/departments/${props.data.short_name}/`}>
-    <div className="flex flex-wrap m-5">
-      <Container className="rounded-2xl col-span-1 bg-yellow-200 lg:m-6 m-4 relative">
+    <div className="flex flex-wrap m-5 text-center">
+      <Container className="rounded-2xl col-span-1 bg-grey lg:m-6 m-4 relative">
         <StyledImage
-          className="w-full rounded-2xl h-44"
+          className="w-full rounded-2xl h-44 image"
           src={props.data.image_url}
           alt="dummy"
         />
-        <div className=" absolute bottom-0 h-2/5 w-full bg-gray-400 bg-opacity-50 hover:bg-opacity-80 lg:p-4 md:p-3 p-2">
-          <p className="lg:text-2xl md:text-xl text-lg font-bold">
+        <div className="bg-gray-400 bg-opacity-75 lg:p-4 md:p-3 p-2 info">
+          <p className="lg:text-2xl md:text-xl text-lg font-bold name">
             {props.data.name}
           </p>
-          <p className="lg:text-sm md:text-sm text-xs mb-4">
+          <p className="lg:text-sm md:text-sm text-xs mb-4 email">
             {props.data.email}
           </p>
         </div>
@@ -124,7 +135,7 @@ const Professor = () => {
       </div>
       <div className="main-container mb-10">
         <div className="results container-1 m-3 flex flex-auto justify-center">
-          <Row gutter className="md:h-full">
+          <Row gutter className="md:h-full justify-center">
             {professors.length ? showProfessors() : null}
           </Row>
         </div>

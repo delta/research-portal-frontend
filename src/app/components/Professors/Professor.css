@@ -16,6 +16,22 @@ li {
 aside{
   min-width: 350px;
 }
+
+.info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.email {
+  visibility: hidden;
+  transition: visibility 10ms;
+}
+
+.info:hover > .email {
+  visibility: visible;
+}
+
 @media (max-width:600px) {
   .search_container{
     display: block;
