@@ -39,7 +39,7 @@ const Login = () => {
       if (response.data.status_code === 200) {
         toast.success("Logged in successfully!");
         localStorage.setItem("email", response.data.data.email);
-        history.push("/");
+        history.push("/profile");
       } else {
         toast.error("Error logging in, please try again!!");
       }

@@ -4,7 +4,7 @@ import dummyImg from "./assets/profile.png";
 import loggedImg from "./assets/logged.png";
 import { Link } from "react-router-dom";
 import { axiosInstance } from '../../utils/axios';
-
+import { useHistory } from "react-router-dom";
 // const data = [{
 //     text: 'sample'
 // },
@@ -19,6 +19,7 @@ import { axiosInstance } from '../../utils/axios';
 // }]
 const SideBar = (props:any) => {
     const [user, setUser] = useState(false);
+    const history = useHistory();
     useEffect(() => {
       // console.log(localStorage.getItem("email"));
       if (localStorage.getItem("email")?.length) setUser(true);
@@ -36,6 +37,7 @@ const SideBar = (props:any) => {
       }).then((res:any)=>{
         localStorage.removeItem('email');
         setUser(false);
+        history.push('/home');
       })
     }
 
@@ -61,6 +63,13 @@ const SideBar = (props:any) => {
               <Link to="/login">Login</Link>
             </div>
           ) : (
+            <>
+            <div className="pt-2 pb-2 text-center hover:bg-gray-400 cursor-pointer">
+              <Link to="/profile">Dashboard</Link>
+            </div>
+            <div className="pt-2 pb-2 text-center hover:bg-gray-400 cursor-pointer">
+              <Link to="/resume">Resume</Link>
+            </div>
             <div className="pt-2 pb-2 text-center hover:bg-gray-400 cursor-pointer">
               <button
                 onClick={logout}
@@ -68,6 +77,7 @@ const SideBar = (props:any) => {
                 Logout
               </button>
             </div>
+            </>
           )}
         </div>
       </div>

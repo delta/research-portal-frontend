@@ -49,6 +49,8 @@ const Resume = ()=>{
       if (profileData.projects!==undefined && profileData.projects.indexOf(project) !== -1) {
         isHead = true;
       }
+      if(project.hasOwnProperty("access"))
+        project = project.data;
       let abstract = project.abstract.split(" ").slice(0, 25).join(" ");
       htmlArr.push(
         <div className="project-card p-4 px-8 w-full">
@@ -159,7 +161,7 @@ const Resume = ()=>{
       <div className="flex flex-col justify-center my-4">
         <Pdf 
           targetRef={ref} 
-          filename="code-example.pdf" 
+          filename="Resume.pdf" 
           options={options}
           scale={scale}
           >
