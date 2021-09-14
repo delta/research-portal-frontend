@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 const data = [{
-	href: '/',
+	href: '/home',
 	text: 'Home'
 },
 {
