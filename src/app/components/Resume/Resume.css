@@ -1,0 +1,12 @@
+.resume{
+    width: 80em;
+    height: calc(80em * 1.4142);
+}
+
+.head-section{
+    height: 20em;
+}
+
+.body-Section{
+    height: calc(80em * 1.4142 - 17.2em);
+}

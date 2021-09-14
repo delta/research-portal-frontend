@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProjectResults from "./components/ProjectResults/ProjectResults";
 import Profile from "./components/Profile/Profile";
+import Resume from "./components/Resume/Resume.jsx";
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -119,6 +120,9 @@ const App = () => {
                   </Route>
                   <Route exact path="/profile">
                     <Profile/>
+                  </Route>
+                  <Route exact path="/resume">
+                    <Resume/>
                   </Route>
                 </Switch>
               </Container>
