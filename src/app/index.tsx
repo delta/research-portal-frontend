@@ -15,6 +15,7 @@ import CorrectionForm from "./components/CorrectionForm/CorrectionForm";
 import MyResearch from "./components/Research/MyResearch";
 import UpdateRoles from "./components/Research/UpdateRoles";
 import Lab from "./components/Labs/labs";
+import Center from "./components/CentersOfExcellence/CentersOfExcellence";
 import CreateProject from "./components/CreateProject/CreateProject";
 import Project from "./components/Project/Project";
 import { ToastContainer, toast } from "react-toastify";
@@ -111,6 +112,9 @@ const App = () => {
                   </Route>
                   <Route exact path="/labs">
                     <Lab />
+                  </Route>
+                  <Route exact path="/centers-of-excellence">
+                    <Center />
                   </Route>
                 </Switch>
               </Container>
