@@ -22,7 +22,6 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 15vw;
   margin: 1rem;
-  border-radius: 0.7rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
   @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -30,10 +29,6 @@ const Container = styled.div`
   }
   @media screen and (max-width: 768px) {
     width: 100vw;
-  }
-  &:hover{
-    background-color: #FFF1F1;
-    border: 0.06rem solid red;
   }
 `;
 
@@ -56,20 +51,18 @@ const ResearchCard = (props: any) => {
     return (
       <Container>
         <Link to={`/project/${props.data.id}`}>
-          <div className="transition duration-450 ease-in-out transform hover:-translate-y-1 hover:scale-105  ">
           <div className="p-5">
             <div>
-              <img className="rounded mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
+              <img className="mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
             </div>
             <div className="text-center">
-              <h3 className="text-lg font-semibold text-red-500 mb-2 ">{props.data.name}</h3>
+              <h3 className="text-lg font-semibold mb-2">{props.data.name}</h3>
               <a href={props.data.paper_link}>
                 <h5 className="text-sm font-semibold mb-2 break-all">
                   {props.data.paper_link}
                 </h5>
               </a>
             </div>
-          </div>
           </div>
         </Link>
       </Container>
