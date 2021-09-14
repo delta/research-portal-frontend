@@ -8,7 +8,7 @@ import { axiosInstance } from '../../utils/axios';
 
 
 const data = [{
-	href: '/',
+	href: '/home',
 	text: 'Home'
 },
 {
