@@ -1,72 +1,125 @@
-import React,{useState,useEffect} from 'react';
-import './SideBarMob.css';
+import { useState, useEffect } from "react";
+import "./SideBarMob.css";
 import dummyImg from "./assets/profile.png";
-import loggedImg from "./assets/logged.png";
+import { ProfileData } from "../../interfaces/profile";
 import { Link } from "react-router-dom";
+import { axiosInstance } from "../../utils/axios";
 
+const SideBarMob = () => {
+  const [user, setUser] = useState(false);
+  const [profileData, setProfileData] = useState<ProfileData>();
+  useEffect(() => {
+    if (localStorage.getItem("email")?.length) setUser(true);
+    async function fetchData() {
+      if (user === true) {
+        let url = `/admin_user/profile/?email=${localStorage.getItem("email")}`;
+        await axiosInstance
+          .get(url)
+          .then((res: any) => {
+            res.data.filteredProjects = res.data.projects;
+            res.data.filteredNon_admin_projects = res.data.non_admin_projects;
+            setProfileData(res.data);
+          })
+          .catch((err: Error) => console.log(err));
+      }
+    }
+    fetchData();
+    return;
+  }, [user]);
 
-const data = [{
-	href: '/home',
-	text: 'Home'
-},
-{
-	href: '/research',
-	text: 'Research'
-},
-{
-	href: '/labs',
-	text: 'Labs'
-},
-{
-	href: '/centers-of-excellence',
-	text: 'CENTERS'
-},
-{
-	href: '/professors',
-	text: 'Profs'
-}];
-const SideBarMob = (props:any) => {
-    const [user, setUser] = useState(true);
-    useEffect(() => {
-      if (localStorage.getItem("email") != null) setUser(true);
-      else setUser(false);
-    }, [user]);
-    return (
-      <div className="w-8/12 bg-red-50 h-screen border-l-2 border-gray-200 right-0 absolute z-10">
-        <div className="flex justify-center p-4">
-          {user === true ? (
-            <img src={loggedImg} alt='user'></img>
-          ) : (
-            <img src={dummyImg} alt='user'></img>
-          )}
-        </div>
-        {!user ? (
-          <div className="pt-2 pb-2 text-center cursor-pointer">
-            <Link to="/login">Login</Link>
+  async function logout() {
+    let url = `/user/logout/`;
+    await axiosInstance({
+      method: "POST",
+      url: url,
+    }).then((res: any) => {
+      localStorage.removeItem("email");
+      setUser(false);
+    });
+  }
+
+  return (
+    <div className="w-8/12 bg-white h-screen border-l-2 border-gray-200 right-0 absolute z-10">
+      <div className="text-center p-4 border-b-2 border-black">
+        {user === true ? (
+          <div className="flex">
+            <img
+              alt="Placeholder"
+              className="rounded-full h-24 w-24"
+              src={`${profileData?.data.image_url}`}
+            ></img>
+            <header className="flex items-center justify-between leading-tight p-2 ">
+              <h1 className="text-xl fond-bold">{profileData?.data.name}</h1>
+            </header>
           </div>
         ) : (
-          <div className="pt-2 pb-2 text-center cursor-pointer">
-            <button
-              onClick={() => {
-                localStorage.clear();
-                setUser(false);
-              }}
-            >
-              Logout
-            </button>
-          </div>
+          <img
+            alt="Placeholder"
+            className="rounded-full h-24 w-24"
+            src={dummyImg}
+          ></img>
         )}
-        {data.map((val, key) => {
-          return (
-            <a href={val.href} key={key}>
-              <Link to={val.href} key={key}><div className="pt-2 pb-2 text-center cursor-pointer">
-                <h1>{val.text}</h1>
-              </div></Link>
-            </a>
-          );
-        })}
       </div>
-    );
-}
+      {/*Common menu options*/}
+      <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+        <span>
+          <i className="fas fa-home mr-3"></i>
+          <Link to="/home">Home</Link>
+        </span>
+      </div>
+      <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+        <span>
+          <i className="fas fa-flask mr-3"></i>
+          <Link to="/labs">Labs</Link>
+        </span>
+      </div>
+      <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+        <span>
+          <i className="fas fa-project-diagram mr-3"></i>
+          <Link to="/research">Research</Link>
+        </span>
+      </div>
+      <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+        <span>
+          <i className="fas fa-chalkboard-teacher mr-3"></i>
+          <Link to="/professors">Professors</Link>
+        </span>
+      </div>
+      {!user ? (
+        <div className="p-1">
+          {/*Menu when logged out*/}
+          <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+            <span>
+              <i className="fas fa-sign-in-alt mr-3"></i>
+              <Link to="/login">Login</Link>
+            </span>
+          </div>
+          <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+            <span>
+              <i className="fas fa-user-plus mr-3"></i>
+              <Link to="/signup">Register</Link>
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="p-1">
+          {/*Menu when a user is logged in*/}
+          <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+            <span>
+              <i className="far fa-user-circle mr-3"></i>
+              <Link to="/">Profile</Link>
+            </span>
+          </div>
+          <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+            <span>
+              <i className="fas fa-sign-out-alt mr-3"></i>
+              <button onClick={logout}>Logout</button>
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default SideBarMob;

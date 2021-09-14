@@ -12,7 +12,6 @@ import Professor from "./components/Professors/Professors";
 import Login from "./components/Login/Login";
 import Signup from "./components/Login/Signup";
 import CorrectionForm from "./components/CorrectionForm/CorrectionForm";
-import MyResearch from "./components/Research/MyResearch";
 import UpdateRoles from "./components/Research/UpdateRoles";
 import Lab from "./components/Labs/labs";
 import Center from "./components/CentersOfExcellence/CentersOfExcellence";
@@ -112,9 +111,6 @@ const App = () => {
                   </Route>
                   <Route exact path="/create-project">
                     <CreateProject />
-                  </Route>
-                  <Route exact path="/my-research">
-                    <MyResearch />
                   </Route>
                   <Route exact path="/update-role">
                     <UpdateRoles />

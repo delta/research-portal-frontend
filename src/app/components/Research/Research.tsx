@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Research.css'
 import { Button } from 'tailwind-react-ui'
 import { axiosInstance } from "../../utils/axios";

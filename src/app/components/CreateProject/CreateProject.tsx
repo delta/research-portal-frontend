@@ -83,10 +83,8 @@ const CreateProject = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res.data.data);
         setLabs(res.data.data);
         setIsLabsLoaded(true);
-        console.log(labs);
       })
       .catch((err: Error) => console.log(err));
   }
@@ -96,10 +94,8 @@ const CreateProject = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res.data.data);
         setAors(res.data.data);
         setIsAorsLoaded(true);
-        console.log(aors);
       })
       .catch((err: Error) => console.log(err));
   }
@@ -111,7 +107,6 @@ const CreateProject = () => {
       .then((res: any) => {
         setCoes(res.data.data);
         setIsCoesLoaded(true);
-        console.log(coes);
       })
       .catch((err: Error) => console.log(err));
   }
@@ -137,8 +132,6 @@ const CreateProject = () => {
         } else {
           toast.error("Error creating project, please try again!!");
         }
-        console.log(res);
-        // history.push('/research')
       })
       .catch((err: any) => {
         //console.log(err);[]

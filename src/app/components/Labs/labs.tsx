@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axios";
 import "./labs.css";
 import { useHistory } from "react-router";
@@ -10,14 +10,11 @@ const Lab = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        console.log(res);
         history.push("/results", { data: res.data });
       })
       .catch((err: Error) => console.log(err));
   };
-  let img =
-    "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
-
+  
   const [labs, setLabs] = useState([
     { name: "", description: "", image_url: "" },
   ]);
@@ -43,6 +40,7 @@ const Lab = () => {
         >
           <div
             className="m-4 p-4"
+            key={index}
             style={{
               height: "40rem",
               boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",

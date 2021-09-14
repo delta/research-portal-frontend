@@ -83,7 +83,6 @@ const HorizontalFilterBar = (props:any) => {
 
   const filterProjects = (projects:any) => {
     let filteredProjects = projects.filter((project: any) => {
-      console.log(project);
       if(project.hasOwnProperty("access"))
         project = project.data;
       let isHeadNameMatched = project.head.name.toLowerCase().includes(state.headName.toLowerCase());

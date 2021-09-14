@@ -85,20 +85,17 @@ const Professor = () => {
   };
 
   const handleQuery = () => {
-    console.log(searchName);
     let url = `/admin_user/search?professor=${searchName}`;
     axiosInstance
       .get(url)
       .then((res: any) => {
         setProfessors(res.data.data);
-        console.log(professors)
       })
       .catch((err: Error) => console.log(err));
   };
 
   const handleSearchByProfessorName = (e: any) => {
     setSearchName(e.target.value);
-    console.log(searchName);
     
     handleQuery();
   };

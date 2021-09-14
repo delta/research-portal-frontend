@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react';
-import { axiosInstance } from "../../utils/axios";
+import { useState } from 'react';
 import {
     Label,
-    Button,
-    Text,
-    Container,
     TextInput,
-    HelpText,
-    Select,
   } from "tailwind-react-ui";
-import { XIcon } from '@heroicons/react/solid';
 
 const CustomTagInput = (props:any) => {
 
@@ -37,8 +30,8 @@ const CustomTagInput = (props:any) => {
             />
             {props.tags.length > 0 && (
                 <div className="flex flex-wrap pb-4 justify-around">
-                    {props.tags.map((tag:any) => (
-                        <div className="selectedOption my-2 pl-4 rounded flex flex-row items-center" style={{
+                    {props.tags.map((tag:any,key:number) => (
+                        <div key={key} className="selectedOption my-2 pl-4 rounded flex flex-row items-center" style={{
                             boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.75)",
                         }}>
                             <span>{tag}</span>
