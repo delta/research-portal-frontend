@@ -63,6 +63,7 @@ const App = () => {
   };
 
   const NavigationBar = () => {
+    const isAuthenticated = (localStorage.getItem("email") != null);
     return (
       <div className="flex">
         <Router>
@@ -88,6 +89,14 @@ const App = () => {
                   <Route exact path="/signup">
                     <Signup />
                   </Route>
+                  {isAuthenticated?
+                    <Route exact path="/">
+                      <Profile />
+                    </Route>:
+                    <Route exact path="/">
+                      <Home />
+                    </Route>
+                  }
                   <Route exact path="/">
                     <Home />
                   </Route>
@@ -117,6 +126,9 @@ const App = () => {
                   </Route>
                   <Route exact path="/results">
                     <ProjectResults/>
+                  </Route>
+                  <Route exact path="/home">
+                    <Home/>
                   </Route>
                   <Route exact path="/profile">
                     <Profile/>
