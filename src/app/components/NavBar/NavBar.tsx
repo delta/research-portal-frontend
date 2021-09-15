@@ -20,6 +20,10 @@ const data = [{
 	text: 'Labs'
 },
 {
+	href: '/centers-of-excellence',
+	text: 'Centers'
+},
+{
 	href: '/professors',
 	text: 'Profs'
 }
