@@ -13,6 +13,12 @@ export interface AorData {
     description: string;
 }
 
+export interface CoeData {
+    name: string;
+    description: string;
+    image_url: string;
+}
+
 export interface DepartmentData {
     id: number;
     full_name: string;
