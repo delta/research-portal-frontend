@@ -5,6 +5,8 @@ import { useParams } from "react-router";
 import { axiosInstance } from "../../utils/axios";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -60,6 +62,8 @@ const Project = () => {
 
   const [userPrivilege, setUserPrivilege] = useState("View");
 
+  const history = useHistory()  
+
   const getProjectDetails = () => {
     let url = `/project/id?projectId=${id}`;
     axiosInstance
@@ -97,7 +101,7 @@ const Project = () => {
   }
 
   const addRole=()=>{
-    let url=`/admin_users/add_members/`;
+    let url=`/admin_user/add_members/`;
     axiosInstance({
       method:'POST',
       url:url,
@@ -107,6 +111,13 @@ const Project = () => {
         role:role
       }
     }).then((res:any)=>{
+      console.log(res);
+      if (res.data.status_code === 200) {
+        toast.success("Member added successfully !");
+        history.push(`/project/${id}`);
+      } else {
+        toast.error(res.data.data);
+      }
       console.log(res);
     }).catch((err:Error)=>{
       console.log(err);
@@ -124,7 +135,7 @@ const Project = () => {
         >
           <form>
             <div className="fieldInput">
-              <Label>Registration Number</Label>
+              <Label>Webmail</Label>
               <input className="inputField" name="heading" type="text" onChange={handleMember} />
             </div>
             <div className="fieldInput">
@@ -134,9 +145,9 @@ const Project = () => {
                 name="selectPrivilege"
                 onChange={handleRole}
                 options={[
-                  { value: "Edit", label: "Edit" },
-                  { value: "Write", label: "Write" },
-                  { value: "View", label: "View" },
+                  { label: "Edit", value: 3 },
+                  { label: "Write", value: 2 },
+                  { label: "View", value: 1 },
                 ]}
               />
             </div>
@@ -215,23 +226,23 @@ const Project = () => {
       <div className="grid mt-5">
         {userPrivilege !== "View" ? (
           <div className="mb-0">
-                <Button
-                onClick={openModal1}
-                className="adminButton md:w-40 w-full bg-red-800 text-white m-2"
-              >
-                Add Members
+            <Button
+              onClick={openModal1}
+              className="adminButton md:w-40 w-full bg-red-800 text-white m-2"
+            >
+              Add Members
+            </Button>
+            <Link to={`/update-role/${id}`}>
+              <Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
+                Update Roles
               </Button>
-              <Link to="/update-role">
-                <Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
-                  Update Roles
-                </Button>
-              </Link>
-                <Link to={`/edit-project/${id}`}>
-                  <Button
-                    className="editButton w-40 bg-red-800 text-white">
-                    Edit Project
-                  </Button>
-                </Link>
+            </Link>
+            <Link to={`/edit-project/${id}`}>
+              <Button
+                className="editButton w-40 bg-red-800 text-white">
+                Edit Project
+              </Button>
+            </Link>
             
           </div>
         ) : null}
