@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
-import { axiosInstance } from "../../utils/axios";
 import {
     Label,
     Button,
-    Text,
-    Container,
-    TextInput,
-    HelpText,
     Select,
   } from "tailwind-react-ui";
 

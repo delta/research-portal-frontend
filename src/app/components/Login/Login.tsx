@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -15,7 +14,6 @@ import { axiosInstance } from "../../utils/axios";
 
 const Login = () => {
   const history = useHistory();
-  let user="Admin";
   let state={
     email:'',
     password:''

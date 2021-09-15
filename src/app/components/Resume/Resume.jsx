@@ -122,7 +122,7 @@ const Resume = ()=>{
                   {
                     project.labs_tags.map((lab,index) => {
                       return <span
-                        className={`text-lg text-red-700 px-4 my-1 border-r-${index + 1 == project.labs_tags.length?0:2} border-black`}>
+                        className={`text-lg text-red-700 px-4 my-1 border-r-${index + 1 === project.labs_tags.length?0:2} border-black`}>
                         {lab.name}
                       </span>
                     })
@@ -140,7 +140,7 @@ const Resume = ()=>{
                   {
                     project.coe_tags.map((coe,index) => {
                       return <span
-                        className={`text-lg text-red-700 px-4 my-1 border-r-${index + 1 == project.coe_tags.length?0:2} border-black`}>
+                        className={`text-lg text-red-700 px-4 my-1 border-r-${index + 1 === project.coe_tags.length?0:2} border-black`}>
                         {coe.name}
                       </span>
                     })
@@ -184,6 +184,7 @@ const Resume = ()=>{
             <div className="nitt-Logo flex justify-center items-center py-4 w-1/4">
               <img src={Logo}
               className="w-3/4"
+              alt='Logo'
               >
               </img>
             </div>
@@ -203,7 +204,7 @@ const Resume = ()=>{
             </div>
             {/* Profile Photo div */}
             <div className="profile-photo-div w-1/4 p-4 flex justify-center items-center border-black">
-              <img src={profileData?.data.image_url} className="w-3/4"/>
+              <img src={profileData?.data.image_url} alt="User" className="w-3/4"/>
             </div>
           </div>
 

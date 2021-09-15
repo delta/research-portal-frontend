@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Project.css";
-import { Select, Label, TextInput, Button } from "tailwind-react-ui";
+import { Select, Label, Button } from "tailwind-react-ui";
 import { useParams } from "react-router";
 import { axiosInstance } from "../../utils/axios";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
 
 const customStyles = {
   content: {
@@ -37,15 +36,7 @@ const Project = () => {
   const closeModal2 = () => {
     setIsOpen2(false);
   };
-  const [isFlipped, setIsFlipped] = useState(-1);
-  const handleClick = (ind: number) => {
-    setIsFlipped(ind);
-  };
 
-  const handleDefault = () => {
-    setIsFlipped(-1);
-  };
-  const [user, setUser] = useState("Admin");
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState({
     head: {
@@ -149,7 +140,7 @@ const Project = () => {
                 ]}
               />
             </div>
-            {user === "admin" ? (
+            {userPrivilege !== "View" ? (
               <div className="flex justify-between m-4">
                 <Button
                   onClick={closeModal1}
@@ -222,36 +213,28 @@ const Project = () => {
         </div>
       </div>
       <div className="grid mt-5">
-        {user === "Admin" ? (
+        {userPrivilege !== "View" ? (
           <div className="mb-0">
-            <Button
-              onClick={openModal1}
-              className="adminButton md:w-40 w-full bg-red-800 text-white m-2"
-            >
-              Add Members
-            </Button>
-            <Link to="/update-role">
-              <Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
-                Update Roles
+                <Button
+                onClick={openModal1}
+                className="adminButton md:w-40 w-full bg-red-800 text-white m-2"
+              >
+                Add Members
               </Button>
-            </Link>
-            {/* <Button className="adminButton w-40 bg-red-800 text-white m-2">
-              Add Tags
-            </Button> */}
-            {
-              userPrivilege !== "View" ? (
+              <Link to="/update-role">
+                <Button className="adminButton md:w-40 w-full bg-red-800 text-white m-2">
+                  Update Roles
+                </Button>
+              </Link>
                 <Link to={`/edit-project/${id}`}>
                   <Button
                     className="editButton w-40 bg-red-800 text-white">
                     Edit Project
                   </Button>
-                </Link>):null
-            }
+                </Link>
             
           </div>
-        ) : (
-          <div></div>
-        )}
+        ) : null}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:p-3 mt-0 sm:w-9/12">
         {project.members.length !== 0 &&

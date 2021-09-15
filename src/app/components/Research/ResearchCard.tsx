@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Research.css";
-import img from "./Assets/icon.jpg";
 import { axiosInstance } from "../../utils/axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";

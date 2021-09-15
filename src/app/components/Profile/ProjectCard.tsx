@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 
 const ProjectCard = (props: any) => {
     let aorTags = props.data.aor_tags;
-    let labTags = props.data.labs_tags;
-    let coeTags = props.data.coe_tags;
     let customTags = props.data.tags;
 
     const history = useHistory();

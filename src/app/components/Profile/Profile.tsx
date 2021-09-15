@@ -1,48 +1,63 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { axiosInstance } from "../../utils/axios";
-import { Link } from "react-router-dom";
-import img from "../Professors/Assets/icon.jpg";
-import styled from "styled-components";
-import CustomTagInput from "../CreateProject/CustomTagInput";
 import {
   ProfileData,
 } from "../../interfaces/profile";
 import ProjectCard from "./ProjectCard";
 import HorizontalFilterBar from "./HorizontalFilterBar";
+import { useParams } from "react-router";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 15vw;
+  margin: 1rem;
+  border-radius: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 40vw;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+  &:hover{
+    background-color: #FFF1F1;
+    border: 0.06rem solid red;
+  }
+`;
 
 const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileData>();
 
+  /*function to render lab card*/
   const labCards = () => {
     let labs = profileData?.labs;
     let htmlArr: JSX.Element[] = [];
     labs?.forEach((lab, index) => {
       htmlArr.push(
-        <div
-          className="m-4 p-4 md:w-1/4 sm:w-5/12 w-full rounded-lg"
-          style={{
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-          }}
-        >
-          <img
-            src={`${lab.image_url}`}
-            alt="Example image"
-            className="w-full"
-          ></img>
-          <div className="flex flex-col m-2">
-            <div className="p-4">
-              <h1 className="text-2xl font-bold">{lab.name}</h1>
+        <Container key={index}>
+          <div className="transition duration-450 ease-in-out transform hover:-translate-y-1 hover:scale-105  ">
+          <div className="p-5">
+            <div>
+              <img className="rounded mb-6 h-40 w-full" src={lab.image_url} alt="Project"></img>
+            </div>
+            <div className="text-center">
+              <h3 className="text-lg font-semibold text-red-500 mb-2 ">{lab.name}</h3>
+                <h5 className="text-sm font-semibold mb-2 break-all truncate">
+                  {lab.description}
+                </h5>
             </div>
           </div>
-        </div>
+          </div>
+      </Container>
       );
     });
     return htmlArr;
   };
 
   useEffect(() => {
-    let url = `/admin_user/profile/?email=${localStorage.getItem("email")}`;
+    let url = `/admin_user/profile/?email=${localStorage.getItem('email')}`;
     axiosInstance
       .get(url)
       .then((res: any) => {
@@ -59,7 +74,7 @@ const Profile = () => {
         
         {/* Profile Info Area */}
         <div className="w-1/4 h-full profile-info">
-          <article className="overflow-hidden rounded-lg shadow-lg flex flex-col sm:flex-row lg:flex-col">
+          <div className="overflow-hidden rounded-lg shadow-lg flex flex-col sm:flex-row lg:flex-col">
             <div className="w-full sm:w-1/3 lg:w-full">
               <img alt="Placeholder" className="block h-auto w-full"
               src={`${profileData?.data.image_url}`}
@@ -92,7 +107,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          </article>
+          </div>
         </div>
 
         {/* Project and Cards Area */}
@@ -110,6 +125,9 @@ const Profile = () => {
               />
               <div className="flex flex-wrap justify-around">
                 {profileData.filteredProjects.map((item, key) => {
+                  return <ProjectCard data={item} key={key} />;
+                })}
+                {profileData.filteredNon_admin_projects.map((item, key) => {
                   return <ProjectCard data={item} key={key} />;
                 })}
               </div>

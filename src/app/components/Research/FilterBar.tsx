@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Select, Field, Label, Button} from 'tailwind-react-ui'
+import { Select, Field, Label} from 'tailwind-react-ui'
 import { axiosInstance } from "../../utils/axios";
-import { AorData, LabData } from '../../interfaces/home';
+import { LabData } from '../../interfaces/home';
 import "./Research.css";
 
 const FilterBar = (props:any) => {
@@ -17,11 +17,9 @@ const FilterBar = (props:any) => {
   });
 
   const [departments,setDepartments] = useState([]);  
-  const [aors, setAors] = useState<Array<AorData>>();
   const [labs, setLabs] = useState<Array<LabData>>();
   const [coes, setCoes] = useState([{name:""}]);
 
-  const [isAorsLoaded, setIsAorsLoaded] = useState(false);
   const [isLabsLoaded, setIsLabsLoaded] = useState(false);
   const [isCoesLoaded, setIsCoesLoaded] = useState(false);
 
@@ -46,16 +44,16 @@ const FilterBar = (props:any) => {
       .catch((err: Error) => console.log(err));
   }
 
-  const getAors = () => {
-    let url = `/aor`;
-    axiosInstance
-      .get(url)
-      .then((res: any) => {
-        setAors(res.data.data);
-        setIsAorsLoaded(true);
-      })
-      .catch((err: Error) => console.log(err));
-  }
+  // const getAors = () => {
+  //   let url = `/aor`;
+  //   axiosInstance
+  //     .get(url)
+  //     .then((res: any) => {
+  //       setAors(res.data.data);
+  //       setIsAorsLoaded(true);
+  //     })
+  //     .catch((err: Error) => console.log(err));
+  // }
 
   const getCoes = () => {
     let url = `/coe`;
