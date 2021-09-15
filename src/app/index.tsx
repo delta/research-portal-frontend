@@ -112,7 +112,7 @@ const App = () => {
                   <Route exact path="/create-project">
                     <CreateProject />
                   </Route>
-                  <Route exact path="/update-role">
+                  <Route exact path="/update-role/:id">
                     <UpdateRoles />
                   </Route>
                   <Route exact path="/labs">

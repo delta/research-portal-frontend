@@ -1,27 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import { useParams } from "react-router";
 import {Button, Select, Label} from 'tailwind-react-ui';
-
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-  {
-    name: 'Ajitha',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-]
+import { axiosInstance } from "../../utils/axios";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -36,11 +19,63 @@ const customStyles = {
 
 const UpdateRoles = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
-
-
-    const openModal = () =>{
-        setIsOpen(true);
+  const [people, setPeople] = useState([{
+    name: "", permission: "", image_url: "", email: "", department: "",
+  }]);
+  const [projectData, setProject] = useState({
+    head: {
+      email: ''
     }
+  });
+  const [member, setMember] = useState('');
+  const [role, setRole] = useState(0);
+
+  const { id } = useParams<{ id: string }>();
+  const history = useHistory();
+
+  const updateRole=()=>{
+    let url=`/admin_user/update_roles/`;
+    axiosInstance({
+      method:'POST',
+      url:url,
+      data:{
+        user_id:member,
+        project_id:id,
+        role:role
+      }
+    }).then((res:any)=>{
+      console.log(res);
+      if (res.data.status_code === 200) {
+        toast.success("Member role updated successfully !");
+        history.push(`/update-role/${id}`);
+      } else {
+        toast.error(res.data.data);
+      }
+      console.log(res);
+    }).catch((err:Error)=>{
+      console.log(err);
+    })
+  }
+
+  const getProjectDetails = () => {
+    let url = `/project/id?projectId=${id}`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        setProject(res.data.data);
+        setPeople(res.data.data.members)
+      })
+      .catch((err: Error) => console.log(err));
+  };
+
+  useEffect(() => {
+    getProjectDetails();
+  }, []);
+  
+  const openModal = (email:any) =>{
+      setIsOpen(true);
+      setMember(email)
+  }
 
   const closeModal = () =>{
     setIsOpen(false);
@@ -60,16 +95,17 @@ const UpdateRoles = () => {
                             <Select
                                 className="inputField"
                                 name="selectPrivilege"
+                                onChange={(e:any) => { setRole(e.target.value)}}
                                 options={[
-                                { value: 'Edit', label: 'Edit' },
-                                { value: 'Write', label: 'Write' },
-                                { value: 'View', label: 'View' },
+                                { value: 3, label: 'Edit' },
+                                { value: 2, label: 'Write' },
+                                { value: 1, label: 'View' },
                                 ]}
                             />
                         </div>
                         <div className="flex justify-between m-4">
                             <Button onClick={closeModal} className="adminButton w-40 bg-red-800 text-white mr-2">Close</Button>
-                            <Button onClick={closeModal} className="adminButton w-40 bg-red-800 text-white ml-2">Update</Button>
+                            <Button onClick={updateRole} className="adminButton w-40 bg-red-800 text-white ml-2">Update</Button>
                         </div>
                     </form>
                 </Modal>
@@ -85,12 +121,12 @@ const UpdateRoles = () => {
                   >
                     Name
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
                     Title
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -103,29 +139,35 @@ const UpdateRoles = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr key={person.email}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                          <div className="text-sm text-gray-500">{person.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.title}</div>
-                      <div className="text-sm text-gray-500">{person.department}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.role}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Button onClick={openModal} className="w-40 bg-red-800 text-white m-2">Edit</Button>
-                    </td>
-                  </tr>
-                ))}
+                {people.length !== 0 && (
+                  people.map((person) => {
+                    return (
+                      person.email !== projectData.head.email ? (
+                        <tr key={person.email}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="flex-shrink-0 h-10 w-10">
+                                <img className="h-10 w-10 rounded-full" src={person.image_url} alt="profile_picture" />
+                              </div>
+                              <div className="ml-4">
+                                <div className="text-sm font-medium text-gray-900">{person.name}</div>
+                                <div className="text-sm text-gray-500">{person.email}</div>
+                              </div>
+                            </div>
+                          </td>
+                          {/* <td className="px-6 py-4 whitespace-nowrap"> */}
+                            {/* <div className="text-sm text-gray-900">{person.title}</div> */}
+                            {/* <div className="text-sm text-gray-500">{person.department}</div> */}
+                          {/* </td> */}
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.permission}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <Button onClick={()=>openModal(person.email)} className="w-40 bg-red-800 text-white m-2">Edit</Button>
+                          </td>
+                      </tr>
+                      ) : ''
+                    )
+                  })
+                )}
               </tbody>
             </table>
           </div>
