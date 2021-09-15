@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProjectResults from "./components/ProjectResults/ProjectResults";
 import Profile from "./components/Profile/Profile";
 import Resume from "./components/Resume/Resume.jsx";
+import Center from "./components/CentersOfExcellence/CentersOfExcellence";
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -135,6 +136,9 @@ const App = () => {
                   </Route>
                   <Route exact path="/resume">
                     <Resume/>
+                  </Route>
+                  <Route exact path="/centers-of-excellence">
+                    <Center/>
                   </Route>
                 </Switch>
               </Container>
