@@ -49,7 +49,7 @@ const SideBarMob = () => {
               src={`${profileData?.data.image_url}`}
             ></img>
             <header className="flex items-center justify-between leading-tight p-2 ">
-              <h1 className="text-xl fond-bold">{profileData?.data.name}</h1>
+              <h1 className="text-md fond-bold">{profileData?.data.name}</h1>
             </header>
           </div>
         ) : (

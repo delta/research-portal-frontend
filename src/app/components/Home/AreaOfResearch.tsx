@@ -32,14 +32,7 @@ const AreaOfResearchCard = (props:any) => {
   const history = useHistory();
 
   const handleClick = (aor: String) => {
-    let url = `/project/search?department=&projectName=&headName=&aor=${aor}&lab=&coe=&tag=`;
-    axiosInstance
-      .get(url)
-      .then((res: any) => {
-        console.log(res)
-        history.push("/results", {data:res.data});
-      })
-      .catch((err: Error) => console.log(err));
+    history.push(`/results/aor/${aor}`)
   };
   // Temp frontend obj to store urls
   const Urls = [
