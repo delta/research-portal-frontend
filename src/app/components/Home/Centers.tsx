@@ -24,7 +24,7 @@ transition: transform 1s;
 const CentersCard = (props:any) => {
   const history = useHistory();
   const handleClick = (name: String) => {
-    history.push(`/results/coe/${name}`)
+    history.push(`/results/lab/${name}`)
   };
 
   return (
