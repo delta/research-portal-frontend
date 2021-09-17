@@ -43,7 +43,7 @@ const Lab = () => {
           >
             <img
               src={`${lab.image_url}`}
-              alt="Example image"
+              alt="Lab"
               className="h-96"
             ></img>
             <div className="flex flex-col text-left">

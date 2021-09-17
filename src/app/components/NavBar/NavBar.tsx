@@ -25,7 +25,7 @@ const data = [{
 },
 {
 	href: '/professors',
-	text: 'Profs'
+	text: 'Professors'
 }
 ];
 const  NavBar = (props:any) => {
