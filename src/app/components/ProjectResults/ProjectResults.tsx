@@ -79,9 +79,10 @@ const ProjectResults = () => {
 
   return (
     <div className="wrapper">
+      <h1 className="header-results">{researches.length? researches.length: "No"} results found for {value}</h1>
       <div className="main-container mb-10">
-        <div className="results container-1 m-3 flex flex-auto justify-center">
-          <div className="flex flex-wrap m-10">
+        <div className="results container-1 m-3 flex flex-auto justify-center">  
+          <div className="flex flex-wrap m-10">  
             {researches.length ? showResearches() : null}
           </div>
         </div>
