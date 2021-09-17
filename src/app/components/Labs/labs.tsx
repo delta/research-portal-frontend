@@ -5,14 +5,9 @@ import { useHistory } from "react-router";
 
 const Lab = () => {
   const history = useHistory();
+
   const handleClick = (name: String) => {
-    let url = `/project/search?department=&projectName=&headName=&aor=&lab=${name}&coe=&tag=`;
-    axiosInstance
-      .get(url)
-      .then((res: any) => {
-        history.push("/results", { data: res.data });
-      })
-      .catch((err: Error) => console.log(err));
+    history.push(`/results/lab/${name}`)
   };
   
   const [labs, setLabs] = useState([

@@ -17,6 +17,15 @@ li {
 aside{
   min-width: 350px;
 }
+
+.header-results {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 20px;
+  color: red;
+  font-weight: bold;
+}
+
 @media (max-width:600px) {
   .search_container{
     display: block;

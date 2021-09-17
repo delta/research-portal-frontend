@@ -24,19 +24,12 @@ transition: transform 1s;
 const CentersCard = (props:any) => {
   const history = useHistory();
   const handleClick = (name: String) => {
-    let url = `/project/search?department=&projectName=&headName=&aor=&lab=&coe=${name}&tag=`;
-    axiosInstance
-      .get(url)
-      .then((res: any) => {
-        console.log(res);
-        history.push("/results", { data: res.data });
-      })
-      .catch((err: Error) => console.log(err));
+    history.push(`/results/lab/${name}`)
   };
 
   return (
     <button onClick={() => {
-            handleClick(props.name);
+            handleClick(props.data.name);
           }}>
       <Container className="bg-red-300 lg:m-6 m-4 rounded-2xl relative">
         <StyledImage

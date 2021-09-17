@@ -118,7 +118,7 @@ const App = () => {
                   <Route exact path="/labs">
                     <Lab />
                   </Route>
-                  <Route exact path="/results">
+                  <Route exact path="/results/:filterBy/:value">
                     <ProjectResults/>
                   </Route>
                   <Route exact path="/home">
