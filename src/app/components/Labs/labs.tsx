@@ -21,7 +21,6 @@ const Lab = () => {
       .get(url)
       .then((res: any) => {
         setLabs(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err: Error) => console.log(err));
   }, []);

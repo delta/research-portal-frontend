@@ -44,14 +44,12 @@ const UpdateRoles = () => {
         role:role
       }
     }).then((res:any)=>{
-      console.log(res);
       if (res.data.status_code === 200) {
         toast.success("Member role updated successfully !");
         history.push(`/update-role/${id}`);
       } else {
         toast.error(res.data.data);
       }
-      console.log(res);
     }).catch((err:Error)=>{
       console.log(err);
     })
