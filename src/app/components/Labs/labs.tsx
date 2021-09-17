@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axios";
 import "./labs.css";
 import { useHistory } from "react-router";
+import {
+  Labs,
+} from "../../interfaces/projects";
 
 const Lab = () => {
   const history = useHistory();
@@ -10,9 +13,7 @@ const Lab = () => {
     history.push(`/results/lab/${name}`)
   };
   
-  const [labs, setLabs] = useState([
-    { name: "", description: "", image_url: "" },
-  ]);
+  const [labs, setLabs] = useState<Array<Labs>>([]);
 
   useEffect(() => {
     let url = `/center`;
@@ -20,6 +21,7 @@ const Lab = () => {
       .get(url)
       .then((res: any) => {
         setLabs(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err: Error) => console.log(err));
   }, []);

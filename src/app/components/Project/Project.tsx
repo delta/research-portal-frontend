@@ -7,6 +7,9 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+import {
+  SingleProject,
+} from "../../interfaces/projects";
 
 const customStyles = {
   content: {
@@ -40,25 +43,7 @@ const Project = () => {
   };
 
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState({
-    head: {
-      name: "",
-      id: null,
-      email: "",
-      image_url: "",
-      is_staff: "",
-    },
-    department: {
-      full_name: "",
-      id: null,
-      short_name: "",
-    },
-    aor: {},
-    id: null,
-    abstract: "",
-    paper_link: "",
-    members: [{ name: "", permission: "", image_url: "" }],
-  });
+  const [project, setProject] = useState<SingleProject>();
 
   const [userPrivilege, setUserPrivilege] = useState("View");
 
@@ -69,6 +54,7 @@ const Project = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
+        console.log(res.data.data);
         setProject(res.data.data);
       })
       .catch((err: Error) => console.log(err));
@@ -125,6 +111,7 @@ const Project = () => {
   }
 
   return (
+    project !== undefined ?
     <div className="flex flex-col items-center mt-5 mb-10 sm:mb-20 sm:mt-20 p-0 sm:p-2 m-7">
       <div>
         <Modal
@@ -274,7 +261,7 @@ const Project = () => {
           })}
       </div>
     </div>
-  );
+  : null);
 };
 
 export default Project;
