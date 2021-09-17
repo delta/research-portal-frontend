@@ -3,10 +3,13 @@ import "./ProjectResults.css";
 import ResearchCard from "../Research/ResearchCard";
 import { useParams } from "react-router";
 import { axiosInstance } from "../../utils/axios";
+import {
+  Project,
+} from "../../interfaces/projects";
 
 const ProjectResults = () => {
 
-  const [researches, setResearches] = useState([{}]);
+  const [researches, setResearches] = useState<Array<Project>>([]);
   const { filterBy } = useParams<{ filterBy: string }>();
   const { value } = useParams<{ value: string }>();
 

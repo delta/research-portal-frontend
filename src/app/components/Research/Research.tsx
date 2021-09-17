@@ -5,10 +5,13 @@ import { axiosInstance } from "../../utils/axios";
 import {Link} from 'react-router-dom';
 import ResearchCard from "./ResearchCard";
 import FilterBar from './FilterBar';
+import {
+  Project,
+} from "../../interfaces/projects";
 
 const Research = () => {
   const [user,setUser] = useState(false);
-  const [researches,setResearches] = useState([{name:"",description:""}]);
+  const [researches,setResearches] = useState<Array<Project>>([]);
   
   const getResearches = () => {
     let url = `/projects`;
