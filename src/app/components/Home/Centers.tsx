@@ -24,7 +24,7 @@ transition: transform 1s;
 const CentersCard = (props:any) => {
   const history = useHistory();
   const handleClick = (name: String) => {
-    history.push(`/results/lab/${name}`)
+    history.push(`/results/coe/${name}`)
   };
 
   return (
@@ -52,7 +52,7 @@ const Centers = () => {
   const [centers, setcenters] = useState([{image_url:''}]);
 
   useEffect(() => {
-    let url = `/center`;
+    let url = `/coe`;
     axiosInstance
       .get(url)
       .then((res: any) => {
