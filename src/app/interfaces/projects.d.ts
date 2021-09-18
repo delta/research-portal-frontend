@@ -66,5 +66,6 @@ export interface SingleProject {
     paper_link: string,
     members: Member[],
     name: string,
-    success: boolean
+    success: boolean,
+    tags: [string]
 }
