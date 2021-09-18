@@ -77,7 +77,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="min-w-full mb-10 sm:mb-20 p-0 m-7">
+    <div className="min-w-full mb-10 sm:mb-20 p-0 md:m-7">
       <div className="flex flex-row flex-wrap justify-content-sm-start">
         
         {/* Profile Info Area */}
@@ -131,7 +131,7 @@ const Profile = () => {
                 profileData={profileData}
                 setProfileData={setProfileData}
               />
-              <div className="flex flex-wrap justify-around">
+              <div className="flex flex-wrap justify-around md:ml-10">
                 {profileData.filteredProjects.map((item, key) => {
                   return <ProjectCard data={item} key={key} />;
                 })}
