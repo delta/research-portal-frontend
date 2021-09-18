@@ -2,12 +2,18 @@ import "./Profile.css";
 import { useHistory } from "react-router-dom";
 
 const ProjectCard = (props: any) => {
-    let aorTags = props.data.aor_tags;
-    let customTags = props.data.tags;
+    let project:any;  
+    if(props.data.hasOwnProperty("data"))
+        project =  props.data.data;
+    else
+        project = props.data;  
+    let aorTags = project.aor_tags;
+    let customTags = project.tags;
 
     const history = useHistory();
 
     const showTags = (tags: any, color: string) => {
+      console.log(tags);
       let htmlArr = tags.map((item:any, key:any) => {
         item = (item.name!==undefined)?item.name:item;
         return (
@@ -31,7 +37,7 @@ const ProjectCard = (props: any) => {
         {/* Title and Tags Div */}
         <div className="w-full">
           <div className="uppercase tracking-wide xl:text-2xl text-xl text-red-800 font-bold">
-            {props.data.name}
+            {project.name}
           </div>
           <div className="">
             {showTags(customTags, "red")}
@@ -45,14 +51,14 @@ const ProjectCard = (props: any) => {
           <div className="flex w-full items-center">
             <img
               className="w-full object-cover"
-              src={props.data.head.image_url}
+              src={project.head.image_url}
               alt="Head of the project"
             />
           </div>
           {/* Right side div */}
           <div className="p-8 pt-0 flex flex-col w-full truncate whitespace-pre-line">
             <p className="mt-2 text-black">
-              {props.data.abstract}
+              {project.abstract}
             </p>
           </div>
         </div>
@@ -60,7 +66,7 @@ const ProjectCard = (props: any) => {
         {/* Button */}
         <button
           className="bg-red-800 hover:bg-red-700 text-white mt-4 font-bold py-2 px-4 w-full self-end"
-          onClick={() => history.push(`/project/${props.data.id}`)}
+          onClick={() => history.push(`/project/${project.id}`)}
         >
           View Project
         </button>
