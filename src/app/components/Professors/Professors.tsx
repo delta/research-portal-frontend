@@ -5,6 +5,7 @@ import {
 import "./Professor.css";
 import { axiosInstance } from "../../utils/axios";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 16vw;
@@ -39,23 +40,24 @@ const StyledImage = styled.img`
 
 const ProfessorCard = (props: any) => {
   return (
-    // <a href={`https://www.nitt.edu/home/academics/departments/${props.data.short_name}/`}>
     <div className="flex flex-wrap m-5 text-center">
-      <Container className="rounded-2xl col-span-1 bg-grey lg:m-6 m-4 relative">
-        <StyledImage
-          className="w-full rounded-2xl h-44 image"
-          src={props.data.image_url}
-          alt="dummy"
-        />
-        <div className="bg-gray-400 bg-opacity-75 lg:p-4 md:p-3 p-2 info">
-          <p className="lg:text-2xl md:text-xl text-lg font-bold name">
-            {props.data.name}
-          </p>
-          <p className="lg:text-sm md:text-sm text-xs mb-4 email">
-            {props.data.email}
-          </p>
-        </div>
-      </Container>
+      <Link to={`/professors/${props.data.email!=undefined?props.data.email.split("@")[0]:""}`}>
+        <Container className="rounded-2xl col-span-1 bg-grey lg:m-6 m-4 relative">
+          <StyledImage
+            className="w-full rounded-2xl h-44 image"
+            src={props.data.image_url}
+            alt="dummy"
+          />
+          <div className="bg-gray-400 bg-opacity-75 lg:p-4 md:p-3 p-2 info">
+            <p className="lg:text-2xl md:text-xl text-lg font-bold name">
+              {props.data.name}
+            </p>
+            <p className="lg:text-sm md:text-sm text-xs mb-4 email">
+              {props.data.email}
+            </p>
+          </div>
+        </Container>
+      </Link>
     </div>
     // </a>
   );

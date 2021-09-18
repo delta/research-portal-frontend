@@ -100,6 +100,9 @@ const App = () => {
                   <Route exact path="/project/:id">
                     <Project />
                   </Route>
+                  <Route exact path="/professors/:mail">
+                    <Profile />
+                  </Route>
                   <Route exact path="/professors">
                     <Professor />
                   </Route>

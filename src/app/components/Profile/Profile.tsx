@@ -8,6 +8,7 @@ import ProjectCard from "./ProjectCard";
 import HorizontalFilterBar from "./HorizontalFilterBar";
 import { useParams } from "react-router";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 const Container = styled.div`
   width: 15vw;
@@ -28,7 +29,9 @@ const Container = styled.div`
 `;
 
 const Profile = () => {
+  const history = useHistory();
   const [profileData, setProfileData] = useState<ProfileData>();
+  let { mail } = useParams<{ mail: string }>();
 
   /*function to render lab card*/
   const labCards = () => {
@@ -57,10 +60,15 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    let url = `/admin_user/profile/?email=${localStorage.getItem('email')}`;
+    let myMail = localStorage.getItem('email');
+    if (mail == undefined && myMail != null) mail = myMail;
+    else if (mail == undefined) mail = "";
+    if (!mail.endsWith("@nitt.edu")) mail+="@nitt.edu";
+    let url = `/admin_user/profile/?email=${mail}`;
     axiosInstance
       .get(url)
       .then((res: any) => {
+        if(res.data.status_code == 400) history.push("/404");
         res.data.filteredProjects = res.data.projects;
         res.data.filteredNon_admin_projects = res.data.non_admin_projects;
         setProfileData(res.data);
