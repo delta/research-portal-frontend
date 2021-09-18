@@ -112,6 +112,12 @@ const SideBarMob = () => {
           </div>
           <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
             <span>
+              <i className="fas fa-file mr-3"></i>
+              <Link to="/resume">My Resume</Link>
+            </span>
+          </div>
+          <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
+            <span>
               <i className="fas fa-sign-out-alt mr-3"></i>
               <button onClick={logout}>Logout</button>
             </span>
