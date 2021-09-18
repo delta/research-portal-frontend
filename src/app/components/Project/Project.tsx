@@ -109,6 +109,21 @@ const Project = () => {
     })
   }
 
+  const showTags = (tags: any, color: string) => {
+    let htmlArr = tags.map((item:any, key:any) => {
+      item = (item.name!==undefined)?item.name:item;
+      return (
+        <span
+          key={key}
+          className={`text-xs inline-block font-semibold  py-2 px-3 rounded-full bg-${color}-500 text-white uppercase last:mr-0 mr-1`}
+        >
+          {item}
+        </span>
+      );
+    })
+    return htmlArr
+  }
+
   return (
     project !== undefined ?
     <div className="flex flex-col items-center mt-5 mb-10 sm:mb-20 sm:mt-20 p-0 sm:p-2 m-7">
@@ -202,11 +217,18 @@ const Project = () => {
           ></img>
         </div>
         <div className="flex-1 text-center sm:text-left h-auto sm:pl-12">
+          <h3 className="text-lg font-semibold mb-2">{project.name}</h3>
           <h3 className="text-lg font-semibold mb-2">{project.head.name}</h3>
           <h3 className="text-lg font-semibold mb-2">
             {project.department.full_name}
           </h3>
-          <p className="text-left">{project.abstract}</p>
+          <p className="text-left pb-3">{project.head.email}</p>
+          <p className="text-left pb-3">{project.abstract}</p>
+          <a className="text-left text-blue-900 font-medium cursor-pointer pt-3" href={project.paper_link}>Paper Link</a>
+          <div className="pt-3">{showTags(project.tags, "red")}</div>
+          <div className="pt-3">{showTags(project.aor_tags, "blue")}</div>
+          <div className="pt-3">{showTags(project.coe_tags, "green")}</div>
+          <div className="pt-3">{showTags(project.labs_tags, "pink")}</div>
         </div>
       </div>
       <div className="grid mt-5">
@@ -249,6 +271,7 @@ const Project = () => {
                     </div>
                     <div className="text-center">
                       <h3 className="text-lg font-semibold mb-2">{val.name}</h3>
+                      <h3 className="text-lg font-semibold mb-2">{val.email}</h3>
                       <h3 className="text-lg font-semibold mb-2">
                         {val.permission}
                       </h3>
