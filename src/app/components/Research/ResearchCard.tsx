@@ -16,8 +16,8 @@ const Container = styled.div`
   @media screen and (max-width: 768px) {
     width: 100vw;
   }
-  &:hover{
-    background-color: #FFF1F1;
+  &:hover {
+    background-color: #fff1f1;
     border: 0.06rem solid red;
   }
 `;
@@ -40,23 +40,27 @@ const ResearchCard = (props: any) => {
   if (!user)
     return (
       <Container>
-        <Link to={`/project/${props.data.id}`}>
-          <div className="transition duration-450 ease-in-out transform hover:-translate-y-1 hover:scale-105  ">
+        <div className="transition duration-450 ease-in-out transform hover:-translate-y-1 hover:scale-105  ">
           <div className="p-5">
-            <div>
-              <img className="rounded mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
-            </div>
+            <Link to={`/project/${props.data.id}`}>
+              <div>
+                <img
+                  className="rounded mb-6 h-40 w-full"
+                  src={props.data.image_url}
+                  alt="Project"
+                ></img>
+              </div>
+            </Link>
             <div className="text-center">
-              <h3 className="text-lg font-semibold text-red-500 mb-2 ">{props.data.name}</h3>
-              <a href={props.data.paper_link}>
-                <h5 className="text-sm font-semibold mb-2 break-all">
-                  {props.data.paper_link}
-                </h5>
-              </a>
+              <h3 className="text-lg font-semibold text-red-500 mb-2 ">
+                {props.data.name}
+              </h3>
+              <h5 className="text-sm font-semibold mb-2 break-all">
+                <a href={props.data.paper_link}>{props.data.paper_link}</a>
+              </h5>
             </div>
           </div>
-          </div>
-        </Link>
+        </div>
       </Container>
     );
   else
@@ -64,7 +68,11 @@ const ResearchCard = (props: any) => {
       <Container>
         <div className="p-5">
           <div>
-            <img className="mb-6 h-40 w-full" src={props.data.image_url} alt="Project"></img>
+            <img
+              className="mb-6 h-40 w-full"
+              src={props.data.image_url}
+              alt="Project"
+            ></img>
           </div>
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2">{props.data.name}</h3>
