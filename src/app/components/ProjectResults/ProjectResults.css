@@ -41,3 +41,26 @@ aside{
     width: 100%;
   }
 }
+
+.profile-info{
+  position:absolute;
+  width: 20%;
+}
+
+.cards-container{
+  width:75%;
+  margin-left: 20%;
+}
+
+@media (max-width: 1024px) { 
+  .cards-container
+  {
+    width: 100%;
+    margin-left: 0!important;
+  }
+  .profile-info{
+    width: 90%;
+    margin:auto;
+    position: relative;
+  }
+}

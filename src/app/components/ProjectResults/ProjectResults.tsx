@@ -7,71 +7,81 @@ import {
   Project,
 } from "../../interfaces/projects";
 
+interface CardDetail {
+  image_url : string,
+  name: string;
+  description: string;
+};
+
 const ProjectResults = () => {
 
   const [researches, setResearches] = useState<Array<Project>>([]);
   const { filterBy } = useParams<{ filterBy: string }>();
   const { value } = useParams<{ value: string }>();
+  const [cardDetail, setCardDetail] = useState<CardDetail>();
 
   const getData=()=>{
-    if(filterBy==='department'){
-      let url = `/project/search?department=${value}&projectName=&headName=&aor=&lab=&coe=&tag=`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
+    let obj:any = {
+      department: '',
+      projectName: '',
+      headName: '',
+      aor:'',
+      lab:'',
+      coe:'',
+      tag:''
+    };
+    obj[filterBy] = value;
+    let query = '';
+    for(let prop in obj) query += `${prop}=${obj[prop]}&`;
+    query = query.slice(0, -1);
+    let url = `/project/search?${query}`;
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        setResearches(res.data.data);
+      })
+      .catch((err: Error) => console.log(err));
+  }
+
+  const getCardDetails = () => {
+    let obj:any = {
+      department: "/department",
+      aor: "/aor",
+      coe: "/coe",
+      lab: "/center",
     }
-    else if(filterBy==='aor'){
-      let url = `/project/search?department=&projectName=&headName=&aor=${value}&lab=&coe=&tag=`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
-    }
-    else if(filterBy==='coe'){
-      let url = `/project/search?department=&projectName=&headName=&aor=&lab=&coe=${value}&tag=`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
-    }
-    else if(filterBy==='headName'){
-      let url = `/project/search?department=&projectName=&headName=${value}&aor=&lab=&coe=&tag=`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
-    }
-    else if(filterBy==='lab'){
-      let url = `/project/search?department=&projectName=&headName=&aor=&lab=${value}&coe=&tag=`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
-    }
-    else{
-      let url = `/project/search?department=&projectName=&headName=&aor=&lab=&coe=&tag=${value}`;
-      axiosInstance
-        .get(url)
-        .then((res: any) => {
-          setResearches(res.data.data);
-        })
-        .catch((err: Error) => console.log(err));
-    }
+    let url = obj[filterBy];
+    axiosInstance
+      .get(url)
+      .then((res: any) => {
+        let details = res.data.data.filter((item: any) => {
+          let name = filterBy === 'department'? item.short_name:item.name;
+          return name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+        })[0];
+        console.log(details);
+        let detailsObj:any = {};
+        if(filterBy === 'department'){
+          detailsObj.name = details.full_name;
+          detailsObj.description = "";
+        }
+        else{
+          detailsObj.name = details.name;
+          detailsObj.description = details.description;
+        }
+        if(filterBy === 'aor'){
+          detailsObj.image_url = '';
+        }
+        else{
+          detailsObj.image_url = details.image_url;
+        }
+        setCardDetail(detailsObj);
+      })
+      .catch((err: Error) => console.log(err));
   }
 
   useEffect(() => {
     getData();
+    getCardDetails();
   }, []);
 
   const showResearches = () => {
@@ -81,15 +91,54 @@ const ProjectResults = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper p-4">
+      <div className="w-full flex flex-col">
+        
+        <div className="flex flex-wrap w-full rounded-lg shadow-xl">
+          <div className="w-full md:w-1/2 xl:w-1/4 border-r-2 border-black">
+            <div className="card-head p-2 text-white bg-red-800"
+              style={{
+                fontFamily: "Lato",
+                fontWeight: 400,
+              }}
+            >
+              <span className="text-3xl">
+                {cardDetail?.name}
+              </span>
+            </div>
+            <div className="card-image">
+              {
+                cardDetail?.image_url !== ''? (<img src={cardDetail?.image_url} className="w-full" alt="image"></img>) : null
+              }
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 xl:w-3/4 flex flex-col p-4">
+            <div className="text-xl flex justify-between my-2 w-full" 
+              style={
+                {
+                  fontFamily:"Lato",
+                  fontSize:"1.5rem",
+                  lineHeight:"1.75rem",
+                  fontWeight: 300,
+                  wordSpacing: "0.5rem",
+                }
+              }
+            >
+              {cardDetail?.description}
+            </div>
+          </div>
+        </div>
       <h1 className="header-results">{researches.length? researches.length: "No"} results found for {value}</h1>
-      <div className="main-container mb-10">
-        <div className="results container-1 m-3 flex flex-auto justify-center">  
-          <div className="flex flex-wrap m-10">  
-            {researches.length ? showResearches() : null}
+       {/* Project Cards */}
+        <div className="main-container mb-10">
+          <div className="results container-1 m-3 flex flex-auto justify-center">  
+            <div className="flex flex-wrap m-10">  
+              {researches.length ? showResearches() : null}
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 };
