@@ -155,7 +155,7 @@ const Project = () => {
               <span className="">{project.head.email}</span>
             </div>
             <span className="">{project.department.full_name}</span>
-            <p className="text-left pb-3 truncate">Abstract: {project.abstract}</p>
+            <p className="text-left pb-3 pt-3 truncate">Abstract: {project.abstract}</p>
             <a
               className="text-left text-blue-900 font-medium cursor-pointer pt-3"
               href={project.paper_link}
