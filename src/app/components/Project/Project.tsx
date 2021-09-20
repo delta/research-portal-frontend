@@ -70,7 +70,7 @@ const Project = () => {
   useEffect(() => {
     getProjectDetails();
     checkCurrentUserPrivilege();
-  }, []);
+  }, [modalIsOpen1,modalIsOpen2]);
 
   const handleMember = (e: any) => {
     setMember(e.target.value);

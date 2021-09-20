@@ -18,19 +18,19 @@ import { AorData, LabData, DepartmentData } from "../../interfaces/home";
 import { toast } from "react-toastify";
 
 const CreateProject = () => {
-  let state={
-    name:'',
-    head:'',
-    paperLink:'',
-    abstract:'',
-    department:''
-  }
-  const [currentState, setCurrentState] = useState<any>(state)
+  let state = {
+    name: "",
+    head: "",
+    paperLink: "",
+    abstract: "",
+    department: "",
+  };
+  const [currentState, setCurrentState] = useState<any>(state);
   const [departments, setDepartments] = useState<Array<DepartmentData>>();
-  
+
   const [aors, setAors] = useState<Array<AorData>>();
   const [labs, setLabs] = useState<Array<LabData>>();
-  const [coes, setCoes] = useState([{name:""}]);
+  const [coes, setCoes] = useState([{ name: "" }]);
   const [customTags, setCustomTags] = useState<Array<string>>([]);
 
   const [selectedLabs, setSelectedLabs] = useState([]);
@@ -47,27 +47,22 @@ const CreateProject = () => {
   function handleChange(e: any) {
     let val = e.target.name;
 
-    if(val==='name'){
-      setCurrentState({...currentState, name: e.target.value});
-    }
-    else if(val==='head'){
-      currentState.head=e.target.value;
-    }
-    else if(val==='department'){
-      currentState.department=e.target.value;
-    }
-    else if(val==='paperLink'){
-      setCurrentState({...currentState, paperLink: e.target.value});
-    }
-    else if(val==='abstract'){
-      setCurrentState({...currentState, abstract: e.target.value});
-    }
-    else if(val==='id'){
-      setCurrentState({...currentState, id: e.target.value});
+    if (val === "name") {
+      setCurrentState({ ...currentState, name: e.target.value });
+    } else if (val === "head") {
+      currentState.head = e.target.value;
+    } else if (val === "department") {
+      currentState.department = e.target.value;
+    } else if (val === "paperLink") {
+      setCurrentState({ ...currentState, paperLink: e.target.value });
+    } else if (val === "abstract") {
+      setCurrentState({ ...currentState, abstract: e.target.value });
+    } else if (val === "id") {
+      setCurrentState({ ...currentState, id: e.target.value });
     }
   }
 
-  const getDepartments = ()=>{
+  const getDepartments = () => {
     let url = `/department`;
     axiosInstance
       .get(url)
@@ -76,7 +71,7 @@ const CreateProject = () => {
         setIsDepartmentsLoaded(true);
       })
       .catch((err: Error) => console.log(err));
-  }
+  };
 
   const getLabs = () => {
     let url = `/center`;
@@ -87,7 +82,7 @@ const CreateProject = () => {
         setIsLabsLoaded(true);
       })
       .catch((err: Error) => console.log(err));
-  }
+  };
 
   const getAors = () => {
     let url = `/aor`;
@@ -98,7 +93,7 @@ const CreateProject = () => {
         setIsAorsLoaded(true);
       })
       .catch((err: Error) => console.log(err));
-  }
+  };
 
   const getCoes = () => {
     let url = `/coe`;
@@ -109,7 +104,7 @@ const CreateProject = () => {
         setIsCoesLoaded(true);
       })
       .catch((err: Error) => console.log(err));
-  }
+  };
 
   useEffect(() => {
     getDepartments();
@@ -123,14 +118,21 @@ const CreateProject = () => {
     axiosInstance({
       method: "POST",
       url: "/project/create",
-      data: {...currentState, aor: selectedAors, labs: selectedLabs, coes: selectedCoes, tags: customTags},
+      data: {
+        ...currentState,
+        aor: selectedAors,
+        labs: selectedLabs,
+        coes: selectedCoes,
+        tags: customTags,
+      },
     })
       .then((res: any) => {
+        console.log(res)
         if (res.data.status_code === 200) {
           toast.success("Project created successfully!!");
           history.push("/research");
         } else {
-          toast.error("Error creating project, please try again!!");
+          toast.error(res.data.data);
         }
       })
       .catch((err: any) => {
@@ -138,7 +140,14 @@ const CreateProject = () => {
       });
   }
   return (
-    <div className="wrapper p-20" style={{ height: "fit-content" }}>
+    <div className="wrapper p-20 pt-4" style={{ height: "fit-content" }}>
+      <div className="w-full text-center">
+        <Link to="/research" className="">
+          <Button className="w-64 mt-4 bg-red-800 hover:bg-red-600 transform hover:scale-105 transition duration-300 text-white">
+            Go Back
+          </Button>
+        </Link>
+      </div>
       <Container padding className="formContainer">
         <div className="header">
           <Text className="text-red-800 text-header">Create Project</Text>
@@ -159,17 +168,19 @@ const CreateProject = () => {
             className="inputField"
             name="head"
             type="text"
+            disabled
             onChange={handleChange}
+            value = {localStorage.getItem('email')}
           />
         </div>
-        {
-          isAorsLoaded == true?(
-            <CustomFilter options={aors} 
-              selectedOptions={selectedAors}
-              name="Select Areas of Research"
-              setSelectedOptions={setSelectedAors} />
-          ):null
-        }
+        {isAorsLoaded == true ? (
+          <CustomFilter
+            options={aors}
+            selectedOptions={selectedAors}
+            name="Select Areas of Research"
+            setSelectedOptions={setSelectedAors}
+          />
+        ) : null}
         <div className="fieldInput">
           <Label>Abstract</Label>
           <HelpText>Abstract of the project (max 10,000 words)</HelpText>
@@ -195,24 +206,24 @@ const CreateProject = () => {
           />
         </div>
 
-        {
-          isLabsLoaded == true?(
-            <CustomFilter options={labs} 
-              selectedOptions={selectedLabs}
-              name="Select Labs"
-              setSelectedOptions={setSelectedLabs} />
-          ):null
-        }
-        {
-          isCoesLoaded == true?(
-            <CustomFilter options={coes}
-              selectedOptions={selectedCoes}
-              name="Select Ceners of Excellence"
-              setSelectedOptions={setSelectedCoes}/>
-          ):null
-        }
+        {isLabsLoaded == true ? (
+          <CustomFilter
+            options={labs}
+            selectedOptions={selectedLabs}
+            name="Select Labs"
+            setSelectedOptions={setSelectedLabs}
+          />
+        ) : null}
+        {isCoesLoaded == true ? (
+          <CustomFilter
+            options={coes}
+            selectedOptions={selectedCoes}
+            name="Select Ceners of Excellence"
+            setSelectedOptions={setSelectedCoes}
+          />
+        ) : null}
 
-        <CustomTagInput tags={customTags} setTags={setCustomTags}/>
+        <CustomTagInput tags={customTags} setTags={setCustomTags} />
 
         <div className="fieldInput">
           <Label>Paper Link</Label>

@@ -3,6 +3,7 @@ import { axiosInstance } from "../../utils/axios";
 import Pdf from 'react-to-pdf'
 import "./Resume.css";
 import Logo from "./imgs/logo.png"
+import { backendurl } from "../../../env";
 
 const scale = 2;
 const width = 80;
@@ -28,10 +29,7 @@ const Resume = ()=>{
   }, []);
     
   let showProjects = () => {
-    let mainSiteUrl = {
-      dev : "http://localhost:3000",
-      prod : "https://www.test.delta.nitt.edu"
-    }
+    let mainSiteUrl = backendurl;
     let htmlArr = [];
     let allProjects = [];
     if (profileData.projects!==undefined) {
@@ -70,7 +68,7 @@ const Resume = ()=>{
             <div className="">
               <span 
                 onClick={() => {
-                  window.open(mainSiteUrl.dev + "/project/" + project.id, '_blank');
+                  window.open(mainSiteUrl + "/project/" + project.id, '_blank');
                 }}
                 className="text-xl cursor-pointer text-blue-700 hover:text-red-500 pr-4 border-r-2 border-black"
               >
