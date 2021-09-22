@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
     Label,
     TextInput,
+    HelpText
   } from "tailwind-react-ui";
 
 const CustomTagInput = (props:any) => {
@@ -15,6 +16,7 @@ const CustomTagInput = (props:any) => {
     return (
         <div className="fieldInput mb-4">
             <Label>Add Custom Tags</Label>
+            <HelpText>Press Enter to add a tag</HelpText>
             <TextInput
                 className="inputField"
                 name="paperLink"

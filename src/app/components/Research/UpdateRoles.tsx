@@ -46,7 +46,7 @@ const UpdateRoles = () => {
     }).then((res:any)=>{
       if (res.data.status_code === 200) {
         toast.success("Member role updated successfully !");
-        history.push(`/update-role/${id}`);
+        history.push(`/project/${id}`)
       } else {
         toast.error(res.data.data);
       }
@@ -77,6 +77,7 @@ const UpdateRoles = () => {
 
   const closeModal = () =>{
     setIsOpen(false);
+    history.push(`/project/${id}`)
   }
 
   return (

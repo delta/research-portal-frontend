@@ -15,6 +15,10 @@ const Container = styled.div`
     width: 32vw;
     height: 40vw;
   }
+  transition: transform 1s;
+  :hover {
+    transform: scale(1.05, 1.05);
+  }
   @media screen and (max-width: 768px) {
     width: 48vw;
     height: 60vw;
@@ -24,10 +28,6 @@ const Container = styled.div`
 const StyledImage = styled.img`
   width: 16vw;
   height: 20vw;
-  transition: transform 1s;
-  :hover {
-    transform: scale(1.05, 1.05);
-  }
   @media screen and (min-width: 768px) and (max-width: 991px) {
     width: 32vw;
     height: 40vw;
@@ -42,19 +42,20 @@ const ProfessorCard = (props: any) => {
   return (
     <div className="flex flex-wrap m-5 text-center">
       <Link to={`/professors/${props.data.email!=undefined?props.data.email.split("@")[0]:""}`}>
-        <Container className="rounded-2xl col-span-1 bg-grey lg:m-6 m-4 relative">
+        <Container className="col-span-1 bg-grey lg:m-6 m-4 relative shadow-lg">
           <StyledImage
-            className="w-full rounded-2xl h-44 image"
+            className="w-full image object-fill"
             src={props.data.image_url}
             alt="dummy"
           />
-          <div className="bg-gray-400 bg-opacity-75 lg:p-4 md:p-3 p-2 info">
+          <div className="bg-white lg:p-4 md:p-3 p-2 info">
             <p className="lg:text-2xl md:text-xl text-lg font-bold name">
               {props.data.name}
             </p>
-            <p className="lg:text-sm md:text-sm text-xs mb-4 email">
+            <p>
+            <a href={`mailto:${props.data.email}`} className="lg:text-sm md:text-sm text-xs mb-4 text-red-800 p-1">
               {props.data.email}
-            </p>
+            </a></p>
           </div>
         </Container>
       </Link>
