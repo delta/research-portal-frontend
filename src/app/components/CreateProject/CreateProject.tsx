@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 const CreateProject = () => {
   let state = {
     name: "",
-    head: "",
+    head: localStorage.getItem('email'),
     paperLink: "",
     abstract: "",
     department: "",
