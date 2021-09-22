@@ -69,13 +69,11 @@ const Center = () => {
 };
 
   return (
-    <div className="container">
-      <h1 className="font-bold text-5xl text-gray-700 text-center mt-2 mb-2 tracking-widest">
-        Centers of Excellence
-      </h1>
-      <div className="container md:mx-auto md:px-20 md:py-5 m-auto grid grid-flow-row lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-      {isCoesLoaded? noResult(): noResult()}
-     </div>
+    <div className='container'>
+      <h1 className='font-bold text-5xl text-gray-700 text-center mt-2 mb-2 tracking-widest'>Centers of Excellence</h1>
+      <div className='container md:mx-auto md:px-20 md:py-5 m-auto grid grid-flow-row lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
+        {isCoesLoaded? noResult(): noResult()}
+      </div>
     </div>
   );
 };
