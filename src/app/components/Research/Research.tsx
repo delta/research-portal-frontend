@@ -8,6 +8,7 @@ import FilterBar from './FilterBar';
 import {
   Project,
 } from "../../interfaces/projects";
+import NoResults from '../NoResults/NoResults' ;
 
 const Research = () => {
   const [user,setUser] = useState(false);
@@ -46,6 +47,11 @@ const Research = () => {
       );
     })
   };
+  const noResult = ()=>{
+      return (
+        <NoResults flag={0}/>
+      );
+  };
 
   return (
     <div className="wrapper">
@@ -56,7 +62,7 @@ const Research = () => {
         {/* project card container */}
         <div className="result-container relative m-3 flex flex-auto justify-center">
           <div className="flex flex-wrap m-10">
-            {researches.length ? showResearches() : null}
+            {researches.length ?  noResult(): noResult()}
           </div>
           {user ? (
             <Link to="/create-project" className="absolute right-10 -top-4">

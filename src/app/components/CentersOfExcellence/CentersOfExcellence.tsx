@@ -3,6 +3,7 @@ import "./CentersOfExcellence.css";
 import { CoeData } from "../../interfaces/home";
 import { axiosInstance } from "../../utils/axios";
 import { useHistory } from "react-router";
+import NoResults from '../NoResults/NoResults' ;
 
 const Center = () => {
   const [centers, setCenters] = useState<Array<CoeData>>();
@@ -61,6 +62,11 @@ const Center = () => {
     }
     return htmlArr;
   };
+  const noResult = ()=>{
+    return (
+      <NoResults flag={3}/>
+    );
+};
 
   return (
     <div className="container">
@@ -68,8 +74,8 @@ const Center = () => {
         Centers of Excellence
       </h1>
       <div className="container md:mx-auto md:px-20 md:py-5 m-auto grid grid-flow-row lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-        {isCoesLoaded ? getCenters() : null}
-      </div>
+      {isCoesLoaded? noResult(): noResult()}
+     </div>
     </div>
   );
 };
