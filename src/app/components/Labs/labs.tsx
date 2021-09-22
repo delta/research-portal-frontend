@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { axiosInstance } from "../../utils/axios";
 import "./labs.css";
 import { useHistory } from "react-router";
+import NoResults from '../NoResults/NoResults' ;
 
 const Lab = () => {
   const history = useHistory();
@@ -63,11 +64,16 @@ const Lab = () => {
     });
     return htmlArr;
   };
+  const noResult = ()=>{
+    return (
+      <NoResults flag={2}/>
+    );
+};
 
   return (
     <div className="wrapper mt-10 mb-10 p-2">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center justify-items-center gap-4 m-2">
-        {labs.length ? labCards() : null}
+        {labs.length ? noResult() : noResult()}
       </div>
     </div>
   );
