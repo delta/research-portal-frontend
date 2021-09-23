@@ -19,43 +19,30 @@ const Container = styled.div`
   }
 `;
 
-const ResearchCard1 = (props: any) => {
+const NoResults = (props: any) => {
   const [user, setUser] = useState(false);
-  if(props.flag==0)
+  const renderSwitch=() => {
+    switch(props.flag) {
+      case 0:
+        return 'No projects set up yet';
+        case 1:
+          return 'No Professors registered yet';
+          case 2:
+            return 'No Labs registered yet';
+            case 3:
+              return 'No Centers of Excellence created yet';
+               default:
+                return null;
+    }
+  }
+
     return (
       <Container >
               <img className="object-contain h-60 w-full" src={notFound} alt="Project"></img>
-              <h3 className="text-lg text-center font-semibold text-red-500 mb-2 ">No Projects</h3>
-              <h4 className="text-sm text-center font-sans text-gray-500 mb-2">Create new project</h4>
-
-      </Container>
-    )
-    else if(props.flag==1)
-    return (
-      <Container >
-              <img className="object-contain h-60 w-full" src={notFound} alt="Project"></img>
-              <h3 className="text-lg text-center font-semibold text-red-500 mb-2 ">No Professors registered yet</h3>
-
-      </Container>
-    )
-    else if(props.flag==2)
-    return (
-      <Container >
-              <img className="object-contain h-60 w-full" src={notFound} alt="Project"></img>
-              <h3 className="text-lg text-center font-semibold text-red-500 mb-2 ">No Labs registered yet</h3>
-
-      </Container>
-    )
-    else 
-    return (
-      <Container >
-              <img className="object-contain h-60 w-full" src={notFound} alt="Project"></img>
-              <h3 className="text-lg text-center font-semibold text-red-500 mb-2 ">No Centers of Excellence created yet</h3>
-
+              <h3 className="text-lg text-center font-semibold text-red-500 mb-2 ">{renderSwitch()}</h3>
       </Container>
     )
 
- 
 };
 
-export default ResearchCard1;
+export default NoResults;
