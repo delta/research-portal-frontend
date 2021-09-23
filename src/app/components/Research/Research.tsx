@@ -62,7 +62,7 @@ const Research = () => {
         {/* project card container */}
         <div className="result-container relative m-3 flex flex-auto justify-center">
           <div className="flex flex-wrap m-10">
-            {researches.length ?  noResult(): noResult()}
+            {researches.length ?  showResearches(): noResult()}
           </div>
           {user ? (
             <Link to="/create-project" className="absolute right-10 -top-4">

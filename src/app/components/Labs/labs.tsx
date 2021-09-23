@@ -69,7 +69,7 @@ const Lab = () => {
   return (
     <div className="wrapper mt-10 mb-10 p-2">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center justify-items-center gap-4 m-2">
-        {labs.length ? noResult() : noResult()}
+        {labs.length ? labCards() : noResult()}
       </div>
     </div>
   );

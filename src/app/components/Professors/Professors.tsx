@@ -130,7 +130,7 @@ const Professor = () => {
       <div className="main-container mb-10">
         <div className="results container-1 m-3 flex flex-auto justify-center">
           <Row gutter className="md:h-full justify-center">
-            {professors.length ?  noResult() : noResult()}
+            {professors.length ?  showProfessors() : noResult()}
           </Row>
         </div>
       </div>
