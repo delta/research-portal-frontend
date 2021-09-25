@@ -39,7 +39,7 @@ const Login = () => {
         localStorage.setItem("email", response.data.data.email);
         history.push("/profile");
       } else {
-        toast.error("Error logging in, please try again!!");
+        toast.error(response.data.data);
       }
     });
   }
