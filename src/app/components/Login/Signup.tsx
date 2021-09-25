@@ -74,7 +74,7 @@ const Signup = () => {
             toast.success("Registered successfully!");
             history.push("/login");
           } else {
-            toast.error("Error registering the user, please try again!!");
+            toast.error(res.data.data);
           }
         })
         .catch((err: Error) => console.log(err));

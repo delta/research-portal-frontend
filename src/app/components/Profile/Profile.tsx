@@ -84,7 +84,7 @@ const Profile = () => {
         <div className="w-1/4 h-full profile-info">
           <div className="overflow-hidden rounded-lg shadow-lg flex flex-col sm:flex-row lg:flex-col">
             <div className="w-full sm:w-1/3 lg:w-full">
-              <img alt="Placeholder" className="block h-auto w-full"
+              <img alt="Placeholder" className="block h-auto w-full pro-image"
               src={`${profileData?.data.image_url}`}
               ></img>
             </div>
