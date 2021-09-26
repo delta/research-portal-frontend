@@ -71,7 +71,7 @@ const Signup = () => {
         })
         .then((res: any) => {
           if (res.data.status_code === 200) {
-            toast.success("Registered successfully!");
+            toast.success(res.data.data);
             history.push("/login");
           } else {
             toast.error(res.data.data);
