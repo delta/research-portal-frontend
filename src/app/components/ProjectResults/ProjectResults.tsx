@@ -113,8 +113,8 @@ const ProjectResults = () => {
               <></>
             ) : (
               <>
-                <div className="w-full flex flex-col">
-                  <div className="flex flex-wrap w-full rounded-lg shadow-xl">
+                <div className="w-full flex flex-col rounded-lg shadow-xl">
+                  <div className="flex flex-wrap w-full">
                     <div className="w-full md:w-1/2 xl:w-1/4 border-r-2 border-black">
                       <div
                         className="card-head p-2 text-white bg-red-800"
