@@ -56,7 +56,7 @@ const ResearchCard = (props: any) => {
                 {props.data.name}
               </h3>
               <h5 className="text-sm font-semibold mb-2 break-all">
-                <a className="text-blue-700 cursor-pointer" href={props.data.paper_link}>Paper Link</a>
+                <a target='_blank' className="text-blue-700 cursor-pointer" href={props.data.paper_link}>Paper Link</a>
               </h5>
             </div>
           </div>
@@ -77,7 +77,7 @@ const ResearchCard = (props: any) => {
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2">{props.data.name}</h3>
             <h5 className="text-sm font-semibold mb-2 break-all">
-              <a className="text-blue-700 cursor-pointer" href={props.data.paper_link}>Paper Link</a>
+              <a target='_blank' className="text-blue-700 cursor-pointer" href={props.data.paper_link}>Paper Link</a>
             </h5>
           </div>
         </div>
