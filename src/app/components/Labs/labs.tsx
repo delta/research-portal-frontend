@@ -6,6 +6,7 @@ import {
   Labs,
 } from "../../interfaces/projects";
 import NoResults from '../NoResults/NoResults' ;
+import Professor from '../Professors/Professors';
 
 const Lab = () => {
   const history = useHistory();
@@ -29,6 +30,14 @@ const Lab = () => {
   const labCards = () => {
     let htmlArr: JSX.Element[] = [];
     labs.forEach((lab, index) => {
+
+      var description,contact,faculties;
+      var contactIndex=lab.description.search("Contact Details:")
+      var facultiesIndex=lab.description.search("Faculties:")
+      description=lab.description.slice(0,contactIndex)
+      contact=lab.description.slice(contactIndex,facultiesIndex)
+      faculties=lab.description.slice(facultiesIndex)
+      
       htmlArr.push(
         <button
           onClick={() => {
@@ -52,9 +61,20 @@ const Lab = () => {
                 </h5>
                 <div className="max-h-sm mx:m-auto bg-gray-50">
                   <p className="text-gray-600 text-base text-justify truncate">
-                    {lab.description}
+                    {description}
                   </p>
                 </div>
+                <div className="max-h-sm mx:m-auto bg-gray-50">
+                  <p className="text-gray-600 text-base text-justify truncate">
+                    {contact}
+                  </p>
+                </div>
+                <div className="max-h-sm mx:m-auto bg-gray-50">
+                  <p className="text-gray-600 text-base text-justify truncate">
+                    {faculties}
+                  </p>
+                </div>
+
               </div>
             </div>
         </button>

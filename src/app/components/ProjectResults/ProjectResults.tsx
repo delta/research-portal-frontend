@@ -9,6 +9,8 @@ interface CardDetail {
   image_url: string;
   name: string;
   description: string;
+  contact: string;
+  faculties: string;
 }
 
 const ProjectResults = () => {
@@ -16,7 +18,7 @@ const ProjectResults = () => {
   const { filterBy } = useParams<{ filterBy: string }>();
   const { value } = useParams<{ value: string }>();
   const [cardDetail, setCardDetail] = useState<CardDetail>();
-
+  
   const getData = () => {
     let obj: any = {
       department: "",
@@ -60,9 +62,30 @@ const ProjectResults = () => {
         if (filterBy === "department") {
           detailsObj.name = details.full_name;
           detailsObj.description = "";
+          
         } else {
           detailsObj.name = details.name;
-          detailsObj.description = details.description;
+          let contactIndex=details.description.search("Contact Details:")
+          let facultiesIndex=details.description.search("Faculties:")
+
+          if(contactIndex!=-1){
+            let description=details.description.slice(0,contactIndex)
+            detailsObj.description = description;
+            if(facultiesIndex!=-1){
+              let contact=details.description.slice(contactIndex,facultiesIndex)
+              let faculties=details.description.slice(facultiesIndex)
+              detailsObj.faculties=faculties;
+              detailsObj.contact=contact;
+            }
+          } else if(facultiesIndex==-1){
+            detailsObj.description=details.description
+          }else{
+            let contact=details.description.slice(0,facultiesIndex)
+            let faculties=details.description.slice(facultiesIndex)
+            detailsObj.faculties=faculties;
+            detailsObj.contact=contact;
+          }
+
         }
         if (filterBy === "aor") {
           detailsObj.image_url = "";
@@ -146,7 +169,9 @@ const ProjectResults = () => {
                           wordSpacing: "0.5rem",
                         }}
                       >
-                        {cardDetail?.description}
+                        {cardDetail?.description}<br/>
+                        {cardDetail?.contact}<br/>
+                        {cardDetail?.faculties}
                       </div>
                     </div>
                   </div>
