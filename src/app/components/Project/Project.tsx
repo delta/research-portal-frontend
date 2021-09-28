@@ -70,7 +70,7 @@ const Project = () => {
   useEffect(() => {
     getProjectDetails();
     checkCurrentUserPrivilege();
-  }, []);
+  }, [modalIsOpen1,modalIsOpen2]);
 
   const handleMember = (e: any) => {
     setMember(e.target.value);
@@ -163,7 +163,7 @@ const Project = () => {
               Paper Link
             </a>
           </div>
-          <div>
+          <div className="md:mt-9">
             <div className="pt-3">{showTags(project.tags, "red")}</div>
             <div className="pt-3">{showTags(project.aor_tags, "blue")}</div>
             <div className="pt-3">{showTags(project.coe_tags, "green")}</div>

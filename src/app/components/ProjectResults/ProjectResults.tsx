@@ -86,57 +86,14 @@ const ProjectResults = () => {
   };
 
   return (
-    <div className="wrapper h-full p-4 mb-5 overflow-y-scroll" style={{ minHeight: "100%;", height:"fit-content"}}>
-      <div className="grid md:grid-flow-col grid-auto gap-1 h-full" style={{ minHeight:"100vh"}}>
-        <div className="w-full flex flex-auto h-full">
-          <div className="flex flex-wrap w-full h-full">
-            {filterBy !== "department" ? (
-              <div className="w-full md:w-1/2 xl:w-1/2">
+    <div className="wrapper p-4">
+      <div className="flex-1 w-full">
+        {cardDetail?.image_url === "" ? (
+          <div className="w-full flex flex-col">
+            <div className="flex flex-wrap w-full rounded-lg shadow-xl">
+              <div className="w-full flex flex-col p-4">
                 <div
-                  className="card-head p-2 text-white bg-red-800"
-                  style={{
-                    fontFamily: "Lato",
-                    fontWeight: 400,
-                  }}
-                >
-                  <span className="text-3xl">{cardDetail?.name}</span>
-                </div>
-                <div className="card-image">
-                  {cardDetail?.image_url !== "" ? (
-                    <img
-                      src={cardDetail?.image_url}
-                      className="w-full"
-                      alt="image"
-                    ></img>
-                  ) : null}
-                </div>
-              </div>
-            ) : (
-              <div className="w-full col-span-2 md:col-span-1 max-w-md">
-                <div
-                  className="card-head p-2 text-white bg-red-800"
-                  style={{
-                    fontFamily: "Lato",
-                    fontWeight: 400,
-                  }}
-                >
-                  <span className="text-3xl">{cardDetail?.name}</span>
-                </div>
-                <div className="card-image">
-                  {cardDetail?.image_url !== "" ? (
-                    <img
-                      src={cardDetail?.image_url}
-                      className="w-full"
-                      alt="image"
-                    ></img>
-                  ) : null}
-                </div>
-              </div>
-            )}
-            {filterBy !== "department" ? (
-              <div className="w-full md:w-1/2 xl:w-1/2 flex flex-col p-4 border-black relative md:right-20 md:top-60 h-auto max-h-96 bg-white shadow-xl mb-4">
-                <div
-                  className="text-xl flex justify-between my-2 w-full overflow-y-scroll mb-4 h-full"
+                  className="text-xl flex justify-between my-2 w-full"
                   style={{
                     fontFamily: "Lato",
                     fontSize: "1.5rem",
@@ -148,19 +105,93 @@ const ProjectResults = () => {
                   {cardDetail?.description}
                 </div>
               </div>
-            ) : null}
+            </div>
           </div>
-        </div>
-        <div className="w-full text-center col-span-2">
-          <h1 className="header-results w-full">
-            {researches.length ? researches.length : "No"} results found for{" "}
-            {value}
-          </h1>
-          {/* Project Cards */}
-          <div className="main-container mb-10">
-            <div className="results container-1 m-3 flex flex-auto justify-center">
-              <div className="flex flex-wrap m-10">
-                {researches.length ? showResearches() : null}
+        ) : (
+          <>
+            {cardDetail?.description === "" ? (
+              <></>
+            ) : (
+              <>
+                <div className="w-full flex flex-col rounded-lg shadow-xl">
+                  <div className="flex flex-wrap w-full">
+                    <div className="w-full md:w-1/2 xl:w-1/4 border-r-2 border-black">
+                      <div
+                        className="card-head p-2 text-white bg-red-800"
+                        style={{
+                          fontFamily: "Lato",
+                          fontWeight: 400,
+                        }}
+                      >
+                        <span className="text-3xl">{cardDetail?.name}</span>
+                      </div>
+                      <div className="card-image h-full">
+                        {cardDetail?.image_url !== "" ? (
+                          <img
+                            src={cardDetail?.image_url}
+                            className="w-full h-full object-fill"
+                            alt="image"
+                          ></img>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/2 xl:w-3/4 flex flex-col p-4">
+                      <div
+                        className="text-xl flex justify-between my-2 w-full"
+                        style={{
+                          fontFamily: "Lato",
+                          fontSize: "1.5rem",
+                          lineHeight: "1.75rem",
+                          fontWeight: 300,
+                          wordSpacing: "0.5rem",
+                        }}
+                      >
+                        {cardDetail?.description}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </>
+        )}
+
+        <div className="w-full md:flex md:flex-1">
+          {cardDetail?.description === "" ? (
+            <div className="w-full md:w-1/2 xl:w-1/3 border-r-2 border-black">
+              <div
+                className="card-head p-2 text-white bg-red-800"
+                style={{
+                  fontFamily: "Lato",
+                  fontWeight: 400,
+                }}
+              >
+                <span className="text-3xl">{cardDetail?.name}</span>
+              </div>
+              <div className="card-image h-full">
+                {cardDetail?.image_url !== "" ? (
+                  <img
+                    src={cardDetail?.image_url}
+                    className="w-full h-full object-fill"
+                    alt="image"
+                  ></img>
+                ) : null}
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className="w-full">
+            <h1 className="header-results">
+              {researches.length ? researches.length : "No"} results found for{" "}
+              {value}
+            </h1>
+            {/* Project Cards */}
+            <div className="main-container mb-10">
+              <div className="results container-1 m-3 flex flex-auto justify-center">
+                <div className="flex flex-wrap m-10">
+                  {researches.length ? showResearches() : null}
+                </div>
               </div>
             </div>
           </div>
