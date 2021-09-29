@@ -111,6 +111,7 @@ const FilterBar = (props:any) => {
           placeholder="Search by project Name"
           onChange={handleChange}
         />
+        <div className="absolute top-3 right-3"> <i className="fa fa-search text-gray-400 z-20  hover:text-gray-500"></i> </div>
       </div>
       
       <div className="searchHolder relative flex items-center mb-3 mt-3 w-full">
@@ -121,6 +122,7 @@ const FilterBar = (props:any) => {
           name="aor"
           onChange={handleChange}
         />
+        <div className="absolute top-3 right-3"> <i className="fa fa-search text-gray-400 z-20  hover:text-gray-500"></i> </div>
       </div>
 
       <div className="searchHolder relative flex items-center mb-3 mt-3 w-full">
@@ -131,6 +133,7 @@ const FilterBar = (props:any) => {
           name="headName"
           onChange={handleChange}
         />
+        <div className="absolute top-3 right-3"> <i className="fa fa-search text-gray-400 z-20  hover:text-gray-500"></i> </div>
       </div>
 
       <div className="searchHolder relative flex items-center mb-3 mt-3 w-full">
@@ -141,6 +144,7 @@ const FilterBar = (props:any) => {
           name="tag"
           onChange={handleChange}
         />
+        <div className="absolute top-3 right-3"> <i className="fa fa-search text-gray-400 z-20  hover:text-gray-500"></i> </div>
       </div>
       
       <div className="filter-input-container">

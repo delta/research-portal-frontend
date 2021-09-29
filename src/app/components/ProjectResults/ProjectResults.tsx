@@ -9,6 +9,8 @@ interface CardDetail {
   image_url: string;
   name: string;
   description: string;
+  contact: string;
+  faculties: string;
 }
 
 const ProjectResults = () => {
@@ -16,7 +18,7 @@ const ProjectResults = () => {
   const { filterBy } = useParams<{ filterBy: string }>();
   const { value } = useParams<{ value: string }>();
   const [cardDetail, setCardDetail] = useState<CardDetail>();
-
+  
   const getData = () => {
     let obj: any = {
       department: "",
@@ -60,9 +62,18 @@ const ProjectResults = () => {
         if (filterBy === "department") {
           detailsObj.name = details.full_name;
           detailsObj.description = "";
+          
         } else {
           detailsObj.name = details.name;
-          detailsObj.description = details.description;
+          let contactIndex=details.description.search("Contact Details:")
+          let facultiesIndex=details.description.search("Faculties:")
+
+            let description=details.description.slice(0,contactIndex)
+            detailsObj.description = description;
+              let contact=details.description.slice(contactIndex+16,facultiesIndex)
+              let faculties=details.description.slice(facultiesIndex+10)
+              detailsObj.faculties=faculties;
+              detailsObj.contact=contact;
         }
         if (filterBy === "aor") {
           detailsObj.image_url = "";
@@ -142,11 +153,24 @@ const ProjectResults = () => {
                           fontFamily: "Lato",
                           fontSize: "1.5rem",
                           lineHeight: "1.75rem",
+                          fontWeight: 400,
+                          wordSpacing: "0.5rem",
+                        }}
+                      >
+                        {cardDetail?.description}<br/>
+                      </div>
+
+                      <div
+                        style={{
+                          fontFamily: "Lato",
+                          fontSize: "1.5rem",
+                          lineHeight: "1.75rem",
                           fontWeight: 300,
                           wordSpacing: "0.5rem",
                         }}
                       >
-                        {cardDetail?.description}
+                        <span style={{fontWeight: 400,color:"red"}}>Contact Details:</span>{cardDetail?.contact}<br/>
+                        <span style={{fontWeight: 400,color:"red"}}>Faculties:&emsp;&emsp;&emsp;</span>{cardDetail?.faculties}
                       </div>
                     </div>
                   </div>
