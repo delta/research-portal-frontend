@@ -82,7 +82,7 @@ const SideBarMob = () => {
       <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
         <span>
           <i className="fas fa-project-diagram mr-3"></i>
-          <Link to="/research">Research</Link>
+          <Link to="/research">Apply for projects</Link>
         </span>
       </div>
       <div className="p-3 text-lg flex justify-content-start cursor-pointer w-full hover:bg-gray-800 hover:text-white">
