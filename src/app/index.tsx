@@ -19,6 +19,7 @@ import CreateProject from "./components/CreateProject/CreateProject";
 import Project from "./components/Project/Project";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ErrorPage from "./components/404Error/404Error";
 
 const Container = styled.div`
   overflow-y: scroll;
@@ -112,6 +113,7 @@ const App = () => {
                   <Route exact path="/labs">
                     <Lab />
                   </Route>
+                  <Route component={ErrorPage}></Route>
                 </Switch>
               </Container>
             </div>
