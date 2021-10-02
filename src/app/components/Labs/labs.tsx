@@ -45,7 +45,7 @@ const Lab = () => {
                 src={`${lab.image_url}`}
                 alt="Image"
               />
-              <div className="px-6 py-4 ">
+              <div className="px-6 py-4 md:h-48">
                 <h5 className="text-gray-700 font-bold text-xl text-center mb-2">
                   {lab.name}
                 </h5>
