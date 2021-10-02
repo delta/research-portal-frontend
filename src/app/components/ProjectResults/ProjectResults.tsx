@@ -63,12 +63,9 @@ const ProjectResults = () => {
           detailsObj.name = details.full_name;
           detailsObj.description = "";
         } else {
-          if (details.name === "Surface Engineering")
-            console.log(details.description);
           detailsObj.name = details.name;
           let contactIndex = details.description.search("Contact Details:");
           let facultiesIndex = details.description.search("Faculties:");
-          var description = null;
           if (facultiesIndex == 0 || contactIndex == 0)
             detailsObj.description = null;
           else if (facultiesIndex != -1 || contactIndex != -1) {
@@ -110,8 +107,6 @@ const ProjectResults = () => {
             detailsObj.faculties = " No records found";
           }
         }
-        console.log(details.description);
-
         if (filterBy === "aor") {
           detailsObj.image_url = "";
         } else {
