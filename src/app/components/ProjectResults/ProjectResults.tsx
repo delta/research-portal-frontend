@@ -18,7 +18,7 @@ const ProjectResults = () => {
   const { filterBy } = useParams<{ filterBy: string }>();
   const { value } = useParams<{ value: string }>();
   const [cardDetail, setCardDetail] = useState<CardDetail>();
-  
+
   const getData = () => {
     let obj: any = {
       department: "",
@@ -62,19 +62,56 @@ const ProjectResults = () => {
         if (filterBy === "department") {
           detailsObj.name = details.full_name;
           detailsObj.description = "";
-          
         } else {
+          if (details.name === "Surface Engineering")
+            console.log(details.description);
           detailsObj.name = details.name;
-          let contactIndex=details.description.search("Contact Details:")
-          let facultiesIndex=details.description.search("Faculties:")
+          let contactIndex = details.description.search("Contact Details:");
+          let facultiesIndex = details.description.search("Faculties:");
+          var description = null;
+          if (facultiesIndex == 0 || contactIndex == 0)
+            detailsObj.description = null;
+          else if (facultiesIndex != -1 || contactIndex != -1) {
+            if (contactIndex < facultiesIndex && contactIndex != -1)
+              detailsObj.description = details.description.slice(
+                0,
+                contactIndex
+              );
+            else
+              detailsObj.description = details.description.slice(
+                0,
+                facultiesIndex
+              );
+          }
+          if (facultiesIndex === -1 && contactIndex === -1)
+            detailsObj.description = details.description;
 
-            let description=details.description.slice(0,contactIndex)
-            detailsObj.description = description;
-              let contact=details.description.slice(contactIndex+16,facultiesIndex)
-              let faculties=details.description.slice(facultiesIndex+10)
-              detailsObj.faculties=faculties;
-              detailsObj.contact=contact;
+          if (contactIndex !== -1 && facultiesIndex !== -1) {
+            let contact = details.description.slice(
+              contactIndex + 16,
+              facultiesIndex
+            );
+            let faculties = details.description.slice(facultiesIndex + 10);
+            detailsObj.faculties = faculties;
+            detailsObj.contact = contact;
+          } else if (facultiesIndex !== -1) {
+            let faculties = details.description.slice(facultiesIndex + 10);
+            detailsObj.faculties = faculties;
+            detailsObj.contact = " No records found";
+          } else if (contactIndex !== -1) {
+            let contact = details.description.slice(
+              contactIndex + 16,
+              facultiesIndex
+            );
+            detailsObj.contact = contact;
+            detailsObj.faculties = " No records found";
+          } else {
+            detailsObj.contact = " No records found";
+            detailsObj.faculties = " No records found";
+          }
         }
+        console.log(details.description);
+
         if (filterBy === "aor") {
           detailsObj.image_url = "";
         } else {
@@ -157,7 +194,8 @@ const ProjectResults = () => {
                           wordSpacing: "0.5rem",
                         }}
                       >
-                        {cardDetail?.description}<br/>
+                        {cardDetail?.description}
+                        <br />
                       </div>
 
                       <div
@@ -169,8 +207,15 @@ const ProjectResults = () => {
                           wordSpacing: "0.5rem",
                         }}
                       >
-                        <span style={{fontWeight: 400,color:"red"}}>Contact Details:</span>{cardDetail?.contact}<br/>
-                        <span style={{fontWeight: 400,color:"red"}}>Faculties:&emsp;&emsp;&emsp;</span>{cardDetail?.faculties}
+                        <span style={{ fontWeight: 400, color: "red" }}>
+                          Contact Details:
+                        </span>
+                        {cardDetail?.contact}
+                        <br />
+                        <span style={{ fontWeight: 400, color: "red" }}>
+                          Faculties:
+                        </span>
+                        {cardDetail?.faculties}
                       </div>
                     </div>
                   </div>
