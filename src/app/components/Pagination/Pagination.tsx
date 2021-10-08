@@ -1,36 +1,38 @@
 import React from "react";
+import "./Pagination.css";
 
 const Pagination = ({
   postsPerPage,
   totalPosts,
   paginate,
+  currentPage,
 }: {
   postsPerPage: any;
   totalPosts: any;
   paginate: any;
+  currentPage: any;
 }) => {
   const pageNumbers = [];
 
   for (let i = 1; i < Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-
+  const highlight = (number: any) => {
+    console.log(number);
+  };
   return (
     <nav>
       <ul className="pagination">
         {pageNumbers.map((number) => (
-          <li
-            style={{
-              cursor: "pointer",
-              float: "left",
-              display: "block",
-              color: "red",
-              padding: "12px",
-            }}
-            key={number}
-            className="hover:bg-red-200"
-          >
-            <a onClick={() => paginate(number)}>{number}</a>
+          <li key={number} className={currentPage === number ? "active " : ""}>
+            <a
+              onClick={() => {
+                paginate(number);
+                highlight(number);
+              }}
+            >
+              {number}
+            </a>
           </li>
         ))}
       </ul>
