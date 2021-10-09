@@ -76,14 +76,6 @@ const Lab = () => {
 
   return (
     <div className="wrapper mt-10 mb-10 p-2">
-      <div className="sticky top-0 flex justify-center  ">
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={labs.length}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
-      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 justify-center justify-items-center gap-4 m-2">
         {labs.length ? labCards(currentPosts) : null}
       </div>
