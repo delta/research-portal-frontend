@@ -5,6 +5,7 @@ import Departments from "./Departments"
 import Footer from "./Footer"
 import Landing from "./Landing"
 import Overview from "./Overview"
+import Portfolio from "./Portfolio"
 
 const Home = () => {
   return <div className='w-ful bg-red-50 relative'>
@@ -14,6 +15,7 @@ const Home = () => {
       <AreaOfResearch/>
       <Departments/>
       <Centers/>
+      <Portfolio/>
       <Footer/>
   </div>;
 };
