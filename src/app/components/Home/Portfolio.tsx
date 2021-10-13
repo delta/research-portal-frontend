@@ -2,91 +2,76 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const StyledImage = styled.img`
-  transition: transform 1s;
   width: 400px;
   height: 400px;
-  :hover {
-    transform: scale(1.1, 1.1);
+  @media(max-width: 768px){
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85vw;
   }
 `;
-
-const Academics = (props:any) => {
-  return (
-    <div>
-      <p className="lg:text-xl md:text-lg text-sm text-gray-800 mt-3">
-        Academic Qualifications :
-      </p>
-      <ul className="lg:text-lg md:text-md text-xs text-gray-200 flex flex-col grid justify-items-start">
-        {props.data.map((qualification: String) => {
-          return (<li className="mt-3 text-left">{qualification}</li>);
-        })}
-      </ul>
-    </div>
-  );
-}
-const ResearchInterests = (props: any) => {
-  return (
-    <div>
-      <p className="lg:text-xl md:text-lg text-sm text-gray-800 mt-3">
-        Research Interests :
-      </p>
-      <ul className="lg:text-lg md:text-md text-xs text-gray-200 text-left flex flex-col grid justify-items-start">
-        {props.data.map((interest: String) => {
-          return (<li className="mt-3 text-left">{interest}</li>);
-        })}
-      </ul>
-    </div>
-  );
-}
 const PortfolioCard = (props: any) => {
   return (
-    <div className='flex flex-row mt-5 mb-8 pt-3 w-full'>
-      <div className="h-full w-full md:col-span-1 col-span-1 md:mb-0 mb-6">
+    <div className='flex md:flex-row flex-col flex-wrap mt-5 mb-8 pt-3 pl-2 w-full bg-red-900 md:rounded-2xl rounded-lg md:shadow-2xl shadow-lg'>
+      <div className="w-max cols-span-1">
         <StyledImage
-          className="md:h-1/2 rounded-md mt-20 max-h-96 max-w-7xl"
-          src={`${props.data.image_url}`}
+          className="md:h-1/2 md:mx-10 md:my-3 rounded-md max-h-96 max-w-7xl"
+          src={props.data.image}
           alt="dummy"
         />
       </div>
-      <div className="w-full md:col-span-3 col-span-5 mx-0 flex flex-col">
-        <p className="xl:text-4xl lg:text-2xl md:text-xl text-lg text-red-100 pb-3 font-bold">
+      <div className="mt-5 md:mt-10 md:pl-48 text-red-100">
+        <p className="xl:text-4xl lg:text-3xl md:text-xl text-lg pb-3 font-bold">
           {props.data.name}
         </p>
-          <Academics data={props.data.acad} />
-          <ResearchInterests data={props.data.res} />
+        <p className="xl:text-3xl lg:text-xl md:text-lg text-md pb-3 font-bold">
+          {props.data.designation}
+        </p>
+        <p className="xl:text-xl lg:text-lg md:text-md text-sm pb-3 font-bold md:mt-20 mt-5">
+          Department: {props.data.department}
+        </p>
+        <p className="xl:text-xl lg:text-lg md:text-md text-sm pb-3 font-bold">
+          Contact: {props.data.email}
+        </p>
+
       </div>
     </div>
   );
 }
 
 const Portfolio = () => {
-  let pfs = [
-    {
-      image_url: 'https://www.nitt.edu/home/academics/departments/meta/faculty/smuthu/smuthu_new.jpg',
-      name: 'Dr.S.Muthukumaran - Dean(R&C)',
-      acad: ['Ph.D. (Engineering) Birla Institute of Technology, Mesra, Ranchi', 'M.E. (Welding Engineering) Regional Engineering College, Tiruchirappalli'],
-      res: ['Welding Engineering', 'Manufacturing technology', 'Non-Destructive Testing', 'Materials Science']
-    },
-    {
-      image_url: 'https://www.nitt.edu/home/academics/departments/mech/faculty/r_anand/DSC00732.JPG',
-      name: 'Dr.R.Anand - AD(Industry and R&D Colloboration, R&C)',
-      acad: ['Ph.D. (ICE, Mechanical Engineering) Anna University, Chennai', 'M.Tech (Energy and Conservation Management) School of Energy, Bharadhidasan University'],
-      res: ['Thermodynamics','Fuels and Combustion','Basic Mechanical Engineering','Thermal Engineering','Energy Engineering']
-    },
-    {
-      image_url: 'https://www.nitt.edu/home/academics/departments/physics/faculty/Santhosh/santhosh.jpg',
-      name: 'Dr.M.C.Santhosh Kumar - AD(Research Services, R&C)',
-      acad: ['Ph.D. (Thin Films) Cochin University of Science and Technology, Kochi, Kerala', 'M.Sc. (Physics) Pondicherry University, Pondicherry'],
-      res: ['Thin Film Voltaics', 'Optoelectronic Devices']
-    },
-    {
-      image_url: 'https://www.nitt.edu/home/academics/departments/civil/faculty/vs/Sunitha.jpg',
-      name: 'Dr.V.Sunitha - AD(Research and Consultancy,R&C)',
-      acad: ['Ph.D. (Transportation Engineering)', 'M.E. (Traffic and Transportation Planning)'],
-      res: ['Transportation Engineering', 'Highway Engineering']
-    }
-  ];
-  const [portfolios, setPortfolios] = useState(pfs);
+  const deansInfo = [
+  {
+    name: "Dr. S. Muthukumaran",
+    designation: "Dean Research & Consultancy",
+    department: "Metallurgical and Materials Engineering",
+    email: "smuthu@nitt.edu",
+    image: "https://www.nitt.edu/home/academics/departments/meta/faculty/smuthu/smuthu_new.jpg",
+  }, 
+  {
+    name: "Dr. R. Anand",
+    designation: "Associate Dean (Industry and R&D Collaboration)",
+    department: "Mechanical Engineering",
+    email: "anandachu@nitt.edu",
+    image: "https://www.nitt.edu/home/academics/departments/mech/faculty/r_anand/DSC00732.JPG",
+  }, 
+  {
+    name: "Dr. M. C. Santhosh kumar",
+    designation: "Associate Dean (Research Services)",
+    department: "Department of Physics",
+    email: "santhoshmc@nitt.edu",
+    image: "https://www.nitt.edu/home/academics/departments/physics/faculty/Santhosh/santhosh.jpg",
+  }, 
+  {
+    name: "Dr. V. Sunitha",
+    designation: "Associate Dean (Research & Consultancy)",
+    department: "Civil Engineering",
+    email: "sunitha@nitt.edu",
+    image: "https://www.nitt.edu/home/academics/departments/civil/faculty/vs/Sunitha.jpg",
+  }];
+  const [portfolios, setPortfolios] = useState(deansInfo);
 
   const getPortfolios = () => {
     let htmlArr: JSX.Element[] = [];
