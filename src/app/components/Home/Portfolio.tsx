@@ -23,10 +23,10 @@ const PortfolioCard = (props: any) => {
         />
       </div>
       <div className="mt-5 md:mt-10 md:pl-48 text-red-100">
-        <p className="xl:text-4xl lg:text-3xl md:text-xl text-lg pb-3 font-bold">
+        <p className="xl:text-4xl lg:text-3xl md:text-xl text-lg pb-3 font-bold text-center md:text-left">
           {props.data.name}
         </p>
-        <p className="xl:text-3xl lg:text-xl md:text-lg text-md pb-3 font-bold">
+        <p className="xl:text-3xl lg:text-xl md:text-lg text-md pb-3 font-bold text-center md:text-left">
           {props.data.designation}
         </p>
         <p className="xl:text-xl lg:text-lg md:text-md text-sm pb-3 font-bold md:mt-20 mt-5">
