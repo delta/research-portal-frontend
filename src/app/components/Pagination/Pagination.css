@@ -1,0 +1,19 @@
+.pagination li {
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  cursor: pointer;
+  float: left;
+  color: red;
+  border-radius: 0.25rem;
+}
+.pagination :hover {
+  background-color: rgb(252, 42, 42);
+  color: white;
+}
+.pagination li.active {
+  background-color: red;
+  color: white;
+}
