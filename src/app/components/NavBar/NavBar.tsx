@@ -13,7 +13,7 @@ const data = [{
 },
 {
 	href: '/research',
-	text: 'Research'
+	text: 'Projects'
 },
 {
 	href: '/labs',
