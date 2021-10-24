@@ -13,9 +13,13 @@ import { useParams } from "react-router";
 import CustomFilter from "../CreateProject/CustomFilter";
 import CustomTagInput from "../CreateProject/CustomTagInput";
 import { AorData, LabData } from "../../interfaces/home";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router";
 
 
 const CorrectionForm = () => {
+    const history = useHistory();
     const {id} = useParams<{id: string}>();
     const [user,setUser] = useState("Write")
     let state={
@@ -133,10 +137,11 @@ const CorrectionForm = () => {
         
       }).then((res:any)=>{
         if(res.data.status_code === 200){
-          window.location.href = '/research';
+          toast.success("Project edited successfully!!");
+          history.push("/research");
         }
         else{
-          console.log(res.data);
+          toast.error(res.data.data);
         }
       }).catch((err:any)=>{
         console.log(err);
@@ -144,7 +149,14 @@ const CorrectionForm = () => {
     }
   
   return (
-    <div className="wrapper p-20" style={{ height: "fit-content" }}>
+    <div className="wrapper p-20 pt-4" style={{ height: "fit-content" }}>
+        <div className="w-full text-center">
+        <Link to="/research" className="">
+          <Button className="w-64 mt-4 bg-red-800 hover:bg-red-600 transform hover:scale-105 transition duration-300 text-white">
+            Go Back
+          </Button>
+        </Link>
+      </div>
       <Container padding className="formContainer">
       <div className="header">
       <Text className="text-red-800 text-header">Edit Project</Text></div>

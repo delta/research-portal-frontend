@@ -17,6 +17,10 @@
   overflow-x: hidden;
 }
 
+.pro-image {
+  height: 400px;
+}
+
 @media (max-width: 1024px) { 
     .cards-container
     {

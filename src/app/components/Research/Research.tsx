@@ -29,7 +29,8 @@ const Research = () => {
     axiosInstance
       .get(url)
       .then((res: any) => {
-        setUser(res.data.data);
+        if(localStorage.getItem("email"))
+          setUser(res.data.data);
       })
       .catch((err: Error) => console.log(err));
     url = `/admin_user/search/?professor=${localStorage.getItem('email')}`

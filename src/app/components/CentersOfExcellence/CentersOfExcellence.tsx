@@ -37,7 +37,7 @@ const Center = () => {
             <div
               className=" border border-gray-100 px-5 py-3 mt-6 mb-6 ml-3 mr-3 rounded-md shadow-lg max-w-sm justify-items-center shadow-2xl"
               style={{
-                height: "40rem",
+                height: "fit-content",
               }}
             >
               <img
@@ -45,12 +45,12 @@ const Center = () => {
                 src={`${center.image_url}`}
                 alt="Image"
               />
-              <div className="px-6 py-4 ">
+              <div className="px-6 py-4 md:h-48">
                 <h5 className="text-gray-700 font-bold text-xl text-center mb-2">
                   {center.name}
                 </h5>
-                <div className="overflow-y-scroll max-h-sm h-40 mx:m-auto bg-gray-50">
-                  <p className="text-gray-600 text-base text-justify">
+                <div className="max-h-sm mx:m-auto bg-gray-50">
+                  <p className="text-gray-600 text-base text-justify truncate">
                     {center.description}
                   </p>
                 </div>

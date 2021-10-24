@@ -22,15 +22,18 @@ aside{
   bottom: 0;
   width: 100%;
 }
+.email{
+  text-decoration: none;
+}
 
-.email {
+/* .email {
   visibility: hidden;
   transition: visibility 10ms;
 }
 
 .info:hover > .email {
   visibility: visible;
-}
+} */
 
 @media (max-width:600px) {
   .search_container{
