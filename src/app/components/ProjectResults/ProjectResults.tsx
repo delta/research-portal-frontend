@@ -156,9 +156,9 @@ const ProjectResults = () => {
               <></>
             ) : (
               <>
-                <div className="w-full flex flex-col rounded-lg shadow-xl">
-                  <div className="flex flex-wrap w-full">
-                    <div className="w-full md:w-1/2 xl:w-1/4 border-r-2 border-black">
+                <div className=" p-0 md:p-8 flex-1 flex-col rounded-lg mx-0 md:mx-24 ">
+                  <div className="flex flex-wrap w-full shadow-xl bg-gray-300 ">
+                    <div className="w-full h-2/5 xl:w-3/5 xl:h-4/5 md:w-1/2 border-r-2">
                       <div
                         className="card-head p-2 text-white bg-red-800"
                         style={{
@@ -168,50 +168,58 @@ const ProjectResults = () => {
                       >
                         <span className="text-3xl">{cardDetail?.name}</span>
                       </div>
-                      <div className="card-image h-full">
+                      <div className="card-image h-full ">
                         {cardDetail?.image_url !== "" ? (
                           <img
                             src={cardDetail?.image_url}
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-fill "
                             alt="image"
                           ></img>
                         ) : null}
                       </div>
                     </div>
-                    <div className="w-full md:w-1/2 xl:w-3/4 flex flex-col p-4">
-                      <div
-                        className="text-xl flex justify-between my-2 w-full"
-                        style={{
-                          fontFamily: "Lato",
-                          fontSize: "1.5rem",
-                          lineHeight: "1.75rem",
-                          fontWeight: 400,
-                          wordSpacing: "0.5rem",
-                        }}
-                      >
-                        {cardDetail?.description}
-                        <br />
-                      </div>
-
+                    <div className="w-full text-sm xl:text-xl md:w-1/2 xl:w-2/5 flex flex-col p-0 mx-0 text-center justify-center">
                       <div
                         style={{
-                          fontFamily: "Lato",
-                          fontSize: "1.5rem",
-                          lineHeight: "1.75rem",
-                          fontWeight: 300,
-                          wordSpacing: "0.5rem",
+                          fontFamily: "Roboto",
+                          wordSpacing: "0rem",
+                          height: "80%",
+                          width: "80%",
+                          textAlign: "center",
+                          margin: "2.1rem 0 0 2.3rem",
                         }}
                       >
-                        <span style={{ fontWeight: 400, color: "red" }}>
-                          Contact Details:
+                        <span style={{ fontWeight: 400, color: "#880000 " }}>
+                          Contact Details <br />
                         </span>
                         {cardDetail?.contact}
-                        <br />
-                        <span style={{ fontWeight: 400, color: "red" }}>
-                          Faculties:
+                        <br /> <br />
+                        <span style={{ fontWeight: 400, color: "#880000 " }}>
+                          Faculties <br />
                         </span>
                         {cardDetail?.faculties}
-                      </div>
+                      </div>{" "}
+                    </div>
+                    <div className="break"> </div>
+                    <div
+                      className="overflow-clip overflow-hidden text-sm md:text-lg flex-1 justify-between mx-3 mt-4 w-full pb-3 pt-2"
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {cardDetail?.description && (
+                        <span
+                          style={{
+                            fontWeight: 500,
+                            color: "#880000 ",
+                            fontSize: "2rem",
+                          }}
+                        >
+                          Description <br />
+                        </span>
+                      )}
+                      {cardDetail?.description}
+                      <br />
                     </div>
                   </div>
                 </div>
