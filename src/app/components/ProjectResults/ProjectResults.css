@@ -1,4 +1,4 @@
-.main-container{
+.main-container {
   display: flex;
 }
 
@@ -14,7 +14,7 @@ li {
   padding: 2px;
   line-height: 1;
 }
-aside{
+aside {
   min-width: 350px;
 }
 
@@ -26,41 +26,45 @@ aside{
   font-weight: bold;
 }
 
-@media (max-width:600px) {
-  .search_container{
+@media (max-width: 600px) {
+  .search_container {
     display: block;
   }
   .adminButton {
     width: 95%;
   }
-  .main-container{
+  .main-container {
     display: block;
     text-align: center;
   }
-  .searchInput,.searchHolder{
+  .searchInput,
+  .searchHolder {
     width: 100%;
   }
 }
 
-.profile-info{
-  position:absolute;
+.profile-info {
+  position: absolute;
   width: 20%;
 }
 
-.cards-container{
-  width:75%;
+.cards-container {
+  width: 75%;
   margin-left: 20%;
 }
 
-@media (max-width: 1024px) { 
-  .cards-container
-  {
+@media (max-width: 1024px) {
+  .cards-container {
     width: 100%;
-    margin-left: 0!important;
+    margin-left: 0 !important;
   }
-  .profile-info{
+  .profile-info {
     width: 90%;
-    margin:auto;
+    margin: auto;
     position: relative;
   }
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
 }
