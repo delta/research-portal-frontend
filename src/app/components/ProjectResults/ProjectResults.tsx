@@ -158,35 +158,39 @@ const ProjectResults = () => {
               <>
                 <div className=" p-0 md:p-8 flex-1 flex-col rounded-lg mx-0 md:mx-24 ">
                   <div className="flex flex-wrap w-full shadow-xl bg-gray-300 ">
-                    <div className="w-full h-2/5 xl:w-3/5 xl:h-4/5 md:w-1/2 border-r-2">
-                      <div
-                        className="card-head p-2 text-white bg-red-800"
-                        style={{
-                          fontFamily: "Lato",
-                          fontWeight: 400,
-                        }}
-                      >
-                        <span className="text-3xl">{cardDetail?.name}</span>
-                      </div>
-                      <div className="card-image h-full ">
+                    <div
+                      className="card-head p-2 text-white bg-red-800 pl-3 w-full"
+                      style={{
+                        fontFamily: "Lato",
+                        fontWeight: 400,
+                      }}
+                    >
+                      <span className="text-3xl">{cardDetail?.name}</span>
+                    </div>
+                    <div className="break"> </div>
+
+                    <div className="w-full h-2/5 xl:w-3/5 xl:h-4/5 md:w-1/2 ">
+                      <div className="card-image h-full p-3">
                         {cardDetail?.image_url !== "" ? (
                           <img
                             src={cardDetail?.image_url}
-                            className="w-full h-full object-fill "
+                            className="w-full h-full object-fill shadow-md"
                             alt="image"
                           ></img>
                         ) : null}
                       </div>
                     </div>
-                    <div className="w-full text-sm xl:text-xl md:w-1/2 xl:w-2/5 flex flex-col p-0 mx-0 text-center justify-center">
+                    <div className="overflow-clip overflow-hidden w-full text-sm xl:text-xl md:w-1/2 xl:w-2/5 flex flex-col pb-2 mx-0 text-center justify-center shadow-none">
                       <div
                         style={{
-                          fontFamily: "Roboto",
+                          fontFamily: "'Zen Maru Gothic', sans-serif",
                           wordSpacing: "0rem",
                           height: "80%",
                           width: "80%",
                           textAlign: "center",
-                          margin: "2.1rem 0 0 2.3rem",
+                          margin: "0 0 0 2.3rem",
+                          overflow: "scroll",
+                          boxShadow: "none",
                         }}
                       >
                         <span style={{ fontWeight: 400, color: "#880000 " }}>
@@ -202,9 +206,9 @@ const ProjectResults = () => {
                     </div>
                     <div className="break"> </div>
                     <div
-                      className="overflow-clip overflow-hidden text-sm md:text-lg flex-1 justify-between mx-3 mt-4 w-full pb-3 pt-2"
+                      className="overflow-clip overflow-hidden text-sm md:text-lg flex-1 justify-between mx-3 mt-4 w-full pb-6 pt-2 pl-3 pr-2.5"
                       style={{
-                        fontFamily: "sans-serif",
+                        fontFamily: "'Zen Maru Gothic', sans-serif",
                       }}
                     >
                       {cardDetail?.description && (
