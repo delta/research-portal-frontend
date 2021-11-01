@@ -190,6 +190,7 @@ const ProjectResults = () => {
                           textAlign: "center",
                           margin: "0 0 0 2.3rem",
                           overflow: "scroll",
+                          overflowY: 'auto',
                           boxShadow: "none",
                         }}
                       >
