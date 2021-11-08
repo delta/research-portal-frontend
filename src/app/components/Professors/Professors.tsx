@@ -6,6 +6,7 @@ import "./Professor.css";
 import { axiosInstance } from "../../utils/axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import NoResults from '../NoResults/NoResults' ;
 
 const Container = styled.div`
   width: 16vw;
@@ -86,6 +87,12 @@ const Professor = () => {
       return <ProfessorCard data={item} key={key} />;
     });
   };
+  const noResult = ()=>{
+    return (
+      <NoResults flag={1}/>
+    );
+};
+
 
   const handleQuery = () => {
     let url = `/admin_user/search?professor=${searchName}`;
@@ -124,7 +131,7 @@ const Professor = () => {
       <div className="main-container mb-10">
         <div className="results container-1 m-3 flex flex-auto justify-center">
           <Row gutter className="md:h-full justify-center">
-            {professors.length ? showProfessors() : null}
+            {professors.length ?  showProfessors() : noResult()}
           </Row>
         </div>
       </div>
